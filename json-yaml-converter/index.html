@@ -1,0 +1,42 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>JSON to YAML &amp; YAML to JSON Converter — Edwin Lab</title>
+  <meta name="description" content="Convert JSON to YAML or YAML to JSON in your browser. Preserve strings and data types with clear validation for configuration files and API payloads.">
+  <link rel="canonical" href="https://edwinlab.dev/json-yaml-converter/">
+  <meta name="theme-color" content="#f7f7f2"><meta property="og:type" content="website"><meta property="og:title" content="JSON to YAML &amp; YAML to JSON Converter — Edwin Lab"><meta property="og:description" content="Convert JSON to YAML or YAML to JSON locally. Preserve strings and data types with clear validation for configuration and API payloads."><meta property="og:url" content="https://edwinlab.dev/json-yaml-converter/"><meta property="og:image" content="https://edwinlab.dev/assets/edwinlab-logo.png"><meta property="og:site_name" content="Edwin Lab"><meta name="twitter:card" content="summary"><meta name="twitter:title" content="JSON to YAML &amp; YAML to JSON Converter — Edwin Lab"><meta name="twitter:description" content="Convert JSON and YAML locally in your browser.">
+  <link rel="icon" href="/favicon/favicon.ico"><link rel="stylesheet" href="/tools/shared/tools.css">
+  <style>.tools-page .yaml-editors{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:18px;margin-top:18px}.tools-page .yaml-editors textarea{min-height:300px}.tools-page .yaml-control{max-width:360px}@media(max-width:700px){.tools-page .yaml-editors{grid-template-columns:minmax(0,1fr)}}
+  </style>
+  <script type="application/ld+json">{"@context":"https://schema.org","@type":"WebApplication","name":"JSON ↔ YAML Converter","url":"https://edwinlab.dev/json-yaml-converter/","description":"Convert JSON and YAML locally in a browser with explicit safe data type handling.","applicationCategory":"DeveloperApplication","browserRequirements":"JavaScript enabled","featureList":["JSON to YAML","YAML to JSON","YAML 1.2 JSON-compatible subset"]}</script>
+  <script type="application/ld+json">{"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"Home","item":"https://edwinlab.dev/"},{"@type":"ListItem","position":2,"name":"Developer Tools","item":"https://edwinlab.dev/tools/"},{"@type":"ListItem","position":3,"name":"JSON ↔ YAML Converter","item":"https://edwinlab.dev/json-yaml-converter/"}]}</script>
+</head>
+<body class="tools-page">
+  <a class="tools-skip" href="#workspace">Skip to JSON and YAML converter</a>
+  <header class="tools-header"><div class="tools-container tools-header-inner"><a class="tools-brand" href="/" aria-label="Edwin Lab home"><img src="/assets/edwinlab-logo.png" alt="" width="44" height="44">Edwin Lab</a><nav class="tools-nav" aria-label="Main navigation"><a href="/">Home</a><a href="/tools/">Developer Tools</a></nav></div></header>
+  <main class="tools-container"><nav class="tools-breadcrumb" aria-label="Breadcrumb"><ol><li><a href="/">Home</a></li><li><a href="/tools/">Developer Tools</a></li><li aria-current="page">JSON ↔ YAML Converter</li></ol></nav>
+    <h1>JSON ↔ YAML Converter</h1><p class="tools-intro">Move between JSON payloads and YAML configuration without uploading your data.</p>
+    <noscript><p class="tools-status" data-kind="warning">Enable JavaScript to convert documents. The guide, examples, and navigation remain available below.</p></noscript>
+    <section class="tools-workspace" id="workspace" aria-label="JSON and YAML converter">
+      <div class="tools-control yaml-control"><label for="direction">Conversion direction</label><select id="direction"><option value="json-yaml">JSON to YAML</option><option value="yaml-json">YAML to JSON</option></select></div>
+      <div class="yaml-editors"><div><label id="input-label" for="input">JSON input</label><textarea id="input" spellcheck="false" aria-describedby="input-note" placeholder='{"name":"api","enabled":true}'></textarea><p class="tools-note" id="input-note">Strict JSON only. Numbers outside the safe JavaScript range are rejected; use strings for large IDs.</p></div><div><label id="output-label" for="output">YAML output</label><textarea id="output" readonly spellcheck="false" aria-describedby="output-note"></textarea><p class="tools-note" id="output-note">Conversion does not preserve comments or source formatting.</p></div></div>
+      <div class="tools-actions"><button class="tools-primary" id="convert" type="button">Convert</button><button id="copy" type="button" disabled>Copy output</button><button id="download" type="button" disabled>Download</button><button id="clear" type="button">Clear</button></div>
+      <div class="tools-actions" aria-label="Examples"><button type="button" data-direction="json-yaml" data-example='{"name":"api","enabled":true,"ports":[80,443]}'>Example: JSON to YAML</button><button type="button" data-direction="yaml-json" data-example="name: api&#10;enabled: true&#10;ports: [80, 443]">Example: YAML to JSON</button></div>
+      <p class="tools-status" id="status" role="status" aria-live="polite" aria-atomic="true" data-kind="idle">Ready. Choose a direction and enter a document.</p>
+    </section>
+    <article class="tools-prose" aria-label="JSON and YAML conversion guide">
+      <section><h2>Convert in either direction</h2><p>Select JSON to YAML for readable configuration, or YAML to JSON for API payloads and tooling. The converter handles one document, writes two-space JSON/YAML output, and processes text locally in your browser. Comments and original whitespace are not preserved.</p><ol><li>Choose a direction and paste one document.</li><li>Select Convert and review the result and data types.</li><li>Copy or download the converted text.</li></ol></section>
+      <section><h2>Keep strings distinct from numbers and booleans</h2><p>Quote identifiers and values that should stay text. For example, JSON values <code>"00123"</code> and <code>"true"</code> remain strings through YAML and back. A quoted large ID such as <code>"9007199254740993"</code> avoids number precision loss. Unquoted large integers are rejected.</p><p>YAML 1.2 core treats <code>yes</code>, <code>no</code>, <code>on</code>, and <code>off</code> as strings. Dates such as <code>2024-01-01</code> also stay strings. JSON decimals use JavaScript Number precision; arbitrary-precision decimal values are not supported.</p></section>
+      <section><h2>Supported YAML subset</h2><p>V1 accepts a single YAML 1.2 document with string mapping keys and JSON-compatible null, boolean, finite number, string, list, and mapping values. Anchors, aliases, merge keys, custom or explicit tags, non-string keys, duplicate keys, YAML 1.1 directives, and multiple documents are rejected. Nested values remain nested.</p><p>A small API settings example:</p><pre><code>service: api
+retry:
+  enabled: true
+  ports: [80, 443]
+labels:
+  account: "00123"
+  flag: "true"</code></pre></section>
+      <section><h2>Frequently asked questions</h2><h3>Are YAML comments preserved?</h3><p>No. Conversion reads the data and writes fresh output; comments and source formatting are not retained.</p><h3>Why does yes stay a string?</h3><p>This converter uses YAML 1.2 core rules. Only recognized YAML 1.2 boolean words become booleans; yes/no/on/off remain strings.</p><h3>Are anchors and custom tags supported?</h3><p>No. Anchors, aliases, merge keys, explicit tags, and custom tags are outside this JSON-compatible subset.</p><h3>Can I convert multiple YAML documents?</h3><p>No. Enter one YAML document at a time. A document separator that begins a second document is rejected.</p></section>
+      <section><h2>Related developer tools</h2><p>Validate JSON with <a href="/jsonlint/">JSONLint</a>, compare JSON documents with <a href="/json-diff/">JSON Diff</a>, or browse <a href="/tools/">Developer Tools</a>.</p></section>
+    </article>
+  </main><footer class="tools-footer"><div class="tools-container"><span>Edwin Lab · Developer tools</span><a href="/">About Edwin</a></div></footer><script type="module" src="./tool.js"></script>
+</body></html>

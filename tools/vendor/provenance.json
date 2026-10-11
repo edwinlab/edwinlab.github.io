@@ -102,14 +102,14 @@
   },
   {
     "name": "croner",
-    "version": "10.0.1",
-    "source": "https://registry.npmjs.org/croner/-/croner-10.0.1.tgz",
-    "integrity": "sha512-ixNtAJndqh173VQ4KodSdJEI6nuioBWI0V1ITNKhZZsO0pEMoDxz539T4FTTbSZ/xIOSuDnzxLVRqBVSvPNE2g==",
-    "archiveSHA256": "d6d93c286125fed567b986a576ff1daa74e72d56bb63fe28248ca17cfcb00cee",
+    "version": "10.0.2-dev.0",
+    "source": "https://registry.npmjs.org/croner/-/croner-10.0.2-dev.0.tgz",
+    "integrity": "sha512-QbSWXiDHJs3UZVHln3rnKMPEh6PQ0mRaQSKPZyCku9gXZryNj8cWY8oC2rFwkhAcwg0k8voJ1kJ9vgv1sNID+Q==",
+    "archiveSHA256": "a7788ec263b3d575e9e143b40f62335d6532727ec5e2ac9a32348cdb35ad7b43",
     "license": "MIT",
     "files": {
-      "LICENSE": "d1c89d2de9ab5785f68c69473d5e10f1ff0e5dbacef88e2aecbd6eaf89b63003",
-      "croner.js": "a2eb1f669c605d4775116947209c91dfec4afdcc76fe8407134938bf5a09a600"
+      "croner.js": "bbb2227473b5d81e6e84941b7b3faf168d11124671158109788f8e05372180c9",
+      "LICENSE": "d1c89d2de9ab5785f68c69473d5e10f1ff0e5dbacef88e2aecbd6eaf89b63003"
     }
   },
   {

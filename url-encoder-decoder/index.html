@@ -1,0 +1,60 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>URL Encoder &amp; Decoder — Inspect Query Parameters | Edwin Lab</title>
+  <meta name="description" content="Encode or decode URL components and full URIs in your browser. Inspect query parameters, repeated keys, spaces, and plus signs without uploading data.">
+  <link rel="canonical" href="https://edwinlab.dev/url-encoder-decoder/">
+  <meta property="og:type" content="website">
+  <meta property="og:title" content="URL Encoder &amp; Decoder — Inspect Query Parameters | Edwin Lab">
+  <meta property="og:description" content="Encode or decode URL components and full URIs in your browser. Inspect query parameters, repeated keys, spaces, and plus signs without uploading data.">
+  <meta property="og:url" content="https://edwinlab.dev/url-encoder-decoder/">
+  <meta property="og:image" content="https://edwinlab.dev/assets/edwinlab-logo.png">
+  <meta property="og:site_name" content="Edwin Lab">
+  <meta name="twitter:card" content="summary">
+  <link rel="icon" href="/favicon/favicon.ico">
+  <link rel="stylesheet" href="/tools/shared/tools.css">
+  <script type="application/ld+json">
+  {"@context":"https://schema.org","@type":"WebApplication","name":"URL Encoder & Decoder","url":"https://edwinlab.dev/url-encoder-decoder/","description":"Encode or decode URI components and inspect query parameters locally in a browser.","applicationCategory":"DeveloperApplication","browserRequirements":"JavaScript enabled","featureList":["URL component encoding","Whole URI encoding","Ordered query parameter inspection"]}
+  </script>
+  <script type="application/ld+json">
+  {"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"Home","item":"https://edwinlab.dev/"},{"@type":"ListItem","position":2,"name":"Developer Tools","item":"https://edwinlab.dev/tools/"},{"@type":"ListItem","position":3,"name":"URL Encoder & Decoder","item":"https://edwinlab.dev/url-encoder-decoder/"}]}
+  </script>
+</head>
+<body class="tools-page">
+  <a class="tools-skip" href="#workspace">Skip to URL tool</a>
+  <header class="tools-header"><div class="tools-container tools-header-inner">
+    <a class="tools-brand" href="/" aria-label="Edwin Lab home"><img src="/assets/edwinlab-logo.png" alt="" width="44" height="44">Edwin Lab</a>
+    <nav class="tools-nav" aria-label="Main navigation"><a href="/">Home</a><a href="/tools/">Developer Tools</a></nav>
+  </div></header>
+  <main class="tools-container">
+    <nav class="tools-breadcrumb" aria-label="Breadcrumb"><ol><li><a href="/">Home</a></li><li><a href="/tools/">Developer Tools</a></li><li aria-current="page">URL Encoder &amp; Decoder</li></ol></nav>
+    <h1>URL Encoder &amp; Decoder</h1>
+    <p class="tools-intro">Encode a single URI component, work with a whole URI, or inspect ordered query parameters. Your input stays in this browser.</p>
+    <noscript><p class="tools-status" data-kind="warning">Enable JavaScript to encode, decode, or inspect query parameters. Instructions, examples, and navigation remain available below.</p></noscript>
+    <section class="tools-workspace" id="workspace" aria-label="URL encoder, decoder, and query inspector">
+      <div class="tools-controls">
+        <div class="tools-control"><label for="mode">Mode</label><select id="mode" disabled><option value="component">URL component</option><option value="whole">Whole URI</option><option value="query">Query parameters</option></select></div>
+        <div class="tools-control" id="direction-control"><label for="direction">Operation</label><select id="direction" disabled><option value="encode">Encode</option><option value="decode">Decode</option></select></div>
+      </div>
+      <p class="tools-note" id="mode-help">Encode one value or decode one component. Plus signs stay literal; use %2B for a plus in a component.</p>
+      <div class="tools-editors">
+        <div class="tools-panel"><label for="input">Input</label><textarea id="input" spellcheck="false" autocapitalize="off" autocomplete="off" aria-describedby="input-note" placeholder="Enter a component, URI, or query…"></textarea><p class="tools-note" id="input-note">Input limit: 5 MiB UTF-8. Query mode accepts raw query text, an optional ?, or an absolute HTTP(S) URL.</p></div>
+        <section class="tools-panel" id="uri-output-panel" aria-label="URI result"><label for="output">Output</label><textarea id="output" readonly spellcheck="false" aria-describedby="output-note" placeholder="Result appears here."></textarea><p class="tools-note" id="output-note">Output limit: 10 MiB. Whole URI mode preserves reserved separators and does not normalize or validate URLs.</p></section>
+        <section class="tools-panel" id="query-results" aria-labelledby="query-title" hidden><h2 id="query-title">Query parameters</h2><p>Rows preserve original order and repeated keys. Copy returns a JSON array of key/value pairs.</p><div class="tools-table-wrap"><table><thead><tr><th scope="col">#</th><th scope="col">Parameter</th><th scope="col">Value</th></tr></thead><tbody id="query-rows"></tbody></table></div></section>
+      </div>
+      <div class="tools-actions" aria-label="URL actions"><button class="tools-primary" type="button" id="process" disabled>Process</button><button type="button" id="example" disabled>Load example</button><button type="button" id="clear" disabled>Clear</button><button type="button" id="copy" disabled>Copy output</button></div>
+      <p class="tools-status" id="status" role="status" aria-live="polite" aria-atomic="true" data-kind="idle">Ready. Choose a mode and process your input.</p>
+    </section>
+    <article class="tools-prose" aria-label="URL encoding guide">
+      <section><h2>Choose the right mode</h2><p>Use URL component mode for one parameter value; it encodes reserved characters such as <code>/</code> and <code>?</code>. Use Whole URI mode for a URI with structure; reserved separators remain intact. Whole URI encoding is not a URL validator or normalizer and does not convert internationalized host names to punycode.</p><p>For example, component encoding turns <code>a b+c/d?e=f</code> into <code>a%20b%2Bc%2Fd%3Fe%3Df</code>. Whole URI encoding retains <code>://</code>, <code>?</code>, and <code>&amp;</code>, while encoding spaces as <code>%20</code>.</p></section>
+      <section><h2>Query parameter rules</h2><p>Query mode uses form-style decoding: <code>+</code> means a space, while <code>%2B</code> means a literal plus. It accepts a raw query, an optional leading <code>?</code>, or an absolute HTTP(S) URL. URL fragments are ignored when you enter an absolute URL. Repeated keys remain separate rows in their original order; parameters without <code>=</code> have an empty value.</p><p>For URI component and whole URI modes, <code>+</code> remains a plus. Percent escapes are decoded once only: decoding <code>%252F</code> produces <code>%2F</code>.</p></section>
+      <section><h2>Frequently asked questions</h2><h3>Why is plus different from a space?</h3><p>In a form-encoded query, plus represents a space. In a URI component or whole URI, plus is a literal character; encode a plus sign there as <code>%2B</code>.</p><h3>Why does %2F stay encoded?</h3><p>Whole URI decoding preserves reserved separators such as slash so URI structure is not changed. Use component mode when decoding one value.</p><h3>Are duplicate parameters preserved?</h3><p>Yes. Query results are an ordered list of key/value pairs, not an object, so repeated keys such as <code>tag=one&amp;tag=two</code> are retained.</p></section>
+      <section><h2>Related developer tools</h2><p>Encode UTF-8 text with <a href="/base64/">Base64 Encoder &amp; Decoder</a>, inspect structured data with <a href="/jsonlint/">JSON Validator &amp; Formatter</a>, or browse <a href="/tools/">all Developer Tools</a>.</p></section>
+    </article>
+  </main>
+  <footer class="tools-footer"><div class="tools-container"><span>Edwin Lab · Developer tools</span><a href="/">About Edwin</a></div></footer>
+  <script type="module" src="./tool.js"></script>
+</body>
+</html>

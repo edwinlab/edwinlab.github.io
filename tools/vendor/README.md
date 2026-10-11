@@ -6,7 +6,7 @@ Pinned on 11 October 2026. These files are official prebuilt JavaScript distribu
 |---|---|---|---|
 | jsonc-parser | 3.3.1 | `jsonc-parser/main.js` (ESM) | MIT · [Microsoft repository](https://github.com/microsoft/node-jsonc-parser) |
 | yaml | 2.8.1 | `yaml/index.js` (ESM) | ISC · [YAML documentation](https://eemeli.org/yaml/) |
-| Croner | 10.0.1 | `croner/croner.js` (ESM) | MIT · [Croner repository](https://github.com/Hexagon/croner) |
+| Croner | 10.0.2-dev.0 | `croner/croner.js` (ESM) | MIT · [Croner repository](https://github.com/Hexagon/croner) |
 | sql-formatter | 15.6.10 | `sql-formatter/sql-formatter.min.js` (classic UMD) | MIT · [SQL Formatter repository](https://github.com/sql-formatter-org/sql-formatter) |
 
 Each folder includes its upstream `LICENSE`. SQL Formatter's browser bundle embeds Nearley 2.20.1; its license is `sql-formatter/NEARLEY-LICENSE`. The bundled source was compared with Nearley 2.20.1's official archive using the SQL package source map. Argparse is a CLI dependency and is not included in this browser bundle; no CLI/transitive installation is required.
@@ -30,7 +30,7 @@ Do not copy package.json, CLI files, Node/CommonJS distributions, or source maps
 ```js
 import { createScanner, format, applyEdits, SyntaxKind } from '/tools/vendor/jsonc-parser/main.js';
 import { parseDocument, isAlias, isMap } from '/tools/vendor/yaml/index.js';
-import { Cron } from '/tools/vendor/croner/croner.js';
+import { Cron } from '/tools/vendor/croner/croner.js?v=10.0.2-dev.0';
 ```
 
 JSON scanner/format APIs are available for future JSONlint lexical transformations. Do not use the vendor's recovery parser result as successful strict validation; shared/json.js checks syntax and guards first. Formatter edits retain source numeric lexemes and duplicate keys.
@@ -46,7 +46,7 @@ try {
 } finally { cron.stop(); }
 ```
 
-Version 10.0.1 uses OR when DOM and DOW are both restricted. The `+` DOW modifier selects AND and must be rejected by the future Unix-five-field tool. There is no `legacyMode` flag to add for this version. The tool still needs its grammar whitelist, time horizon, cancel/timeout, and DST fixtures. Mode alone does not restrict all extended syntax.
+Version 10.0.2-dev.0 uses OR when DOM and DOW are both restricted. The `+` DOW modifier selects AND and must be rejected by the future Unix-five-field tool. There is no `legacyMode` flag to add for this version. The tool still needs its grammar whitelist, time horizon, cancel/timeout, and DST fixtures. Mode alone does not restrict all extended syntax.
 
 SQL Formatter must load as a **classic script before** the tool's module:
 
@@ -60,3 +60,7 @@ Then call `globalThis.sqlFormatter.format(text, {language: 'postgresql', keyword
 ## Verification
 
 Serve the repository and open `/tests/tools/foundation.html`. Its fixtures cover all four library entry points, native ESM workers for JSON/YAML/Croner, and a classic worker for SQL. The test runner and template are noindex documents and are not public tool pages.
+
+## Croner DST update — 11 October 2026
+
+Pinned the official browser ESM distribution to **10.0.2-dev.0** after 10.0.1 failed the minutely fall-back regression (New York, 2024-11-03 05:59Z; next should be 06:00Z). This is an upstream prerelease containing [fix #344](https://github.com/Hexagon/croner/pull/344), not a local engine modification. Archive SHA-512 and retained-file SHA-256 are recorded in provenance.json; runtime is unchanged from the official archive. Imports use `?v=10.0.2-dev.0` to avoid stale module caches. Foundation and cron fixtures cover the regression. Cron scheduling dialect/DST policy still depends on the pinned library; no universal scheduler compatibility is promised.

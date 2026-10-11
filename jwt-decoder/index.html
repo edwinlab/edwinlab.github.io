@@ -1,0 +1,148 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>JWT Decoder Online — Inspect Token Claims | Edwin Lab</title>
+  <meta name="description" content="Decode JWT headers and payloads in your browser. Inspect expiration and time claims without uploading your token. Signature verification is not included.">
+  <link rel="canonical" href="https://edwinlab.dev/jwt-decoder/">
+  <meta name="theme-color" content="#f7f7f2">
+  <meta property="og:type" content="website">
+  <meta property="og:title" content="JWT Decoder Online — Inspect Token Claims | Edwin Lab">
+  <meta property="og:description" content="Decode JWT headers and payloads in your browser. Inspect expiration and time claims without uploading your token. Signature verification is not included.">
+  <meta property="og:url" content="https://edwinlab.dev/jwt-decoder/">
+  <meta property="og:image" content="https://edwinlab.dev/assets/edwinlab-logo.png">
+  <meta property="og:site_name" content="Edwin Lab">
+  <meta name="twitter:card" content="summary">
+  <meta name="twitter:title" content="JWT Decoder Online — Inspect Token Claims | Edwin Lab">
+  <meta name="twitter:description" content="Decode JWT headers and payloads locally. Signature verification is not included.">
+  <meta name="twitter:image" content="https://edwinlab.dev/assets/edwinlab-logo.png">
+  <link rel="icon" href="/favicon/favicon.ico">
+  <link rel="stylesheet" href="/tools/shared/tools.css">
+  <style>
+    .tools-page .jwt-warning{font-weight:700}
+    .tools-page .jwt-warning strong{display:block}
+    .tools-page .jwt-workspace>.tools-actions{margin-top:16px}
+    .tools-page .jwt-panels{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:18px;margin-top:20px}
+    .tools-page .jwt-panel{min-width:0;border:1px solid var(--line);border-radius:7px;padding:16px;background:#fff}
+    .tools-page .jwt-panel textarea{min-height:240px;background:var(--tint)}
+    .tools-page .jwt-panel .tools-actions{margin:12px 0 0}
+    .tools-page .jwt-signature{margin:16px 0 0;padding:12px 14px;background:var(--tint);border-radius:5px;overflow-wrap:anywhere}
+    .tools-page .jwt-claims{list-style:none;padding:0;margin:0;display:grid;gap:10px}
+    .tools-page .jwt-claim{display:grid;grid-template-columns:70px minmax(0,1fr);gap:12px;border:1px solid var(--line);border-radius:6px;padding:14px;background:#fff}
+    .tools-page .jwt-claim dt{font-family:'DM Mono',monospace;font-weight:700}
+    .tools-page .jwt-claim dd{margin:0;min-width:0;overflow-wrap:anywhere}
+    .tools-page .jwt-claim-value,.tools-page .jwt-claim-date{display:block;font-family:'DM Mono',monospace;font-size:13px;overflow-wrap:anywhere}
+    .tools-page .jwt-claim-date{margin-top:5px;color:var(--muted)}
+    .tools-page .jwt-claim-status{display:inline-block;margin-top:7px;font-size:13px;font-weight:800}
+    .tools-page .jwt-claim[data-kind=error] .jwt-claim-status{color:#8b2c19}
+    .tools-page .jwt-claim[data-kind=warning] .jwt-claim-status{color:#715008}
+    .tools-page .jwt-claim-note{margin:5px 0 0;color:var(--muted);font-size:13px}
+    @media(max-width:700px){.tools-page .jwt-panels{grid-template-columns:minmax(0,1fr)}.tools-page .jwt-panel textarea{min-height:190px}}
+    @media(max-width:400px){.tools-page .jwt-claim{grid-template-columns:46px minmax(0,1fr);gap:8px;padding:11px}}
+  </style>
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "WebApplication",
+    "name": "JWT Decoder",
+    "url": "https://edwinlab.dev/jwt-decoder/",
+    "description": "Decode JWT headers and payloads in a web browser and inspect time claims. Signature verification is not included.",
+    "applicationCategory": "DeveloperApplication",
+    "browserRequirements": "JavaScript enabled",
+    "featureList": ["Decode compact JWT headers and payloads", "Inspect exp, nbf, and iat time claims", "Process tokens locally in the browser"]
+  }
+  </script>
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "BreadcrumbList",
+    "itemListElement": [
+      {"@type":"ListItem","position":1,"name":"Home","item":"https://edwinlab.dev/"},
+      {"@type":"ListItem","position":2,"name":"Developer Tools","item":"https://edwinlab.dev/tools/"},
+      {"@type":"ListItem","position":3,"name":"JWT Decoder","item":"https://edwinlab.dev/jwt-decoder/"}
+    ]
+  }
+  </script>
+</head>
+<body class="tools-page">
+  <a class="tools-skip" href="#workspace">Skip to JWT decoder</a>
+  <header class="tools-header">
+    <div class="tools-container tools-header-inner">
+      <a class="tools-brand" href="/" aria-label="Edwin Lab home"><img src="/assets/edwinlab-logo.png" alt="" width="44" height="44">Edwin Lab</a>
+      <nav class="tools-nav" aria-label="Main navigation"><a href="/">Home</a><a href="/tools/">Developer Tools</a></nav>
+    </div>
+  </header>
+  <main class="tools-container">
+    <nav class="tools-breadcrumb" aria-label="Breadcrumb"><ol><li><a href="/">Home</a></li><li><a href="/tools/">Developer Tools</a></li><li aria-current="page">JWT Decoder</li></ol></nav>
+    <h1>JWT Decoder</h1>
+    <p class="tools-intro">Inspect a compact JSON Web Token header and payload, and see when its time claims apply. The token stays in this browser.</p>
+    <p class="tools-status jwt-warning" data-kind="warning"><strong>Decoded only. Signature not verified.</strong> Decoding shows token contents; it does not prove who issued the token or whether a service will accept it.</p>
+    <noscript><p class="tools-status" data-kind="warning">Enable JavaScript to decode a token. The guide, example, privacy information, and navigation remain available below.</p></noscript>
+    <section class="tools-workspace jwt-workspace" id="workspace" aria-label="JWT decoder">
+      <div class="tools-panel">
+        <label for="jwt-input">JWT</label>
+        <textarea id="jwt-input" spellcheck="false" autocapitalize="off" autocomplete="off" aria-describedby="jwt-note" placeholder="Paste a compact JWT with three dot-separated segments…"></textarea>
+        <p class="tools-note" id="jwt-note">Input limit: 5 MiB UTF-8. Paste the token only; do not include a Bearer prefix. Content is processed locally and is not uploaded.</p>
+      </div>
+      <div class="tools-actions" aria-label="JWT actions">
+        <button class="tools-primary" type="button" id="decode" disabled>Decode</button>
+        <button type="button" id="load-example" disabled>Load example</button>
+        <button type="button" id="clear" disabled>Clear</button>
+      </div>
+      <p class="tools-status" id="status" role="status" aria-live="polite" aria-atomic="true" data-kind="idle">Ready. Paste a compact JWT and select Decode.</p>
+      <section id="result" aria-label="Decoded JWT results" hidden>
+        <p class="jwt-signature" id="signature-status"></p>
+        <div class="jwt-panels">
+          <section class="jwt-panel" aria-labelledby="header-title">
+            <h2 id="header-title">Header</h2>
+            <label for="header-output">Decoded header JSON</label>
+            <textarea id="header-output" readonly spellcheck="false" placeholder="Decoded header appears here."></textarea>
+            <div class="tools-actions"><button type="button" data-copy="header-output" disabled>Copy header</button></div>
+          </section>
+          <section class="jwt-panel" aria-labelledby="payload-title">
+            <h2 id="payload-title">Payload</h2>
+            <label for="payload-output">Decoded payload JSON</label>
+            <textarea id="payload-output" readonly spellcheck="false" placeholder="Decoded payload appears here."></textarea>
+            <div class="tools-actions"><button type="button" data-copy="payload-output" disabled>Copy payload</button></div>
+          </section>
+        </div>
+        <section class="tools-prose" aria-labelledby="claims-title">
+          <h2 id="claims-title">Time claims</h2>
+          <p>NumericDate values are seconds since the Unix epoch. These statuses describe time claims only; they do not determine whether a token is valid.</p>
+          <ul class="jwt-claims" id="time-claims"></ul>
+        </section>
+      </section>
+    </section>
+    <article class="tools-prose" aria-label="JWT decoder guide">
+      <section>
+        <h2>How to decode a JWT</h2>
+        <ol><li>Paste a compact token with three dot-separated segments. Remove any <code>Bearer</code> prefix.</li><li>Select Decode to inspect the JSON header, payload, and <code>exp</code>, <code>nbf</code>, and <code>iat</code> claims.</li><li>Copy the header or payload if you need to inspect it elsewhere.</li></ol>
+        <p>JWT uses Base64URL-encoded segments; encoding is not encryption. For example, a decoded header might contain <code>{"alg":"none","typ":"JWT"}</code>, while its payload can contain a subject and NumericDate claims.</p>
+      </section>
+      <section>
+        <h2>Decoding is not signature verification</h2>
+        <p>This tool only decodes the header and payload. It does not verify a signature, check an issuer or audience, or establish that a server will accept the token. A token marked expired here may be rejected by an application, while a token whose displayed time claims look current still requires verification and authorization checks by the receiving service.</p>
+        <p><code>exp</code> means the token must not be accepted on or after its expiration time. <code>nbf</code> sets the time before which it must not be accepted. <code>iat</code> records when it was issued. These NumericDate values use seconds, and the displayed current-time comparison uses this device's clock.</p>
+      </section>
+      <section>
+        <h2>Example token</h2>
+        <p>Select Load example to inspect a synthetic token with a subject, issue time, not-before time, and expiration time. Its <code>alg: "none"</code> header and empty signature remain unverified.</p>
+      </section>
+      <section>
+        <h2>Frequently asked questions</h2>
+        <h3>Does this verify the signature?</h3>
+        <p>No. It decodes the header and payload only. Signature status always remains Unverified, regardless of the <code>alg</code> value or whether a signature segment is present.</p>
+        <h3>Are my tokens uploaded?</h3>
+        <p>No. Decoding happens in your browser. This page does not send the token to an API, add it to the URL, or save it in browser storage. Treat tokens as sensitive credentials and avoid sharing them.</p>
+      </section>
+      <section>
+        <h2>Related developer tools</h2>
+        <p>Convert a NumericDate with the <a href="/timestamp-converter/">Unix Timestamp Converter</a>, inspect JSON with the <a href="/jsonlint/">JSON Validator &amp; Formatter</a>, or browse the <a href="/tools/">Developer Tools directory</a>.</p>
+      </section>
+    </article>
+  </main>
+  <footer class="tools-footer"><div class="tools-container"><span>Edwin Lab · Developer tools</span><a href="/">About Edwin</a></div></footer>
+  <script type="module" src="./tool.js"></script>
+</body>
+</html>

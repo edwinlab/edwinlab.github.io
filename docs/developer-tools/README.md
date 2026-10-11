@@ -1,12 +1,12 @@
 # Developer tools — rencana eksekusi
 
-Dibuat 11 Oktober 2026. **Foundation (00), JSONlint (01), JSON Diff (02), serta menu Developer Tools dan hub (02a) selesai secara lokal. Prioritas berikutnya: Timestamp Converter (03).** Tujuan: menambah halaman developer tools yang berguna dan dapat ditemukan melalui pencarian, dengan identitas Edwin Lab serta link kembali ke profil profesional.
+Dibuat 11 Oktober 2026. **Foundation, 12 tools, navigasi/hub, serta integrasi SEO (00–13) selesai secara lokal. Deployment dan verifikasi publik belum dijalankan.** Tujuan: menambah halaman developer tools yang berguna dan dapat ditemukan melalui pencarian, dengan identitas Edwin Lab serta link kembali ke profil profesional.
 
 Teknologi: **HTML + CSS + JavaScript vanilla**, tanpa framework, npm, package.json, bundler, backend, atau build. Library parser JavaScript lokal siap browser dipakai hanya untuk fitur yang memerlukannya. Seluruh input diproses di perangkat pengguna.
 
 ## Urutan dan tracker
 
-Foundation 00, tool 01–02, dan hub 02a selesai secara lokal. Lanjutkan 03–06 sebagai rilis awal, kemudian tugas 13 untuk audit SEO dan integrasi tool tambahan. Kerjakan 07–12 sebagai perluasan, lalu ulangi checklist integrasi untuk halaman tambahan. Nomor menunjukkan urutan rekomendasi, bukan dependency antar-tool: sesudah foundation, satu tool bisa dikerjakan mandiri.
+Foundation 00, tool 01–12, hub 02a, dan integrasi lokal 13 telah selesai. Checklist pascadeployment pada task 13 tetap terbuka sampai verifikasi publik benar-benar dilakukan. Nomor menunjukkan urutan rekomendasi, bukan dependency antar-tool: sesudah foundation, satu tool bisa dikerjakan mandiri.
 
 | Selesai | Task dan TODO | Route | Model / reasoning |
 |---|---|---|---|
@@ -14,17 +14,17 @@ Foundation 00, tool 01–02, dan hub 02a selesai secara lokal. Lanjutkan 03–06
 | [x] | [01 — JSON Validator & Formatter](01-jsonlint.md) | `/jsonlint/` | GPT-6 Luna / high |
 | [x] | [02 — JSON Diff](02-json-diff.md) | `/json-diff/` | GPT-6 Luna / high |
 | [x] | [02a — Menu Developer Tools & hub](02a-navigation-hub.md) | Menu utama, `/tools/` | — |
-| [ ] | [03 — Timestamp Converter](03-timestamp-converter.md) | `/timestamp-converter/` | GPT-6 Luna / high |
-| [ ] | [04 — JWT Decoder](04-jwt-decoder.md) | `/jwt-decoder/` | GPT-6 Luna / high |
-| [ ] | [05 — Base64 Encoder / Decoder](05-base64.md) | `/base64/` | GPT-6 Luna / medium |
-| [ ] | [06 — URL Encoder / Decoder](06-url-encoder-decoder.md) | `/url-encoder-decoder/` | GPT-6 Luna / medium |
-| [ ] | [07 — Cron Expression Explainer](07-cron-expression.md) | `/cron-expression/` | GPT-6.1 Sol / medium |
-| [ ] | [08 — UUID Generator](08-uuid-generator.md) | `/uuid-generator/` | GPT-6 Luna / medium |
-| [ ] | [09 — JSON ↔ YAML Converter](09-json-yaml-converter.md) | `/json-yaml-converter/` | GPT-6 Luna / high |
-| [ ] | [10 — JSON ↔ CSV Converter](10-json-csv-converter.md) | `/json-csv-converter/` | GPT-6 Luna / high |
-| [ ] | [11 — SQL Formatter](11-sql-formatter.md) | `/sql-formatter/` | GPT-6 Luna / high |
-| [ ] | [12 — Regex Tester](12-regex-tester.md) | `/regex-tester/` | GPT-6.1 Sol / medium |
-| [ ] | [13 — Integrasi & SEO](13-integration-seo.md) | `/tools/`, sitemap, navigasi | GPT-6.1 Sol / medium |
+| [x] | [03 — Timestamp Converter](03-timestamp-converter.md) | `/timestamp-converter/` | GPT-6 Luna / high |
+| [x] | [04 — JWT Decoder](04-jwt-decoder.md) | `/jwt-decoder/` | GPT-6 Luna / high |
+| [x] | [05 — Base64 Encoder / Decoder](05-base64.md) | `/base64/` | GPT-6 Luna / medium |
+| [x] | [06 — URL Encoder / Decoder](06-url-encoder-decoder.md) | `/url-encoder-decoder/` | GPT-6 Luna / medium |
+| [x] | [07 — Cron Expression Explainer](07-cron-expression.md) | `/cron-expression/` | GPT-6.1 Sol / medium |
+| [x] | [08 — UUID Generator](08-uuid-generator.md) | `/uuid-generator/` | GPT-6 Luna / medium |
+| [x] | [09 — JSON ↔ YAML Converter](09-json-yaml-converter.md) | `/json-yaml-converter/` | GPT-6 Luna / high |
+| [x] | [10 — JSON ↔ CSV Converter](10-json-csv-converter.md) | `/json-csv-converter/` | GPT-6 Luna / high |
+| [x] | [11 — SQL Formatter](11-sql-formatter.md) | `/sql-formatter/` | GPT-6 Luna / high |
+| [x] | [12 — Regex Tester](12-regex-tester.md) | `/regex-tester/` | GPT-6.1 Sol / medium |
+| [x] | [13 — Integrasi & SEO](13-integration-seo.md) | `/tools/`, sitemap, navigasi | GPT-6.1 Sol / medium |
 
 Prioritas ini berdasarkan kegunaan dan cakupan pengerjaan, bukan hasil pengukuran volume keyword. Ranking maupun jumlah traffic tidak dijamin. Evaluasi impresi/query aktual setelah situs terindeks sebelum menambah variasi tool.
 
@@ -64,4 +64,4 @@ Konten bantuan dan metadata ditulis langsung di HTML agar dapat dibaca tanpa men
 
 ## Batas deliverable saat ini
 
-Foundation 00, JSONlint 01, JSON Diff 02, dan hub 02a sudah diimplementasikan dan memiliki laporan tes lokal. Tool 03–12 serta audit integrasi 13 masih terbuka. Tidak ada eksekusi model atau deployment yang dijadwalkan otomatis.
+Seluruh implementasi lokal 00–13 selesai; **321/321 fixture browser lulus**, termasuk 28 audit integrasi. Hub menautkan 12 tools, sitemap berisi 14 halaman publik siap deploy, dan index tes berisi 14 runner noindex. Detail hasil ada pada tiap task. Deployment, verifikasi live routes/redirect, Search Console, dan baseline traffic tetap menunggu tindakan/akses pemilik; tidak dijadwalkan otomatis.

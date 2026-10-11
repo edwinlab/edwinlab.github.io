@@ -1,0 +1,78 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Cron Expression Explainer &amp; Next Run Times | Edwin Lab</title>
+  <meta name="description" content="Explain Unix five-field cron expressions and preview five upcoming run times in UTC or an IANA timezone. Calculate locally with clear field and DST rules.">
+  <link rel="canonical" href="https://edwinlab.dev/cron-expression/">
+  <meta property="og:type" content="website">
+  <meta property="og:title" content="Cron Expression Explainer &amp; Next Run Times | Edwin Lab">
+  <meta property="og:description" content="Explain Unix five-field cron expressions and preview five upcoming run times in UTC or an IANA timezone. Calculate locally with clear field and DST rules.">
+  <meta property="og:url" content="https://edwinlab.dev/cron-expression/">
+  <meta property="og:image" content="https://edwinlab.dev/assets/edwinlab-logo.png">
+  <meta name="twitter:card" content="summary">
+  <meta name="twitter:title" content="Cron Expression Explainer &amp; Next Run Times | Edwin Lab">
+  <meta name="twitter:description" content="Inspect five-field cron expressions and upcoming times in a selected timezone.">
+  <link rel="icon" href="/favicon/favicon.ico">
+  <link rel="stylesheet" href="/tools/shared/tools.css">
+  <style>
+    .tools-page .cron-settings{display:grid;grid-template-columns:minmax(0,2fr) minmax(0,1fr);gap:18px;margin:18px 0}
+    .tools-page .cron-settings input,.tools-page #expression{width:100%;font:14px/1.6 'DM Mono',monospace}
+    .tools-page #expression{font-size:20px}
+    .tools-page .cron-results{margin-top:26px}
+    .tools-page .cron-results section+section{margin-top:28px}
+    .tools-page .cron-table{table-layout:fixed;font:13px/1.6 'DM Mono',monospace}
+    .tools-page .cron-table :is(td,th){overflow-wrap:anywhere;vertical-align:top}
+    .tools-page .cron-table :is(td,th):first-child{width:34px}
+    .tools-page .cron-field-table :is(td,th){overflow-wrap:anywhere;vertical-align:top}
+    .tools-page .cron-field-table{table-layout:fixed;font-size:13px}
+    .tools-page .cron-field-table :is(td,th):nth-child(2){font-family:'DM Mono',monospace}
+    @media(max-width:700px){.tools-page .cron-settings{grid-template-columns:minmax(0,1fr)}.tools-page .cron-table{min-width:600px}.tools-page .cron-field-table{min-width:540px}}
+  </style>
+  <script type="application/ld+json">
+  {"@context":"https://schema.org","@type":"WebApplication","name":"Cron Expression Explainer","url":"https://edwinlab.dev/cron-expression/","description":"Explain five-field cron and calculate upcoming run times locally in a selected timezone.","applicationCategory":"DeveloperApplication","browserRequirements":"JavaScript and Web Workers enabled","featureList":["Five-field cron explanation","IANA timezone previews","Local bounded calculation"]}
+  </script>
+  <script type="application/ld+json">
+  {"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"Home","item":"https://edwinlab.dev/"},{"@type":"ListItem","position":2,"name":"Developer Tools","item":"https://edwinlab.dev/tools/"},{"@type":"ListItem","position":3,"name":"Cron Expression Explainer","item":"https://edwinlab.dev/cron-expression/"}]}
+  </script>
+</head>
+<body class="tools-page">
+  <a class="tools-skip" href="#workspace">Skip to cron tool</a>
+  <header class="tools-header"><div class="tools-container tools-header-inner"><a class="tools-brand" href="/" aria-label="Edwin Lab home"><img src="/assets/edwinlab-logo.png" alt="" width="44" height="44">Edwin Lab</a><nav class="tools-nav" aria-label="Main navigation"><a href="/">Home</a><a href="/tools/">Developer Tools</a></nav></div></header>
+  <main class="tools-container">
+    <nav class="tools-breadcrumb" aria-label="Breadcrumb"><ol><li><a href="/">Home</a></li><li><a href="/tools/">Developer Tools</a></li><li aria-current="page">Cron Expression Explainer</li></ol></nav>
+    <h1>Cron Expression Explainer</h1>
+    <p class="tools-intro">Read a five-field Unix cron expression and preview five upcoming times in a selected timezone. Calculations stay in this browser.</p>
+    <noscript><p class="tools-status" data-kind="warning">Enable JavaScript and Web Workers to calculate upcoming times. The guide, examples, field ranges, and navigation remain available.</p></noscript>
+    <section class="tools-workspace" id="workspace" aria-label="Cron expression explainer">
+      <label for="expression">Cron expression — five fields</label>
+      <input id="expression" type="text" maxlength="256" value="*/15 * * * *" spellcheck="false" autocapitalize="off" autocomplete="off" aria-describedby="expression-note">
+      <p class="tools-note" id="expression-note">Minute · hour · day of month · month · day of week. Numbers, *, comma lists, ascending ranges, and */step or range/step only. Maximum 256 characters.</p>
+      <div class="cron-settings">
+        <div><label for="reference">Reference time — ISO with UTC offset</label><input id="reference" type="text" maxlength="64" placeholder="2024-01-01T00:00:00Z" spellcheck="false" aria-describedby="reference-note"><p class="tools-note" id="reference-note">Defaults to your device clock. Occurrences must be strictly after this instant.</p></div>
+        <div><label for="timezone">Timezone — IANA name</label><input id="timezone" type="text" list="zones" maxlength="100" value="UTC" spellcheck="false" autocomplete="off"><datalist id="zones"><option value="UTC"><option value="Asia/Jakarta"><option value="America/New_York"></datalist></div>
+      </div>
+      <div class="tools-actions" aria-label="Cron actions"><button class="tools-primary" id="explain" type="button" disabled data-enable>Explain &amp; preview</button><button id="cancel" type="button" disabled>Cancel calculation</button><button id="now" type="button" disabled data-enable>Reset reference to now</button><button id="clear" type="button" disabled data-enable>Clear</button></div>
+      <div class="tools-actions" aria-label="Cron examples"><button type="button" data-example="*/15 * * * *" disabled data-enable>Every 15 minutes</button><button type="button" data-example="0 9 * * 1-5" disabled data-enable>Weekdays at 09:00</button><button type="button" data-example="0 0 1 * *" disabled data-enable>First of each month</button></div>
+      <p class="tools-status" id="status" role="status" aria-live="polite" aria-atomic="true" data-kind="idle">Ready. Set a reference and timezone, then explain the expression.</p>
+      <div class="cron-results" id="result" hidden>
+        <p class="tools-note" id="result-context"></p>
+        <section aria-labelledby="fields-title"><h2 id="fields-title">Field values</h2><div class="tools-table-wrap"><table class="cron-field-table"><thead><tr><th scope="col">Field</th><th scope="col">Expression</th><th scope="col">Selected values</th><th scope="col">Notes</th></tr></thead><tbody id="field-rows"></tbody></table></div><p id="day-rule"></p><div class="tools-actions"><button id="copy-expression" type="button" disabled>Copy expression</button></div></section>
+        <section aria-labelledby="runs-title"><h2 id="runs-title">Next run times</h2><div class="tools-table-wrap"><table class="cron-table"><thead><tr><th scope="col">#</th><th scope="col">Local time</th><th scope="col">UTC offset</th><th scope="col">ISO UTC</th></tr></thead><tbody id="run-rows"></tbody></table></div><p class="tools-note" id="run-note"></p><div class="tools-actions"><button id="copy-runs" type="button" disabled>Copy upcoming times</button></div><p class="tools-note">Copy includes the expression, timezone, reference, local times, offsets, and UTC instants. Results can also be selected manually.</p></section>
+      </div>
+    </section>
+    <article class="tools-prose" aria-label="Cron expression guide">
+      <section><h2>How to read five-field cron</h2><pre><code>minute hour day-of-month month day-of-week
+  */15   *       *         *       *</code></pre><div class="tools-table-wrap"><table><thead><tr><th scope="col">Field</th><th scope="col">Range</th></tr></thead><tbody><tr><td>Minute</td><td>0–59</td></tr><tr><td>Hour</td><td>0–23</td></tr><tr><td>Day of month</td><td>1–31</td></tr><tr><td>Month</td><td>1–12</td></tr><tr><td>Day of week</td><td>0–7; Sunday is 0 or 7</td></tr></tbody></table></div><p>Use <code>*</code> for all values, <code>1,3,5</code> for a list, <code>1-5</code> for a range, and <code>*/15</code> or <code>10-40/10</code> for a step. Selected values are expanded with the cron library.</p></section>
+      <section><h2>Common cron examples</h2><ul><li><code>*/15 * * * *</code> — minute 0, 15, 30, and 45 of each hour.</li><li><code>0 9 * * 1-5</code> — weekdays at 09:00 in the selected timezone.</li><li><code>0 0 1 * *</code> — midnight on the first day of each month.</li></ul><p>When day-of-month and day-of-week are both restricted, this tool uses <strong>OR</strong>. For example, <code>0 9 1 * 1</code> matches 09:00 on the first day of a month or on Monday. If either day field is unrestricted, the other field controls the day match. Stepped or listed wildcards follow the library's semantics; expanded values and the day rule are shown together.</p></section>
+      <section><h2>Frequently asked questions</h2><h3>Why are six-field expressions rejected?</h3><p>This tool supports numeric Unix five-field cron only. Seconds, year fields, names, macros, Quartz modifiers, and alternative dialects are outside the supported subset.</p><h3>Which timezone is used?</h3><p>UTC is the default. Choose Asia/Jakarta or enter an IANA name supported by your browser. The reference must include Z or a UTC offset, so its meaning is independent of the device timezone.</p><h3>What happens during daylight saving time?</h3><p>Each occurrence includes its UTC instant and local offset. Frequent patterns continue through a repeated hour; a specific local time uses its first occurrence. Spring gap behavior is documented below using verified fixtures. Compare these estimates with your actual scheduler.</p><h3>Will this run or save a job?</h3><p>No. The tool calculates estimates locally; it does not schedule jobs or save input. Search is limited to five results before a maximum 40-year horizon, with a two-second worker timeout and explicit partial-result messages. Impossible dates can produce no occurrences.</p></section>
+      <section><h2>Calculation policy</h2><p>Results use the local browser distribution of <a href="https://github.com/Hexagon/croner/releases/tag/10.0.2-dev.0">Croner 10.0.2-dev.0</a>, an upstream prerelease pinned to include its DST fall-back fix. This is a calculation preview and does not establish compatibility across cron dialects. Timezone data comes from the browser.</p><p id="dst-policy">Verified spring-gap example for this pinned build: <code>30 2 * * *</code> in America/New_York returns 03:30 at UTC-04:00 on 10 March 2024, then 02:30 the following day. The missing 02:30 shifts forward in this fixture. This differs from the upstream README's general statement that gap jobs are skipped; use the displayed instants and check your scheduler's policy.</p></section>
+      <section><h2>Related developer tools</h2><p>Inspect an occurrence with the <a href="/timestamp-converter/">Unix Timestamp Converter</a>, read token time claims with the <a href="/jwt-decoder/">JWT Decoder</a>, or browse <a href="/tools/">Developer Tools</a>.</p></section>
+    </article>
+  </main>
+  <footer class="tools-footer"><div class="tools-container"><span>Edwin Lab · Developer tools</span><a href="/">About Edwin</a></div></footer>
+  <script type="module" src="./tool.js"></script>
+</body>
+</html>
+

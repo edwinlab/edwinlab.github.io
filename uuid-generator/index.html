@@ -1,0 +1,60 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>UUID v4 Generator — Generate Bulk UUIDs Online | Edwin Lab</title>
+  <meta name="description" content="Generate one or up to 1,000 UUID v4 identifiers locally in your browser. Copy your batch or download it as a text file with no signup required.">
+  <link rel="canonical" href="https://edwinlab.dev/uuid-generator/">
+  <meta name="theme-color" content="#f7f7f2">
+  <meta property="og:type" content="website">
+  <meta property="og:title" content="UUID v4 Generator — Generate Bulk UUIDs Online | Edwin Lab">
+  <meta property="og:description" content="Generate one or up to 1,000 UUID v4 identifiers locally in your browser. Copy or download your batch.">
+  <meta property="og:url" content="https://edwinlab.dev/uuid-generator/">
+  <meta property="og:image" content="https://edwinlab.dev/assets/edwinlab-logo.png">
+  <meta property="og:site_name" content="Edwin Lab">
+  <meta name="twitter:card" content="summary">
+  <meta name="twitter:title" content="UUID v4 Generator — Generate Bulk UUIDs Online | Edwin Lab">
+  <meta name="twitter:description" content="Generate one or up to 1,000 UUID v4 identifiers locally in your browser.">
+  <link rel="icon" href="/favicon/favicon.ico">
+  <link rel="stylesheet" href="/tools/shared/tools.css">
+  <style>
+    .tools-page .uuid-count{width:min(100%,320px);font:16px/1.5 'DM Mono',monospace}
+    .tools-page #output{width:100%;min-height:180px;max-height:520px;resize:vertical;white-space:pre;overflow:auto;font:13px/1.7 'DM Mono',monospace}
+    .tools-page .uuid-output{margin-top:24px}
+  </style>
+  <script type="application/ld+json">
+  {"@context":"https://schema.org","@type":"WebApplication","name":"UUID v4 Generator","url":"https://edwinlab.dev/uuid-generator/","description":"Generate up to 1,000 UUID v4 identifiers locally with browser cryptography.","applicationCategory":"DeveloperApplication","browserRequirements":"JavaScript, Web Crypto, and a secure context","featureList":["Generate one or up to 1,000 UUID v4 values","Copy or download newline-separated output","Local browser processing"]}
+  </script>
+  <script type="application/ld+json">
+  {"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"Home","item":"https://edwinlab.dev/"},{"@type":"ListItem","position":2,"name":"Developer Tools","item":"https://edwinlab.dev/tools/"},{"@type":"ListItem","position":3,"name":"UUID Generator","item":"https://edwinlab.dev/uuid-generator/"}]}
+  </script>
+</head>
+<body class="tools-page">
+  <a class="tools-skip" href="#workspace">Skip to UUID generator</a>
+  <header class="tools-header"><div class="tools-container tools-header-inner"><a class="tools-brand" href="/" aria-label="Edwin Lab home"><img src="/assets/edwinlab-logo.png" alt="" width="44" height="44">Edwin Lab</a><nav class="tools-nav" aria-label="Main navigation"><a href="/">Home</a><a href="/tools/">Developer Tools</a></nav></div></header>
+  <main class="tools-container">
+    <nav class="tools-breadcrumb" aria-label="Breadcrumb"><ol><li><a href="/">Home</a></li><li><a href="/tools/">Developer Tools</a></li><li aria-current="page">UUID Generator</li></ol></nav>
+    <h1>UUID Generator</h1>
+    <p class="tools-intro">Generate one or a batch of UUID v4 identifiers with your browser's secure random-number generator. Your output stays on this device.</p>
+    <noscript><p class="tools-status" data-kind="warning">Enable JavaScript and browser cryptography to generate UUIDs. The guide and examples remain available below.</p></noscript>
+    <section class="tools-workspace" id="workspace" aria-label="UUID v4 generator">
+      <form id="uuid-form" novalidate>
+        <div class="tools-control"><label for="count">Number of UUIDs</label><input class="uuid-count" id="count" name="count" type="number" inputmode="numeric" value="1" min="1" max="1000" step="1" autocomplete="off" aria-describedby="count-note"><p class="tools-note" id="count-note">Enter a whole number from 1 to 1,000. Generation starts only when you press Generate UUIDs.</p></div>
+        <div class="tools-actions"><button class="tools-primary" id="generate" type="submit">Generate UUIDs</button><button id="copy" type="button" disabled>Copy all</button><button id="download" type="button" disabled>Download .txt</button><button id="clear" type="button">Clear</button></div>
+      </form>
+      <p class="tools-status" id="status" role="status" aria-live="polite" aria-atomic="true" data-kind="idle">Ready. Choose how many UUIDs to generate.</p>
+      <div class="uuid-output"><label for="output">Generated UUID v4 values</label><textarea id="output" readonly spellcheck="false" aria-describedby="output-note"></textarea><p class="tools-note" id="output-note">One UUID per line. Select the text to copy manually if clipboard access is unavailable.</p></div>
+    </section>
+    <article class="tools-prose" aria-label="UUID v4 guide">
+      <section><h2>How to use the UUID generator</h2><ol><li>Choose a count between 1 and 1,000.</li><li>Select <strong>Generate UUIDs</strong> to create a fresh batch.</li><li>Copy all values or download them as a UTF-8 text file.</li></ol></section>
+      <section><h2>UUID v4 format</h2><p>A UUID is a 128-bit identifier written as 36 characters: 32 lowercase hexadecimal digits grouped 8-4-4-4-12 with hyphens. Version 4 reserves bits for the version and RFC-compatible variant; the remaining bits come from cryptographically secure randomness.</p><p>Example only: <code>550e8400-e29b-41d4-a716-446655440000</code>. This is a static format example, not a newly generated identifier.</p></section>
+      <section><h2>Common uses</h2><p>UUIDs can label test fixtures, identify resources in development systems, or seed development data. A random UUID is not a password or secret token. Random generation makes collisions unlikely, but does not prove uniqueness across every system or database.</p></section>
+      <section><h2>Frequently asked questions</h2><h3>Which UUID version is generated?</h3><p>This page generates lowercase UUID version 4 values in the standard hyphenated format.</p><h3>Can I generate UUIDs in bulk?</h3><p>Yes. Generate from 1 to 1,000 values in one batch. A new batch replaces the displayed batch.</p><h3>Are UUIDs generated on a server?</h3><p>No. Generation uses the browser's Web Crypto API on this device. The page does not send or save the values.</p></section>
+      <section><h2>Related developer tools</h2><p>Validate a JSON fixture with <a href="/jsonlint/">JSONLint</a>, inspect a date identifier with the <a href="/timestamp-converter/">Unix Timestamp Converter</a>, or browse <a href="/tools/">Developer Tools</a>.</p></section>
+    </article>
+  </main>
+  <footer class="tools-footer"><div class="tools-container"><span>Edwin Lab · Developer tools</span><a href="/">About Edwin</a></div></footer>
+  <script type="module" src="./tool.js"></script>
+</body>
+</html>

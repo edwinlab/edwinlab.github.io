@@ -4,16 +4,19 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>Free Developer Tools | Edwin Lab</title>
-  <meta name="description" content="Free browser-based developer tools from Edwin Lab. Validate and format JSON, or compare JSON payloads by structure. Your input stays in your browser.">
+  <meta name="description" content="Free browser-based developer tools from Edwin Lab. Work with JSON, encodings, timestamps, cron, UUIDs, SQL, and JavaScript regex. Your input stays in your browser.">
   <link rel="canonical" href="https://edwinlab.dev/tools/">
   <meta name="theme-color" content="#f7f7f2">
   <meta property="og:type" content="website">
   <meta property="og:title" content="Free Developer Tools | Edwin Lab">
-  <meta property="og:description" content="Validate, format, and compare JSON with free browser-based tools from Edwin Lab.">
+  <meta property="og:description" content="Twelve free developer utilities for data, encoding, time, identifiers, SQL, and regex. All input stays in your browser.">
   <meta property="og:url" content="https://edwinlab.dev/tools/">
   <meta property="og:image" content="https://edwinlab.dev/assets/edwinlab-logo.png">
   <meta property="og:site_name" content="Edwin Lab">
   <meta name="twitter:card" content="summary">
+  <meta name="twitter:title" content="Free Developer Tools | Edwin Lab">
+  <meta name="twitter:description" content="Twelve practical developer tools for JSON, encoding, time, SQL, regex, and UUIDs.">
+  <meta name="twitter:image" content="https://edwinlab.dev/assets/edwinlab-logo.png">
   <link rel="icon" type="image/png" href="/assets/edwinlab-logo.png">
   <link rel="stylesheet" href="/tools/shared/tools.css">
   <link rel="stylesheet" href="/tools/hub.css">
@@ -41,26 +44,41 @@
     <section class="hub-hero" aria-labelledby="hub-title">
       <p class="hub-eyebrow">Edwin Lab / practical utilities</p>
       <h1 id="hub-title">Developer Tools</h1>
-      <p class="tools-intro">Small, focused tools for the everyday work of building and debugging software. Start with a JSON payload and get a useful answer without leaving your browser.</p>
+      <p class="tools-intro">Small, focused tools for the everyday work of building and debugging software. Validate data, decode text, inspect schedules, and test query patterns without uploading your input.</p>
     </section>
-    <section class="hub-directory" aria-labelledby="directory-title">
-      <div class="hub-section-heading"><h2 id="directory-title">Explore the tools</h2><p>Two tools available</p></div>
+    <section class="hub-directory" aria-labelledby="category-1">
+      <div class="hub-section-heading"><h2 id="category-1">JSON &amp; data</h2><p>4 tools</p></div>
       <div class="hub-grid">
-        <a class="hub-card" href="/jsonlint/">
-          <span class="hub-card-number" aria-hidden="true">01 / JSON</span>
-          <h3>JSON Validator &amp; Formatter</h3>
-          <p>Check JSON syntax, find errors by line and column, then format or minify your payload.</p>
-          <span class="hub-card-link">Open tool <span aria-hidden="true">↗</span></span>
-        </a>
-        <a class="hub-card" href="/json-diff/">
-          <span class="hub-card-number" aria-hidden="true">02 / JSON</span>
-          <h3>JSON Diff</h3>
-          <p>Compare two JSON payloads by structure and see which values were added, removed, or changed.</p>
-          <span class="hub-card-link">Open tool <span aria-hidden="true">↗</span></span>
-        </a>
+        <a class="hub-card" href="/jsonlint/"><span class="hub-card-number" aria-hidden="true">01 / JSON &amp; data</span><h3>JSON Validator &amp; Formatter</h3><p>Check syntax with line and column errors, then format or minify without changing value tokens.</p><span class="hub-card-link">Open tool <span aria-hidden="true">↗</span></span></a>
+        <a class="hub-card" href="/json-diff/"><span class="hub-card-number" aria-hidden="true">02 / JSON &amp; data</span><h3>JSON Diff</h3><p>Compare two JSON documents by structure and inspect added, removed, or changed values.</p><span class="hub-card-link">Open tool <span aria-hidden="true">↗</span></span></a>
+        <a class="hub-card" href="/json-yaml-converter/"><span class="hub-card-number" aria-hidden="true">03 / JSON &amp; data</span><h3>JSON ↔ YAML Converter</h3><p>Convert payloads and configurations with explicit data-type and YAML subset checks.</p><span class="hub-card-link">Open tool <span aria-hidden="true">↗</span></span></a>
+        <a class="hub-card" href="/json-csv-converter/"><span class="hub-card-number" aria-hidden="true">04 / JSON &amp; data</span><h3>JSON ↔ CSV Converter</h3><p>Convert records and tables, choose delimiters, and preview cells with spreadsheet safety options.</p><span class="hub-card-link">Open tool <span aria-hidden="true">↗</span></span></a>
       </div>
     </section>
-    <p class="hub-privacy">Your input is processed locally in your browser. These tools do not upload your JSON.</p>
+    <section class="hub-directory" aria-labelledby="category-2">
+      <div class="hub-section-heading"><h2 id="category-2">Encoding &amp; tokens</h2><p>3 tools</p></div>
+      <div class="hub-grid">
+        <a class="hub-card" href="/base64/"><span class="hub-card-number" aria-hidden="true">05 / Encoding &amp; tokens</span><h3>Base64 Encoder / Decoder</h3><p>Encode UTF-8 text or decode Base64 and Base64URL with clear validation.</p><span class="hub-card-link">Open tool <span aria-hidden="true">↗</span></span></a>
+        <a class="hub-card" href="/url-encoder-decoder/"><span class="hub-card-number" aria-hidden="true">06 / Encoding &amp; tokens</span><h3>URL Encoder / Decoder</h3><p>Encode URI components, decode URLs, and inspect ordered query parameters.</p><span class="hub-card-link">Open tool <span aria-hidden="true">↗</span></span></a>
+        <a class="hub-card" href="/jwt-decoder/"><span class="hub-card-number" aria-hidden="true">07 / Encoding &amp; tokens</span><h3>JWT Decoder</h3><p>Read JWT header, payload, and time claims. Decoding does not verify a signature.</p><span class="hub-card-link">Open tool <span aria-hidden="true">↗</span></span></a>
+      </div>
+    </section>
+    <section class="hub-directory" aria-labelledby="category-3">
+      <div class="hub-section-heading"><h2 id="category-3">Time &amp; scheduling</h2><p>2 tools</p></div>
+      <div class="hub-grid">
+        <a class="hub-card" href="/timestamp-converter/"><span class="hub-card-number" aria-hidden="true">08 / Time &amp; scheduling</span><h3>Unix Timestamp Converter</h3><p>Convert epoch seconds or milliseconds to dates and inspect an IANA time zone.</p><span class="hub-card-link">Open tool <span aria-hidden="true">↗</span></span></a>
+        <a class="hub-card" href="/cron-expression/"><span class="hub-card-number" aria-hidden="true">09 / Time &amp; scheduling</span><h3>Cron Expression Explainer</h3><p>Explain a five-field cron expression and preview upcoming times in a chosen time zone.</p><span class="hub-card-link">Open tool <span aria-hidden="true">↗</span></span></a>
+      </div>
+    </section>
+    <section class="hub-directory" aria-labelledby="category-4">
+      <div class="hub-section-heading"><h2 id="category-4">Identifiers &amp; query text</h2><p>3 tools</p></div>
+      <div class="hub-grid">
+        <a class="hub-card" href="/uuid-generator/"><span class="hub-card-number" aria-hidden="true">10 / Identifiers &amp; query text</span><h3>UUID v4 Generator</h3><p>Generate one or up to 1,000 random UUID v4 values using browser cryptography.</p><span class="hub-card-link">Open tool <span aria-hidden="true">↗</span></span></a>
+        <a class="hub-card" href="/sql-formatter/"><span class="hub-card-number" aria-hidden="true">11 / Identifiers &amp; query text</span><h3>SQL Formatter</h3><p>Format PostgreSQL or MySQL text with indentation and keyword case options.</p><span class="hub-card-link">Open tool <span aria-hidden="true">↗</span></span></a>
+        <a class="hub-card" href="/regex-tester/"><span class="hub-card-number" aria-hidden="true">12 / Identifiers &amp; query text</span><h3>JavaScript Regex Tester</h3><p>Inspect highlighted matches, positions, capture groups, and named groups in a cancellable worker.</p><span class="hub-card-link">Open tool <span aria-hidden="true">↗</span></span></a>
+      </div>
+    </section>
+    <p class="hub-privacy">Your input is processed locally in your browser. All 12 tools process input locally. Nothing you enter is uploaded or saved to browser storage.</p>
   </main>
   <footer class="tools-footer"><div class="tools-container"><span>Edwin Lab · Developer tools</span><a href="/#contact">Get in touch <span aria-hidden="true">↗</span></a></div></footer>
 </body>

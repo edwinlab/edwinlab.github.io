@@ -4,7 +4,7 @@ import { validateJSON, parseSafeJSON } from '../../tools/shared/json.js';
 import { setStatus, copyText, readTextFile, downloadText } from '../../tools/shared/ui.js';
 import { createScanner, SyntaxKind, format, applyEdits } from '../../tools/vendor/jsonc-parser/main.js';
 import { parseDocument, isMap, isAlias } from '../../tools/vendor/yaml/index.js';
-import { Cron } from '../../tools/vendor/croner/croner.js';
+import { Cron } from '../../tools/vendor/croner/croner.js?v=10.0.2-dev.0';
 
 async function rejects(fn, code) {
   try { await fn(); } catch (error) { equal(error.code, code); return error; }
@@ -156,6 +156,11 @@ test('Croner verifies Unix OR semantics for restricted DOM and DOW', () => {
   try { deepEqual(cron.nextRuns(3, new Date('2024-01-29T00:00:00Z')).map(d => d.toISOString()), ['2024-01-29T09:00:00.000Z', '2024-02-01T09:00:00.000Z', '2024-02-05T09:00:00.000Z']); }
   finally { cron.stop(); }
 });
+test('Croner continues minutely through fall DST overlap', () => {
+  const cron = new Cron('* * * * *', { timezone: 'America/New_York', mode: '5-part' });
+  try { equal(cron.nextRun(new Date('2024-11-03T05:59:00Z')).toISOString(), '2024-11-03T06:00:00.000Z'); }
+  finally { cron.stop(); }
+});
 test('Croner calculates IANA timezone dates independently of host timezone', () => {
   const cron = new Cron('0 9 * * *', { timezone: 'Asia/Jakarta', mode: '5-part' });
   try { equal(cron.nextRun(new Date('2024-01-01T00:00:00Z')).toISOString(), '2024-01-01T02:00:00.000Z'); }
@@ -171,7 +176,7 @@ test('SQL browser UMD supports PostgreSQL and MySQL while preserving literals', 
 test('ESM parsers are also importable in a native module worker', async () => {
   const code = `import { validateJSON } from '${location.origin}/tools/shared/json.js';
     import { parseDocument } from '${location.origin}/tools/vendor/yaml/index.js';
-    import { Cron } from '${location.origin}/tools/vendor/croner/croner.js';
+    import { Cron } from '${location.origin}/tools/vendor/croner/croner.js?v=10.0.2-dev.0';
     const cron = new Cron('* * * * *', {timezone:'UTC',mode:'5-part'});
     postMessage({json:validateJSON('{}').valid,yaml:parseDocument('a: yes').get('a'),cron:!!cron.nextRun(new Date('2024-01-01T00:00:00Z'))});cron.stop();`;
   const url = URL.createObjectURL(new Blob([code], { type: 'text/javascript' }));

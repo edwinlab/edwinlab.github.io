@@ -68,3 +68,9 @@ Jalankan fixture dan browser QA. Laporkan hasil dan shared API aktual, lalu cent
 Impor test/assert/equal/deepEqual/throws/run dari `tests/tools/harness.js`. test menerima fungsi sync atau async; run menjalankan berurutan dan menampilkan hasil pada `[data-test-summary]` serta `[data-test-results]`. equal memakai Object.is; deepEqual membandingkan own keys tanpa bergantung urutan key object dan memeriksa panjang/hole array. throws menerima fungsi sync serta optional expectedCode. Async rejection dapat diuji melalui try/catch di dalam async test. Tidak ada framework atau Node runner.
 
 Perbarui template TOOL_* slots dan script src ketika mulai tool. Hapus noindex hanya pada halaman tool yang siap; test runner dan template tetap noindex. Jangan menambahkan link /tools/ sebelum integrasi 13 membuat hub.
+
+## Update Croner untuk task 07 — 11 Oktober 2026
+
+- Dengan persetujuan pengguna setelah blocker DST dilaporkan, Croner diperbarui dari 10.0.1 ke distribusi browser resmi **10.0.2-dev.0 (prerelease)** untuk perbaikan repeated fall hour. Runtime tidak dimodifikasi; archive integrity dan retained-file checksum diperbarui pada provenance. Dependency lain tetap memakai versi yang dicatat pada laporan awal.
+- Import page/worker Croner memakai `?v=10.0.2-dev.0` untuk cache invalidation. Tes foundation ditambah regresi minutely America/New_York `2024-11-03T05:59Z` → `06:00Z`. Hasil terkini **32/32 lulus**, console bersih; laporan 31/31 di atas adalah hasil foundation sebelum update.
+- Task 07 juga lulus **25/25** browser-native fixtures. Perilaku fixed-time spring gap yang teramati berbeda dari penjelasan umum README upstream; detail fixture/kebijakan dicatat di `07-cron-expression.md` dan halaman publik. Versi ini merupakan preview perhitungan dengan semantik library yang dipin.

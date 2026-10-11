@@ -1,0 +1,58 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Base64 Encoder &amp; Decoder — UTF-8 and Base64URL | Edwin Lab</title>
+  <meta name="description" content="Encode and decode UTF-8 text with standard Base64 or Base64URL. Convert locally in your browser with clear validation and one-click copying.">
+  <link rel="canonical" href="https://edwinlab.dev/base64/">
+  <meta property="og:type" content="website">
+  <meta property="og:title" content="Base64 Encoder &amp; Decoder — UTF-8 and Base64URL | Edwin Lab">
+  <meta property="og:description" content="Encode and decode UTF-8 text with standard Base64 or Base64URL. Convert locally in your browser with clear validation and one-click copying.">
+  <meta property="og:url" content="https://edwinlab.dev/base64/">
+  <meta property="og:image" content="https://edwinlab.dev/assets/edwinlab-logo.png">
+  <meta property="og:site_name" content="Edwin Lab">
+  <meta name="twitter:card" content="summary">
+  <link rel="icon" href="/favicon/favicon.ico">
+  <link rel="stylesheet" href="/tools/shared/tools.css">
+  <script type="application/ld+json">
+  {"@context":"https://schema.org","@type":"WebApplication","name":"Base64 Encoder & Decoder","url":"https://edwinlab.dev/base64/","description":"Encode and decode UTF-8 text using standard Base64 or Base64URL locally in a browser.","applicationCategory":"DeveloperApplication","browserRequirements":"JavaScript enabled","featureList":["UTF-8 text encoding","Standard Base64 and Base64URL","Local browser processing"]}
+  </script>
+  <script type="application/ld+json">
+  {"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"Home","item":"https://edwinlab.dev/"},{"@type":"ListItem","position":2,"name":"Developer Tools","item":"https://edwinlab.dev/tools/"},{"@type":"ListItem","position":3,"name":"Base64 Encoder & Decoder","item":"https://edwinlab.dev/base64/"}]}
+  </script>
+</head>
+<body class="tools-page">
+  <a class="tools-skip" href="#workspace">Skip to Base64 tool</a>
+  <header class="tools-header"><div class="tools-container tools-header-inner">
+    <a class="tools-brand" href="/" aria-label="Edwin Lab home"><img src="/assets/edwinlab-logo.png" alt="" width="44" height="44">Edwin Lab</a>
+    <nav class="tools-nav" aria-label="Main navigation"><a href="/">Home</a><a href="/tools/">Developer Tools</a></nav>
+  </div></header>
+  <main class="tools-container">
+    <nav class="tools-breadcrumb" aria-label="Breadcrumb"><ol><li><a href="/">Home</a></li><li><a href="/tools/">Developer Tools</a></li><li aria-current="page">Base64 Encoder &amp; Decoder</li></ol></nav>
+    <h1>Base64 Encoder &amp; Decoder</h1>
+    <p class="tools-intro">Convert UTF-8 text with standard Base64 or Base64URL. Processing stays in this browser; Base64 is an encoding, not encryption.</p>
+    <noscript><p class="tools-status" data-kind="warning">Enable JavaScript to encode or decode text. Instructions, examples, and navigation remain available below.</p></noscript>
+    <section class="tools-workspace" id="workspace" aria-label="Base64 encoder and decoder">
+      <div class="tools-controls">
+        <div class="tools-control"><label for="direction">Operation</label><select id="direction" disabled><option value="encode">Encode</option><option value="decode">Decode</option></select></div>
+        <div class="tools-control"><label for="alphabet">Alphabet</label><select id="alphabet" disabled><option value="standard">Standard Base64</option><option value="url">Base64URL</option></select></div>
+      </div>
+      <div class="tools-editors">
+        <div class="tools-panel"><label for="input">Input</label><textarea id="input" spellcheck="false" autocapitalize="off" autocomplete="off" aria-describedby="input-note" placeholder="Enter UTF-8 text or one Base64 value…"></textarea><p class="tools-note" id="input-note">Input limit: 5 MiB UTF-8. Decode input must be one Base64 value with no whitespace.</p></div>
+        <div class="tools-panel"><label for="output">Output</label><textarea id="output" readonly spellcheck="false" aria-describedby="output-note" placeholder="Result appears here."></textarea><div class="tools-actions"><button type="button" id="copy" disabled>Copy output</button></div><p class="tools-note" id="output-note">Output limit: 10 MiB. Output remains selectable if clipboard access is unavailable.</p></div>
+      </div>
+      <div class="tools-actions" aria-label="Base64 actions"><button class="tools-primary" type="button" id="process" disabled>Process</button><button type="button" id="example" disabled>Load example</button><button type="button" id="clear" disabled>Clear</button></div>
+      <p class="tools-status" id="status" role="status" aria-live="polite" aria-atomic="true" data-kind="idle">Ready. Choose an operation and alphabet, then process your input.</p>
+    </section>
+    <article class="tools-prose" aria-label="Base64 encoding guide">
+      <section><h2>How to encode or decode text</h2><ol><li>Choose Encode or Decode, then choose the alphabet.</li><li>Enter UTF-8 text or a single Base64 value and select Process.</li><li>Copy the result. Change any setting and process again to refresh it.</li></ol><p>For example, standard Base64 encodes <code>Hello, world!</code> as <code>SGVsbG8sIHdvcmxkIQ==</code>. The UTF-8 character <code>✓</code> encodes as <code>4pyT</code>.</p></section>
+      <section><h2>Standard Base64 and Base64URL</h2><div class="tools-table-wrap"><table><thead><tr><th scope="col">Mode</th><th scope="col">Character substitutions</th><th scope="col">Padding</th></tr></thead><tbody><tr><th scope="row">Standard Base64</th><td><code>+</code> and <code>/</code></td><td>Uses trailing <code>=</code> when needed</td></tr><tr><th scope="row">Base64URL</th><td><code>-</code> and <code>_</code></td><td>Encoder omits padding; decoder accepts omitted or correct ending padding</td></tr></tbody></table></div><p>Base64URL uses a URL-safe alphabet. Both modes encode bytes; this page first converts text to UTF-8 and rejects decoded bytes that are not valid UTF-8 text.</p></section>
+      <section><h2>Frequently asked questions</h2><h3>Why is my Base64 invalid?</h3><p>Check that the chosen alphabet matches the value, there are no spaces or line breaks, and padding is valid for the selected mode. Non-canonical pad bits are rejected.</p><h3>Does this support Unicode?</h3><p>Yes. Text is converted to UTF-8 before encoding, so symbols such as <code>✓</code>, emoji, and Japanese text round-trip correctly.</p><h3>What is Base64URL?</h3><p>Base64URL replaces <code>+</code> and <code>/</code> with <code>-</code> and <code>_</code>. Its unpadded form is commonly used in URL-safe data such as JWT segments. Encoding does not encrypt or protect the contents.</p></section>
+      <section><h2>Related developer tools</h2><p>Decode token segments with the <a href="/jwt-decoder/">JWT Decoder</a>, convert URI components with the <a href="/url-encoder-decoder/">URL Encoder &amp; Decoder</a>, or browse all <a href="/tools/">Developer Tools</a>.</p></section>
+    </article>
+  </main>
+  <footer class="tools-footer"><div class="tools-container"><span>Edwin Lab · Developer tools</span><a href="/">About Edwin</a></div></footer>
+  <script type="module" src="./tool.js"></script>
+</body>
+</html>

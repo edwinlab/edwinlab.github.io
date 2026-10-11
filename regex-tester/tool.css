@@ -1,0 +1,11 @@
+.tools-page .regex-pattern{width:100%;font-family:'DM Mono',monospace}
+.tools-page .regex-flags{display:flex;flex-wrap:wrap;gap:10px 20px;border:1px solid var(--line);border-radius:5px;margin:20px 0;padding:12px 16px;min-width:0}
+.tools-page .regex-flags legend{font-weight:700;font-size:14px}
+.tools-page .regex-flags label{display:flex;align-items:center;gap:8px;margin:0;font-weight:500}
+.tools-page .regex-actions{margin-top:18px}
+.tools-page #results{margin-top:24px;min-width:0}
+.tools-page .regex-highlight{white-space:pre-wrap;overflow-wrap:anywhere;max-height:400px;overflow:auto}
+.tools-page mark{background:#bce8da;color:#075c49;border-radius:2px}
+.tools-page .regex-zero{background:#fff4d9;color:#715008}
+.tools-page #match-rows td{font:12px/1.6 'DM Mono',monospace;white-space:pre-wrap;overflow-wrap:anywhere;max-width:280px;vertical-align:top}
+.tools-page #results table{min-width:620px}
