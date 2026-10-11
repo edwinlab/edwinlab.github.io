@@ -1,0 +1,55 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <!-- Replace all TOOL_* slots before publishing. Remove noindex on the finished tool. -->
+  <meta name="robots" content="noindex,nofollow">
+  <title>TOOL_NAME | Edwin Lab</title>
+  <meta name="description" content="TOOL_DESCRIPTION">
+  <link rel="canonical" href="https://edwinlab.dev/TOOL_SLUG/">
+  <meta property="og:type" content="website">
+  <meta property="og:title" content="TOOL_NAME | Edwin Lab">
+  <meta property="og:description" content="TOOL_DESCRIPTION">
+  <meta property="og:url" content="https://edwinlab.dev/TOOL_SLUG/">
+  <meta property="og:image" content="https://edwinlab.dev/assets/edwinlab-logo.png">
+  <meta name="twitter:card" content="summary">
+  <link rel="icon" href="/favicon/favicon.ico">
+  <link rel="stylesheet" href="/tools/shared/tools.css">
+</head>
+<body class="tools-page">
+  <a class="tools-skip" href="#workspace">Skip to tool</a>
+  <header class="tools-header">
+    <div class="tools-container tools-header-inner">
+      <a class="tools-brand" href="/" aria-label="Edwin Lab home"><img src="/assets/edwinlab-logo.png" alt="" width="44" height="44">Edwin Lab</a>
+      <nav class="tools-nav" aria-label="Main navigation"><a href="/">Home</a><!-- Add /tools/ when the hub exists. --></nav>
+    </div>
+  </header>
+  <main class="tools-container">
+    <nav class="tools-breadcrumb" aria-label="Breadcrumb"><ol><li><a href="/">Home</a></li><li aria-current="page">TOOL_NAME</li></ol></nav>
+    <h1>TOOL_NAME</h1>
+    <p class="tools-intro">TOOL_INTRO — Replace with one clear sentence describing the task and result.</p>
+    <noscript><p class="tools-status" data-kind="warning">Enable JavaScript to process your input. The instructions and examples remain available below.</p></noscript>
+    <section class="tools-workspace" id="workspace" aria-label="Tool workspace">
+      <div class="tools-controls"><div class="tools-control"><label for="tool-option">TOOL_OPTION_LABEL</label><select id="tool-option" disabled><option>TOOL_OPTION</option></select></div></div>
+      <div class="tools-actions"><button class="tools-primary" type="button" id="process" disabled>TOOL_ACTION</button><button type="button" id="example" disabled>Load example</button><button type="button" id="clear" disabled>Clear</button></div>
+      <div class="tools-editors">
+        <div class="tools-panel"><label for="input">Input</label><textarea id="input" spellcheck="false" autocapitalize="off" autocomplete="off" aria-describedby="input-note"></textarea><p class="tools-note" id="input-note">Input limit: 5 MiB of UTF-8 text. Your input is processed in this browser.</p></div>
+        <div class="tools-panel"><label for="output">Result</label><textarea id="output" readonly spellcheck="false" aria-describedby="output-note"></textarea><div class="tools-actions"><button type="button" id="copy" disabled>Copy result</button><button type="button" id="download" disabled>Download result</button></div><p class="tools-note" id="output-note">Select the result to copy it manually if clipboard access is unavailable.</p></div>
+      </div>
+      <p class="tools-status" id="status" role="status" aria-live="polite" aria-atomic="true" data-kind="idle">Foundation template. Controls will be enabled by the individual tool implementation.</p>
+    </section>
+    <article class="tools-prose" aria-label="Instructions">
+      <section><h2>How to use TOOL_NAME</h2><ol><li>TOOL_STEP_1</li><li>TOOL_STEP_2</li><li>TOOL_STEP_3</li></ol></section>
+      <section><h2>Example</h2><p>TOOL_EXAMPLE_EXPLANATION</p><pre><code>TOOL_STATIC_EXAMPLE</code></pre></section>
+      <section><h2>Limits and common questions</h2><p>TOOL_LIMITATIONS — Explain supported input, error cases, and data precision where relevant.</p><h3>Is my input uploaded?</h3><p>Your input stays in this browser. Processing does not send your text to a server.</p></section>
+      <!-- Add related tools only after those target pages are ready. -->
+    </article>
+  </main>
+  <footer class="tools-footer"><div class="tools-container"><span>Edwin Lab · Developer tools</span><a href="/">About Edwin</a></div></footer>
+  <!-- SCRIPT_MODULE_SLOT: after copying this template into TOOL_SLUG/index.html,
+       replace the following inert module with <script type="module" src="./tool.js"></script>.
+       Bind events and enable only the controls supported by that tool. -->
+  <script type="module">/* Foundation template: no tool behavior is implemented here. */</script>
+</body>
+</html>

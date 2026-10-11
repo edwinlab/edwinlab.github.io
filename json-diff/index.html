@@ -1,0 +1,138 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>JSON Diff — Compare JSON Objects Online | Edwin Lab</title>
+  <meta name="description" content="Compare two JSON payloads by structure. Find added, removed, and changed values while ignoring object key order, directly in your browser.">
+  <link rel="canonical" href="https://edwinlab.dev/json-diff/">
+  <meta property="og:type" content="website">
+  <meta property="og:title" content="JSON Diff — Compare JSON Objects Online | Edwin Lab">
+  <meta property="og:description" content="Compare two JSON payloads by structure. Find added, removed, and changed values while ignoring object key order, directly in your browser.">
+  <meta property="og:url" content="https://edwinlab.dev/json-diff/">
+  <meta property="og:image" content="https://edwinlab.dev/assets/edwinlab-logo.png">
+  <meta name="twitter:card" content="summary">
+  <link rel="icon" href="/favicon/favicon.ico">
+  <link rel="stylesheet" href="/tools/shared/tools.css">
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "WebApplication",
+    "name": "JSON Diff",
+    "url": "https://edwinlab.dev/json-diff/",
+    "description": "Compare two JSON payloads by structure in a web browser.",
+    "applicationCategory": "DeveloperApplication",
+    "browserRequirements": "JavaScript enabled",
+    "featureList": ["Compare JSON objects", "Find added, removed, and changed values", "Process JSON locally in your browser"]
+  }
+  </script>
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "BreadcrumbList",
+    "itemListElement": [
+      {"@type":"ListItem","position":1,"name":"Home","item":"https://edwinlab.dev/"},
+      {"@type":"ListItem","position":2,"name":"Developer Tools","item":"https://edwinlab.dev/tools/"},
+      {"@type":"ListItem","position":3,"name":"JSON Diff","item":"https://edwinlab.dev/json-diff/"}
+    ]
+  }
+  </script>
+  <style>
+    .diff-summary{display:flex;gap:10px;flex-wrap:wrap;margin:16px 0}
+    .diff-summary span{padding:5px 10px;border:1px solid #aab5a1;border-radius:999px;font-size:13px;font-weight:700}
+    .diff-table{min-width:700px;font-size:13px}
+    .diff-table th{font-size:12px;white-space:nowrap}
+    .diff-table td{vertical-align:top;max-width:380px;overflow-wrap:anywhere}
+    .diff-path,.diff-value{font-family:'DM Mono',monospace;font-size:12px;white-space:pre-wrap}
+    .diff-value{display:block;max-height:8.5em;overflow:auto}
+    .diff-type{font-size:11px;font-weight:800;text-transform:uppercase;letter-spacing:.05em}
+    .diff-row[data-change="added"] .diff-type{color:#075c49}
+    .diff-row[data-change="removed"] .diff-type{color:#8b2c19}
+    .diff-row[data-change="changed"] .diff-type{color:#715008}
+    @media(max-width:700px){.diff-table td{max-width:240px}}
+  </style>
+</head>
+<body class="tools-page">
+  <a class="tools-skip" href="#workspace">Skip to JSON diff</a>
+  <header class="tools-header">
+    <div class="tools-container tools-header-inner">
+      <a class="tools-brand" href="/" aria-label="Edwin Lab home"><img src="/assets/edwinlab-logo.png" alt="" width="44" height="44">Edwin Lab</a>
+      <nav class="tools-nav" aria-label="Main navigation"><a href="/">Home</a><a href="/tools/">Developer Tools</a></nav>
+    </div>
+  </header>
+  <main class="tools-container">
+    <nav class="tools-breadcrumb" aria-label="Breadcrumb"><ol><li><a href="/">Home</a></li><li><a href="/tools/">Developer Tools</a></li><li aria-current="page">JSON Diff</li></ol></nav>
+    <h1>JSON Diff</h1>
+    <p class="tools-intro">See what changed between two API responses without being distracted by formatting or object key order.</p>
+    <noscript><p class="tools-status" data-kind="warning">Enable JavaScript to compare JSON. The guide and examples remain available below.</p></noscript>
+    <section class="tools-workspace" id="workspace" aria-label="JSON comparison workspace">
+      <div class="tools-actions" aria-label="Comparison actions">
+        <button class="tools-primary" type="button" id="compare" disabled>Compare JSON</button>
+        <button type="button" id="swap" disabled>Swap</button>
+        <button type="button" id="example" disabled>Load example</button>
+        <button type="button" id="clear" disabled>Clear</button>
+      </div>
+      <div class="tools-editors">
+        <div class="tools-panel">
+          <label for="original-json">Original JSON</label>
+          <textarea id="original-json" spellcheck="false" autocapitalize="off" autocomplete="off" aria-describedby="original-note" placeholder='Paste the earlier JSON payload…'></textarea>
+          <p class="tools-note" id="original-note">Strict JSON. Combined input limit: 5 MiB UTF-8. Your data stays in this browser.</p>
+        </div>
+        <div class="tools-panel">
+          <label for="updated-json">Updated JSON</label>
+          <textarea id="updated-json" spellcheck="false" autocapitalize="off" autocomplete="off" aria-describedby="updated-note" placeholder='Paste the newer JSON payload…'></textarea>
+          <p class="tools-note" id="updated-note">Object key order is ignored. Arrays are compared by index.</p>
+        </div>
+      </div>
+      <p class="tools-status" id="status" role="status" aria-live="polite" aria-atomic="true" data-kind="idle">Ready. Add two JSON values and select Compare JSON.</p>
+      <section id="results" aria-label="JSON comparison results" aria-live="polite" hidden>
+        <div class="tools-controls" style="margin-top:20px">
+          <div class="tools-control"><label for="change-filter">Show changes</label><select id="change-filter" disabled><option value="all">All changes</option><option value="added">Added</option><option value="removed">Removed</option><option value="changed">Changed</option></select></div>
+          <button type="button" id="copy-report" disabled>Copy report</button>
+        </div>
+        <p class="tools-status" id="summary" data-kind="success"></p>
+        <div class="diff-summary" id="counts" aria-label="Difference counts"></div>
+        <div class="tools-table-wrap">
+          <table class="diff-table">
+            <thead><tr><th scope="col">Change</th><th scope="col">JSON Pointer</th><th scope="col">Before</th><th scope="col">After</th></tr></thead>
+            <tbody id="diff-rows"></tbody>
+          </table>
+        </div>
+      </section>
+    </section>
+    <article class="tools-prose" aria-label="JSON diff guide">
+      <section>
+        <h2>How to compare JSON responses</h2>
+        <ol><li>Paste the earlier payload under Original JSON and the newer one under Updated JSON.</li><li>Select Compare JSON to find added, removed, or changed values.</li><li>Filter the results or copy a plain-text report for a review or bug report.</li></ol>
+        <p>For example, if an API response changes from <code>{"status":"pending","amount":1200}</code> to <code>{"status":"paid","amount":1200,"receipt":"R-42"}</code>, this JSON diff reports <code>/status</code> as changed and <code>/receipt</code> as added.</p>
+      </section>
+      <section>
+        <h2>What added, removed, and changed mean</h2>
+        <p><strong>Added</strong> means a value exists in the updated JSON but not the original. <strong>Removed</strong> means it existed only in the original. <strong>Changed</strong> means values differ at the same location, including when their JSON types differ. A new or removed object or array is shown as one subtree change at its path.</p>
+        <p>Paths use JSON Pointer escaping: <code>~</code> becomes <code>~0</code> and <code>/</code> becomes <code>~1</code>. The root value is labeled <code>(root)</code>.</p>
+      </section>
+      <section>
+        <h2>Comparison rules and limits</h2>
+        <p>Object keys are compared by name in a deterministic order, so key order and whitespace do not matter. Arrays are compared by index and are not sorted or matched by an ID. Moving an item can therefore appear as changes at multiple positions. Numeric values use JavaScript number semantics: <code>1</code>, <code>1.0</code>, and <code>1e0</code> compare equally; <code>-0</code> and <code>0</code> compare equally. Other decimal values use the browser's JavaScript number precision.</p>
+        <p>Both inputs together are limited to 5 MiB of UTF-8 text. JSON nesting is limited to 100 levels, and results stop after 500 differences. Inputs containing duplicate keys, unsafe integer values, non-finite numbers, or numbers that underflow to zero are rejected rather than silently changing their meaning. To compare a large numeric ID, quote it as a JSON string.</p>
+        <p>Comparison runs locally in this browser. Input is not uploaded, stored, or added to the page URL.</p>
+      </section>
+      <section>
+        <h2>Frequently asked questions</h2>
+        <h3>Does JSON key order matter?</h3>
+        <p>No. Object properties are compared by key, regardless of their order in the text. Formatting whitespace is also ignored.</p>
+        <h3>How are arrays compared?</h3>
+        <p>Items are compared at the same index. The tool does not sort arrays or match objects by an ID, so reordered items may be reported as changed values.</p>
+        <h3>Is a missing field the same as null?</h3>
+        <p>No. A missing field is reported as added or removed, while an explicit <code>null</code> is a present JSON value.</p>
+        <h3>Why are large numeric IDs rejected?</h3>
+        <p>JavaScript cannot represent every integer beyond its safe integer range exactly. Quote an identifier such as <code>9007199254740993</code> so it remains an exact string.</p>
+        <h3>Are my JSON payloads uploaded?</h3>
+        <p>No. Parsing and comparison happen locally in your browser. The page does not send input to an API.</p>
+      </section>
+    </article>
+  </main>
+  <footer class="tools-footer"><div class="tools-container"><span>Edwin Lab · Developer tools</span><a href="/">About Edwin</a></div></footer>
+  <script type="module" src="./tool.js"></script>
+</body>
+</html>

@@ -1,0 +1,62 @@
+# Local browser dependencies
+
+Pinned on 11 October 2026. These files are official prebuilt JavaScript distributions copied from the public npm registry archives. No npm installation, package manifest, bundler, transpilation, or build was used. Runtime requests stay local. Load a library only on pages that need it.
+
+| Library | Exact version | Runtime entry | License / official documentation |
+|---|---|---|---|
+| jsonc-parser | 3.3.1 | `jsonc-parser/main.js` (ESM) | MIT · [Microsoft repository](https://github.com/microsoft/node-jsonc-parser) |
+| yaml | 2.8.1 | `yaml/index.js` (ESM) | ISC · [YAML documentation](https://eemeli.org/yaml/) |
+| Croner | 10.0.1 | `croner/croner.js` (ESM) | MIT · [Croner repository](https://github.com/Hexagon/croner) |
+| sql-formatter | 15.6.10 | `sql-formatter/sql-formatter.min.js` (classic UMD) | MIT · [SQL Formatter repository](https://github.com/sql-formatter-org/sql-formatter) |
+
+Each folder includes its upstream `LICENSE`. SQL Formatter's browser bundle embeds Nearley 2.20.1; its license is `sql-formatter/NEARLEY-LICENSE`. The bundled source was compared with Nearley 2.20.1's official archive using the SQL package source map. Argparse is a CLI dependency and is not included in this browser bundle; no CLI/transitive installation is required.
+
+## Provenance and reproduction
+
+`provenance.json` records exact archive URLs, upstream SHA-512 integrity, downloaded archive SHA-256, and SHA-256 for every retained runtime/license file. Archive integrity was checked before extraction. Keep the provenance and licenses when updating or copying these dependencies.
+
+To reproduce, download the exact archive URLs listed in provenance.json using curl or a browser. Verify SHA-512 against the recorded integrity, then extract only these paths:
+
+- jsonc-parser: `package/lib/esm/**/*.js` → `jsonc-parser/`. Add `.js` to extensionless relative `from './...'` imports in that tree. **This is the only runtime source modification**; no parser behavior changes.
+- yaml: `package/browser/dist/**/*.js` → `yaml/`, retaining the directory tree. Imports already include `.js`; no changes.
+- Croner: `package/dist/croner.js` → `croner/croner.js`; unchanged.
+- SQL Formatter: `package/dist/sql-formatter.min.js` → `sql-formatter/sql-formatter.min.js`; unchanged and already bundles its browser runtime dependency.
+- Copy package `LICENSE` or `LICENSE.md` to each folder's `LICENSE`. Copy Nearley 2.20.1 `package/LICENSE.txt` to the SQL folder's `NEARLEY-LICENSE`.
+
+Do not copy package.json, CLI files, Node/CommonJS distributions, or source maps into the website. Source maps were used only for license inspection in temporary storage. This is asset preparation, not a build step.
+
+## Browser import examples
+
+```js
+import { createScanner, format, applyEdits, SyntaxKind } from '/tools/vendor/jsonc-parser/main.js';
+import { parseDocument, isAlias, isMap } from '/tools/vendor/yaml/index.js';
+import { Cron } from '/tools/vendor/croner/croner.js';
+```
+
+JSON scanner/format APIs are available for future JSONlint lexical transformations. Do not use the vendor's recovery parser result as successful strict validation; shared/json.js checks syntax and guards first. Formatter edits retain source numeric lexemes and duplicate keys.
+
+YAML's `parseDocument(text, { version: '1.2', schema: 'core', intAsBigInt: true })` exposes `doc.errors`, `doc.warnings`, `doc.contents`, scalar/pair/alias AST nodes, and `doc.toJS({maxAliasCount: 0})`. Integer values can be inspected as BigInt before conversion to Number. The future converter must enforce its subset via AST; core schema alone does not reject aliases or unsafe values.
+
+Croner example for **calculation only**, without scheduling a callback:
+
+```js
+const cron = new Cron('0 9 1 * 1', { mode: '5-part', timezone: 'UTC' });
+try {
+  const upcoming = cron.nextRuns(5, new Date('2024-01-29T00:00:00Z'));
+} finally { cron.stop(); }
+```
+
+Version 10.0.1 uses OR when DOM and DOW are both restricted. The `+` DOW modifier selects AND and must be rejected by the future Unix-five-field tool. There is no `legacyMode` flag to add for this version. The tool still needs its grammar whitelist, time horizon, cancel/timeout, and DST fixtures. Mode alone does not restrict all extended syntax.
+
+SQL Formatter must load as a **classic script before** the tool's module:
+
+```html
+<script src="/tools/vendor/sql-formatter/sql-formatter.min.js"></script>
+<script type="module" src="./tool.js"></script>
+```
+
+Then call `globalThis.sqlFormatter.format(text, {language: 'postgresql', keywordCase: 'upper'})` or `language: 'mysql'`. Do not import the UMD file as an ES module: its top-level `this` would be undefined. A classic worker can use `importScripts('/tools/vendor/sql-formatter/sql-formatter.min.js')`, then `self.sqlFormatter.format(...)`. Foundation fixtures verify both page and worker loading.
+
+## Verification
+
+Serve the repository and open `/tests/tools/foundation.html`. Its fixtures cover all four library entry points, native ESM workers for JSON/YAML/Croner, and a classic worker for SQL. The test runner and template are noindex documents and are not public tool pages.
