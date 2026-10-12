@@ -1,6 +1,6 @@
 # Developer tools — rencana eksekusi
 
-Dibuat 11 Oktober 2026. **Foundation, 12 tools, navigasi/hub, serta integrasi SEO (00–13) selesai secara lokal. Deployment dan verifikasi publik belum dijalankan.** Tujuan: menambah halaman developer tools yang berguna dan dapat ditemukan melalui pencarian, dengan identitas Edwin Lab serta link kembali ke profil profesional.
+Dibuat 11 Oktober 2026. **Foundation, 12 tools awal, navigasi/hub, serta integrasi SEO (00–13) selesai secara lokal. Enam tool tambahan (15–17, 20–22) sudah dibuat, diuji, dan dihubungkan; empat kandidat parser/diff menunggu akses registry untuk memverifikasi library. Beberapa item QA UI manual dan seluruh verifikasi publik belum dijalankan.** Tujuan: menambah halaman developer tools yang berguna dan dapat ditemukan melalui pencarian, dengan identitas Edwin Lab serta link kembali ke profil profesional.
 
 Teknologi: **HTML + CSS + JavaScript vanilla**, tanpa framework, npm, package.json, bundler, backend, atau build. Library parser JavaScript lokal siap browser dipakai hanya untuk fitur yang memerlukannya. Seluruh input diproses di perangkat pengguna.
 
@@ -30,7 +30,7 @@ Prioritas ini berdasarkan kegunaan dan cakupan pengerjaan, bukan hasil pengukura
 
 ## Backlog tambahan — D01–D10, task 14–24
 
-Dibuat **12 Oktober 2026** sesuai permintaan membuat TODO untuk 10 kandidat developer tools. **Belum ada implementasi baru: 0/10 tools selesai.** Nomor lama 00–13 dipertahankan; D01–D10 adalah kode dari daftar pilihan, sedangkan 14–23 adalah nomor task eksekusi. Dokumen tidak menambahkan route ke hub/sitemap.
+Dibuat **12 Oktober 2026** sesuai permintaan membuat TODO untuk 10 kandidat developer tools. Setelah eksekusi lokal, **6/10 tool siap dan terintegrasi**; 14/18/19/23 belum diimplementasikan karena fase 14a membutuhkan distribusi resmi yang tidak dapat diunduh dari lingkungan ini. Nomor lama 00–13 dipertahankan; D01–D10 adalah kode pilihan, sedangkan 14–23 nomor task. Enam route baru sudah tercatat di hub dan sitemap lokal.
 
 Baca [EXTENSION-CONTRACT.md](EXTENSION-CONTRACT.md) bersama kontrak existing. Task 14a menyiapkan library hanya untuk consumer yang membutuhkan; task 24 mengintegrasikan batch yang sudah lulus. Semua tool memakai HTML/CSS/vanilla JS, direct folder routes, pemrosesan lokal, dan file siap GitHub Pages tanpa compiler/build.
 
@@ -38,16 +38,16 @@ Baca [EXTENSION-CONTRACT.md](EXTENSION-CONTRACT.md) bersama kontrak existing. Ta
 |---|---|---|---|---|
 | [ ] | [14a — Readiness library browser](14a-library-readiness.md) | Tidak ada route publik | Luna · high, per fase | Shared/harness existing |
 | [ ] | [14 / D01 — Text Diff](14-text-diff.md) | `/text-diff/` | Luna · high | 14a fase A |
-| [ ] | [15 / D02 — Hash & Checksum Generator](15-hash-generator.md) | `/hash-generator/` | Luna · medium | Native Web Crypto |
-| [ ] | [16 / D03 — Password Generator](16-password-generator.md) | `/password-generator/` | Luna · high | Native Web Crypto |
-| [ ] | [17 / D04 — Color Converter & Contrast Checker](17-color-converter.md) | `/color-converter/` | Luna · high | Shared existing |
+| [x] | [15 / D02 — Hash & Checksum Generator](15-hash-generator.md) | `/hash-generator/` | Luna · medium | Native Web Crypto |
+| [x] | [16 / D03 — Password Generator](16-password-generator.md) | `/password-generator/` | Luna · high | Native Web Crypto |
+| [x] | [17 / D04 — Color Converter & Contrast Checker](17-color-converter.md) | `/color-converter/` | Luna · high | Shared existing |
 | [ ] | [18 / D05 — XML Formatter & Syntax Checker](18-xml-formatter.md) | `/xml-formatter/` | Luna · high, per tahap | 14a fase B |
 | [ ] | [19 / D06 — Markdown Editor & Preview](19-markdown-preview.md) | `/markdown-preview/` | Luna · high, per tahap | 14a fase C |
-| [ ] | [20 / D07 — Number Base Converter](20-number-base-converter.md) | `/number-base-converter/` | Luna · medium | Native BigInt |
-| [ ] | [21 / D08 — URL Parser & Query Editor](21-url-parser.md) | `/url-parser/` | Luna · medium | Native URL/URLSearchParams |
-| [ ] | [22 / D09 — CSS Gradient Generator](22-css-gradient-generator.md) | `/css-gradient-generator/` | Luna · medium | Shared existing |
+| [x] | [20 / D07 — Number Base Converter](20-number-base-converter.md) | `/number-base-converter/` | Luna · medium | Native BigInt |
+| [x] | [21 / D08 — URL Parser & Query Editor](21-url-parser.md) | `/url-parser/` | Luna · medium | Native URL/URLSearchParams |
+| [x] | [22 / D09 — CSS Gradient Generator](22-css-gradient-generator.md) | `/css-gradient-generator/` | Luna · medium | Shared existing |
 | [ ] | [23 / D10 — JSONPath Tester](23-jsonpath-tester.md) | `/jsonpath-tester/` | Luna · high, per tahap | 14a fase D + shared safe JSON |
-| [ ] | [24 — Integrasi tambahan & SEO](24-extension-integration-seo.md) | Hub/sitemap/related links | Luna · high, per batch | Subset 14–23 lulus |
+| [ ] | [24 — Integrasi tambahan & SEO](24-extension-integration-seo.md) | Hub/sitemap/related links | Luna · high, per batch | **Parsial:** enam tool terhubung; parser berikutnya menunggu 14a |
 
 **Model rekomendasi: GPT-6 Luna (`gpt-6-luna`).** Medium untuk transformasi terbatas; high untuk diff, validasi/parser, randomness kata sandi, dan integrasi. Pilihan reasoning per task adalah penilaian scope proyek, bukan benchmark. [OpenAI Docs: Luna](https://developers.openai.com/api/docs/models/gpt-6-luna) mendukung medium/high; [panduan pemilihan model](https://developers.openai.com/api/docs/guides/model-selection) menempatkan Luna untuk pekerjaan yang scope-nya jelas dan biaya perlu dijaga. Harga API bukan estimasi penggunaan langganan Codex. Pilih model/reasoning di pengaturan chat; teks prompt tidak mengubah model sesi.
 
@@ -57,7 +57,7 @@ Urutan hemat yang disarankan:
 2. **Batch berikutnya: 16 → 17**, lalu **14a fase A → 14**. Jalankan 24 lagi untuk tools siap.
 3. **Batch parser: 14a fase B → 18**, **14a fase C → 19**, **14a fase D → 23**. Kerjakan per tahap sesuai task; tidak wajib menunggu kandidat lain. Jalankan 24 setiap batch siap.
 
-Setiap task berisi scope V1/exclusions, files owned, aturan algoritme, batas input/output, fixture, static SEO, browser QA, serta prompt siap tempel. Executor memperbarui **checklist task dan baris README miliknya** setelah ada bukti. Untuk 14a catat fase yang benar-benar siap; untuk 24 catat nomor tool yang terintegrasi. Jangan menandai rencana sebagai implementasi selesai atau menautkan route yang belum ada.
+Fixture browser untuk enam tool siap lulus **43/43**; runner integrasi enam tool lulus **10/10**, runner developer lama lulus **29/29**, dan `git diff --check` bersih. Angka ini bukti lokal browser, bukan publik/live. Task 24 masih terbuka karena empat kandidat lain belum siap dan 14a A–D tidak memiliki file/vendor yang terverifikasi.
 
 Contoh eksekusi:
 
@@ -69,9 +69,9 @@ Setelah ada bukti, update checklist task15 dan baris15 README. Task lain tetap s
 Jangan commit/push/deploy.
 ```
 
-Laporan 00–13 di bawah adalah bukti historis lokal tanggal 11 Oktober; perkembangan live terbaru dicatat di [tracker SEO](../seo-improvements/README.md). Task tambahan tidak mengubah status tool existing, everyday tools, atau pekerjaan SEO yang belum selesai.
+Rincian tiap task mencatat hasil lokal 12 Oktober. Penerbitan/push, route live, Search Console, dan traffic belum diverifikasi; status tool harian serta backlog SEO tetap sesuai tracker terkait.
 
-## Cara eksekusi dengan model hemat
+## Cara eksekusi dengan model hemat — task awal 00–13
 
 1. Pilih model dan reasoning pada pengaturan chat; teks prompt tidak otomatis mengganti model.
 2. Gunakan satu chat untuk satu task. Berikan README ini, [CONTRACT.md](CONTRACT.md), dan satu TODO target; tidak perlu seluruh riwayat redesign atau semua dokumen sekaligus.
@@ -107,4 +107,4 @@ Konten bantuan dan metadata ditulis langsung di HTML agar dapat dibaca tanpa men
 
 ## Batas deliverable saat ini
 
-Seluruh implementasi lokal 00–13 selesai; **321/321 fixture browser lulus**, termasuk 28 audit integrasi. Hub menautkan 12 tools, sitemap berisi 14 halaman publik siap deploy, dan index tes berisi 14 runner noindex. Detail hasil ada pada tiap task. Deployment, verifikasi live routes/redirect, Search Console, dan baseline traffic tetap menunggu tindakan/akses pemilik; tidak dijadwalkan otomatis.
+Implementasi lokal 00–13 selesai; pada 11 Oktober **321/321 fixture browser lulus**, termasuk 28 audit integrasi pada baseline saat itu. Setelah batch baru, hub menautkan 18 developer tools, sitemap berisi 32 URL publik unik, dan index tes berisi 21 runner noindex. Enam tool tambahan memiliki **43/43 fixture** lulus; runner integrasi baru **10/10** dan runner lama **29/29** lulus. Beberapa pemeriksaan keyboard/console manual, deployment, verifikasi live routes/redirect, Search Console, dan baseline traffic tetap belum diverifikasi.

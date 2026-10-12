@@ -1,0 +1,10 @@
+import { test, equal, deepEqual, throws, run } from './harness.js';
+import { convertBases, parseInteger, formatReport } from '../../number-base-converter/logic.js';
+test('Converts decimal 255 into binary, octal, decimal, and lowercase hex',()=>deepEqual(convertBases('255',10),{2:'11111111',8:'377',10:'255',16:'ff'}));
+test('BigInt preserves integers beyond JavaScript safe range',()=>{const x=convertBases('9007199254740993',10);equal(x[16],'20000000000001');equal(parseInteger(x[16],16),9007199254740993n);});
+test('Matching prefixes are optional and negative zero normalizes',()=>{equal(parseInteger('-0x10',16),-16n);equal(parseInteger('-0',10),0n);});
+test('Mismatched prefixes and invalid integer syntax fail',()=>{throws(()=>parseInteger('0x10',10),'INVALID_INTEGER');throws(()=>parseInteger('0b10',16),'INVALID_INTEGER');throws(()=>parseInteger('0o10',2),'INVALID_INTEGER');throws(()=>parseInteger('1.2',10),'INVALID_INTEGER');throws(()=>parseInteger('1_0',10),'INVALID_INTEGER');});
+test('Report uses raw digits and explicit base labels',()=>equal(formatReport({2:'11',8:'3',10:'3',16:'3'}),'Base 2: 11\nBase 8: 3\nBase 10: 3\nBase 16: 3'));
+test('Signed integers, leading zeros, and matching prefixes normalize exactly',()=>{equal(parseInteger('-10',10),-10n);equal(parseInteger('+00010',10),10n);equal(parseInteger('0b1010',2),10n);equal(parseInteger('0o12',8),10n);equal(parseInteger('0xA',16),10n);});
+test('4096 magnitude digits are accepted and the next digit is rejected',()=>{equal(parseInteger('1'.repeat(4096),2).toString(2).length,4096);throws(()=>parseInteger('1'.repeat(4097),2),'INPUT_TOO_LARGE');});
+await run();

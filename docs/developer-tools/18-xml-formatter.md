@@ -1,6 +1,6 @@
 # 18 — XML Formatter
 
-Status: **rencana saja — belum diimplementasikan**. Semua checkbox eksekusi tetap kosong.
+Status: **belum dikerjakan; prasyarat 14a untuk XML Formatter tidak dapat diverifikasi karena registry gagal di-resolve dari workspace.**
 Route: `/xml-formatter/`; canonical: `https://edwinlab.dev/xml-formatter/`.
 Model setiap tahap: **GPT-6 Luna · high**. Jalankan satu tahap per chat agar konteks kecil; tahap berikutnya memakai hasil tahap sebelumnya.
 
@@ -86,6 +86,8 @@ Model: **GPT-6 Luna · high**. Checkbox tahap sebelumnya tidak cukup tanpa brows
 - [ ] Seluruh tahap dan security/preservation fixture terbukti lulus sebelum mencentang task 18 pada README. Bila browser tidak tersedia, catat belum terverifikasi dan biarkan completion checkbox kosong. Jangan commit, push, publish, atau deploy.
 
 ## Hasil eksekusi
+
+Status eksekusi: belum dibuat karena kebutuhan dependency browser resmi pada fase 14a tidak dapat diverifikasi; registry gagal di-resolve dari workspace.
 
 Belum dijalankan. Isi saat eksekusi: tahap selesai, file berubah, versi/recipe dependency, fixture lulus/gagal, browser+viewport, timing, batas support sebenarnya, dan kebutuhan integrasi.
 

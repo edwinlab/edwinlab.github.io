@@ -13,6 +13,7 @@ const tools = [
   { slug: 'sql-formatter', example: '[data-example]', process: '#format', input: '#input', output: '#output', copy: '#copy', bad: "select 'unfinished" },
   { slug: 'regex-tester', example: '[data-pattern]', process: '#run', input: '#input', output: '#highlight', copy: '#copy-matches', bad: '[', badInput: '#pattern' }
 ];
+const extensions = ['hash-generator','password-generator','color-converter','number-base-converter','url-parser','css-gradient-generator'];
 const fetched = new Map(), titles = new Set(), descriptions = new Set(), metrics = [];
 async function get(path) { if (!fetched.has(path)) fetched.set(path, await fetch(path)); const response = fetched.get(path); assert(response.ok, `Unavailable resource: ${path} (${response.status})`); return response.clone(); }
 async function page(path) { return new DOMParser().parseFromString(await (await get(path)).text(), 'text/html'); }
@@ -76,11 +77,11 @@ for (const { slug } of tools) test(`${slug}: unique static SEO, canonical, navig
   const image = new URL(doc.querySelector('meta[property="og:image"]').content); equal(image.origin, 'https://edwinlab.dev'); await get(image.pathname);
 });
 
-test('Hub has exactly twelve ordinary HTML cards, categories, local CSS, and profile/contact links', async () => {
+test('Hub has eighteen ordinary HTML cards, categories, local CSS, and profile/contact links', async () => {
   const doc = await page('/tools/'); equal(doc.title, 'Free Developer Tools | Edwin Lab');
-  const cards = [...doc.querySelectorAll('.hub-card')]; equal(cards.length, 12); equal(new Set(cards.map(card => card.getAttribute('href'))).size, 12);
+  const cards = [...doc.querySelectorAll('.hub-card')]; equal(cards.length, 18); equal(new Set(cards.map(card => card.getAttribute('href'))).size, 18);
   for (const tool of tools) assert(cards.some(card => card.getAttribute('href') === `/${tool.slug}/`));
-  equal(doc.querySelectorAll('.hub-directory').length, 4); equal(doc.querySelectorAll('script[src]').length, 0);
+  equal(doc.querySelectorAll('.hub-directory').length, 6); equal(doc.querySelectorAll('script[src]').length, 0);
   assert(doc.querySelector('a[href="/#contact"]')); assert(doc.querySelector('a[href="/"]'));
   const home = await page('/'); assert(home.querySelector('nav a[href="/tools/"]')); assert(home.getElementById('contact'));
   await framePage('/tools/', async (doc, win, frame) => {
@@ -89,10 +90,10 @@ test('Hub has exactly twelve ordinary HTML cards, categories, local CSS, and pro
     recordMetrics('tools', win);
   });
 });
-test('Sitemap XML includes only fourteen ready canonical public pages; robots permits required resources', async () => {
+test('Sitemap XML includes only thirty-two ready canonical public pages; robots permits required resources', async () => {
   const doc = new DOMParser().parseFromString(await (await get('/sitemap.xml')).text(), 'application/xml'); equal(doc.querySelector('parsererror'), null);
-  const urls = [...doc.querySelectorAll('loc')].map(el => el.textContent); equal(urls.length, 14); equal(new Set(urls).size, 14);
-  for (const route of ['/', '/tools/', ...tools.map(tool => `/${tool.slug}/`)]) assert(urls.includes(`https://edwinlab.dev${route}`));
+  const urls = [...doc.querySelectorAll('loc')].map(el => el.textContent); equal(urls.length, 32); equal(new Set(urls).size, 32);
+  for (const route of ['/', '/tools/', ...tools.map(tool => `/${tool.slug}/`), ...extensions.map(slug=>`/${slug}/`)]) assert(urls.includes(`https://edwinlab.dev${route}`));
   assert(urls.every(url => url.endsWith('/') && !url.includes('/tests/') && !url.includes('/docs/') && !url.includes('/vendor/')));
   equal(doc.querySelectorAll('lastmod').length, 0);
   const robots = await (await get('/robots.txt')).text(); assert(robots.includes('Allow: /')); assert(robots.includes('Sitemap: https://edwinlab.dev/sitemap.xml')); assert(!robots.includes('Disallow:'));
@@ -101,7 +102,7 @@ test('Sitemap XML includes only fourteen ready canonical public pages; robots pe
 test('Test directory contains only existing noindex runners and stays outside sitemap', async () => {
   const doc = await page('/tests/tools/'); assert(doc.querySelector('meta[name="robots"]').content.includes('noindex'));
   const runners = [...doc.querySelectorAll('a')].filter(a => a.getAttribute('href').startsWith('./'));
-  equal(runners.length, 14);
+  equal(runners.length, 21);
   for (const link of runners) { const runner = await page('/tests/tools/' + link.getAttribute('href').slice(2)); assert(runner.querySelector('meta[name="robots"]')?.content.includes('noindex'), 'Runner missing noindex'); }
 });
 function recordMetrics(slug, win) {

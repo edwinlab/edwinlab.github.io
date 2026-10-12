@@ -1,0 +1,2 @@
+.tools-page .stop-row{display:grid;grid-template-columns:70px minmax(100px,1fr) minmax(90px,.6fr) auto;gap:8px;align-items:center}.tools-page .stop-row input{min-width:0}.tools-page .gradient-preview{height:180px;border:1px solid var(--line);border-radius:8px;margin:16px 0}
+@media(max-width:600px){.tools-page .stop-row{grid-template-columns:60px minmax(0,1fr) minmax(75px,.7fr)}.tools-page .stop-row button{grid-column:1/-1}}

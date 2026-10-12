@@ -1,0 +1,11 @@
+import { test, assert, equal, deepEqual, throws, run } from './harness.js';
+import { assertColorInputs, parseHex, parseRGB, parseHslText, rgbToHex, rgbToHsl, hslToRgb, contrastRatio, contrastResults } from '../../color-converter/logic.js';
+test('Short and long hexadecimal colors normalize to integer RGB',()=>{deepEqual(parseHex('#f00'),[255,0,0]);equal(rgbToHex(parseHex('#00ff80')),'#00ff80');});
+test('RGB and HSL primary colors convert correctly',()=>{deepEqual(hslToRgb([0,100,50]),[255,0,0]);deepEqual(hslToRgb([120,100,50]),[0,255,0]);deepEqual(hslToRgb([240,100,50]),[0,0,255]);deepEqual(rgbToHsl([0,0,255]),[240,100,50]);});
+test('Hue 360 normalizes to red',()=>deepEqual(hslToRgb([360,100,50]),[255,0,0]));
+test('Invalid syntax, fractional RGB, and channel overflow are rejected',()=>{throws(()=>parseHex('red'),'INVALID_COLOR');throws(()=>parseRGB('1.5,2,3'),'INVALID_COLOR');throws(()=>parseRGB([0,0,256]),'INVALID_COLOR');});
+test('Contrast matches WCAG sRGB reference and uses exact ratio',()=>{const ratio=contrastRatio([119,119,119],[255,255,255]);assert(Math.abs(ratio-4.478089453577214)<1e-12);assert(ratio<4.5);});
+test('White on black passes all thresholds; identical colors fail',()=>{const pass=contrastResults([255,255,255],[0,0,0]),fail=contrastResults([10,10,10],[10,10,10]);assert(pass.aaNormal&&pass.aaLarge&&pass.aaaNormal&&pass.aaaLarge);assert(!fail.aaNormal&&!fail.aaLarge&&!fail.aaaNormal&&!fail.aaaLarge);});
+test('HSL text rejects exponent notation and out-of-range saturation',()=>{throws(()=>parseHslText('hsl(1e2, 50%, 50%)'),'INVALID_COLOR');throws(()=>parseHslText('hsl(120, 101%, 50%)'),'INVALID_COLOR');});
+test('Color input fields are capped at 64 bytes each',()=>throws(()=>assertColorInputs({input:'x'.repeat(65),foreground:'#000',background:'#fff'}),'FIELD_TOO_LARGE'));
+await run();

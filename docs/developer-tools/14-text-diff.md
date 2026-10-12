@@ -1,6 +1,6 @@
 # 14 — Text Diff (D01)
 
-Status: **TODO — belum diimplementasikan**. Dokumen ini hanya rencana; seluruh checkbox eksekusi tetap terbuka.
+Status: **belum dikerjakan; prasyarat 14a tidak dapat diverifikasi karena registry tidak bisa di-resolve dari workspace.** Dokumen ini hanya rencana; seluruh checkbox eksekusi tetap terbuka.
 Model: **GPT-6 Luna (`gpt-6-luna`), reasoning `high`**. Penilaian berdasarkan scope dan fixture proyek, bukan benchmark.
 Route: `/text-diff/`. Canonical: `https://edwinlab.dev/text-diff/`.
 

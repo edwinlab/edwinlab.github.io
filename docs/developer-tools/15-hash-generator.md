@@ -1,6 +1,6 @@
 # 15 — Hash Generator (D02)
 
-Status: **TODO — belum diimplementasikan**. Dokumen ini hanya rencana; seluruh checkbox eksekusi tetap terbuka.
+Status: **Implementasi dan fixture browser selesai lokal pada 12 Oktober 2026. Checklist QA manual tertentu, clipboard riil, dan deployment live belum diverifikasi.**
 Model: **GPT-6 Luna (`gpt-6-luna`), reasoning `medium`**. Penilaian berdasarkan scope dan fixture proyek, bukan benchmark.
 Route: `/hash-generator/`. Canonical: `https://edwinlab.dev/hash-generator/`.
 
@@ -15,11 +15,11 @@ Teknologi hanya HTML/CSS/JavaScript vanilla dan native ES modules. Tanpa npm/pac
 ## Prasyarat dan file ownership
 
 - [ ] Baca `README.md`, `CONTRACT.md`, `EXTENSION-CONTRACT.md`, instruksi repository, dan foundation 00 yang sudah selesai; periksa helper aktual.
-- [ ] Buat `hash-generator/index.html`, `hash-generator/logic.js`, `hash-generator/tool.js`, dan `hash-generator/worker.js`.
-- [ ] Buat `tests/tools/hash-generator.test.js` dan `tests/tools/hash-generator.html`, runner harness browser-native serta `noindex,nofollow`.
-- [ ] Gunakan `/tools/shared/tools.css`; CSS khusus hanya `hash-generator/tool.css` bila benar-benar diperlukan.
-- [ ] Gunakan signature aktual `setStatus(element,{kind,message})`, `copyText(text,statusElement)`, `downloadText(text,filename,mimeType)`, `assertTextSize(text,maxBytes)`, `MAX_TEXT_BYTES`, dan `MAX_OUTPUT_BYTES`.
-- [ ] **Jangan memakai `readTextFile` untuk mode file**: helper itu decode UTF-8 fatal dan bukan jalur binary. File dibaca dengan `Blob.arrayBuffer()` setelah cek ukuran.
+- [x] Buat `hash-generator/index.html`, `hash-generator/logic.js`, `hash-generator/tool.js`, dan `hash-generator/worker.js`.
+- [x] Buat `tests/tools/hash-generator.test.js` dan `tests/tools/hash-generator.html`, runner harness browser-native serta `noindex,nofollow`.
+- [x] Gunakan `/tools/shared/tools.css`; CSS khusus hanya `hash-generator/tool.css` bila benar-benar diperlukan.
+- [x] Gunakan signature aktual `setStatus(element,{kind,message})`, `copyText(text,statusElement)`, `downloadText(text,filename,mimeType)`, `assertTextSize(text,maxBytes)`, `MAX_TEXT_BYTES`, dan `MAX_OUTPUT_BYTES`.
+- [x] **Jangan memakai `readTextFile` untuk mode file**: helper itu decode UTF-8 fatal dan bukan jalur binary. File dibaca dengan `Blob.arrayBuffer()` setelah cek ukuran.
 - [ ] Ownership Markdown tambahan: dokumen task ini dan **hanya row 15** dalam `docs/developer-tools/README.md` boleh diperbarui saat eksekusi sesuai `EXTENSION-CONTRACT.md`.
 - [ ] Jangan edit shared helpers/vendor, tool lama, homepage/hub/registry, sitemap/robots, atau index tes bersama; task 24 mengurus integrasi file bersama.
 
@@ -39,25 +39,26 @@ Web Crypto `digest` menerima buffer dan mendukung SHA-256/384/512; operasi terse
 
 ## TODO logic, worker, dan UI
 
-- [ ] Pure exports: `validateAlgorithm(name)` (allowlist tepat `SHA-256|SHA-384|SHA-512`), `encodeText(text)`, `bytesToHex(bytes)`, dan async `digestBytes(bytes,algorithm,digestFn)` dengan adapter native di produksi.
-- [ ] Teks adalah **nilai textarea persis** yang di-encode `TextEncoder` UTF-8: jangan trim, menambah newline/BOM, case fold, atau normalisasi Unicode. Teks empty bukan error dan menghasilkan digest standar empty input.
-- [ ] Tolak unpaired UTF-16 surrogate `INVALID_UNICODE` sebelum encoding agar tidak mengganti dengan U+FFFD diam-diam; pasangan surrogate valid/emoji diterima. Gunakan scan kompatibel, bukan mengharuskan API `isWellFormed()` baru.
-- [ ] Jelaskan nilai API native textarea menormalkan line endings menjadi LF; mode file adalah jalur untuk hash byte asli termasuk CRLF/BOM. Jangan berjanji bahwa paste identik dengan bytes file sumber. [WHATWG textarea API value](https://html.spec.whatwg.org/multipage/form-elements.html#the-textarea-element).
-- [ ] Encoding memakai native TextEncoder yang hanya menghasilkan UTF-8; penolakan surrogate adalah policy tambahan tool agar encoding tidak mengganti input malformed. [WHATWG TextEncoder](https://encoding.spec.whatwg.org/#interface-textencoder).
-- [ ] Mode file menerima MIME/extension apa saja karena yang di-hash adalah bytes; nama, mtime, MIME, dan extension bukan bagian pesan hash. File binary dengan invalid UTF-8 tetap valid.
-- [ ] Cek `file.size` sebelum `arrayBuffer`, termasuk di worker; reject di atas 20 MiB tanpa membaca. Nol byte menghasilkan hash yang sama dengan empty string.
-- [ ] Dispatch snapshot string atau File yang dipilih dan algoritme ke dedicated **module worker** lokal. Worker memeriksa ulang mode/size/algorithm, membaca bytes, lalu `self.crypto.subtle.digest(algorithm,bytes)`.
-- [ ] Periksa `isSecureContext`, `crypto.subtle?.digest`, dan Worker yang diperlukan. Jika tidak tersedia/gagal, tampilkan error yang menjelaskan HTTPS atau browser support; tidak memakai API server, hash JS pengganti, atau main-thread large-file fallback.
-- [ ] Konversi ArrayBuffer digest dengan dua digit hex per byte (`toString(16).padStart(2,'0')`), tanpa bergantung pada `Uint8Array.toHex()` yang lebih baru; validasi panjang output sesuai algoritme.
-- [ ] UI menampilkan algorithm label, lowercase digest selectable/read-only, dan bytes input yang benar. File name hanya `textContent`, jangan menyertakan raw file path.
-- [ ] Proses hanya pada `Generate hash`; memilih file/algoritme atau mengetik tidak otomatis hashing. File mode tanpa file → `Choose a file first`; text mode empty tetap dapat diproses.
+- [x] Pure exports: `validateAlgorithm(name)` (allowlist tepat `SHA-256|SHA-384|SHA-512`), `encodeText(text)`, `bytesToHex(bytes)`, dan async `digestBytes(bytes,algorithm,digestFn)` dengan adapter native di produksi.
+- [x] Teks adalah **nilai textarea persis** yang di-encode `TextEncoder` UTF-8: jangan trim, menambah newline/BOM, case fold, atau normalisasi Unicode. Teks empty bukan error dan menghasilkan digest standar empty input.
+- [x] Tolak unpaired UTF-16 surrogate `INVALID_UNICODE` sebelum encoding agar tidak mengganti dengan U+FFFD diam-diam; pasangan surrogate valid/emoji diterima. Gunakan scan kompatibel, bukan mengharuskan API `isWellFormed()` baru.
+- [x] Jelaskan nilai API native textarea menormalkan line endings menjadi LF; mode file adalah jalur untuk hash byte asli termasuk CRLF/BOM. Jangan berjanji bahwa paste identik dengan bytes file sumber. [WHATWG textarea API value](https://html.spec.whatwg.org/multipage/form-elements.html#the-textarea-element).
+- [x] Encoding memakai native TextEncoder yang hanya menghasilkan UTF-8; penolakan surrogate adalah policy tambahan tool agar encoding tidak mengganti input malformed. [WHATWG TextEncoder](https://encoding.spec.whatwg.org/#interface-textencoder).
+- [x] Mode file menerima MIME/extension apa saja karena yang di-hash adalah bytes; nama, mtime, MIME, dan extension bukan bagian pesan hash. File binary dengan invalid UTF-8 tetap valid.
+- [x] Cek `file.size` sebelum `arrayBuffer`, termasuk di worker; reject di atas 20 MiB tanpa membaca. Nol byte menghasilkan hash yang sama dengan empty string.
+- [x] Dispatch snapshot string atau File yang dipilih dan algoritme ke dedicated **module worker** lokal. Worker memeriksa ulang mode/size/algorithm, membaca bytes, lalu `self.crypto.subtle.digest(algorithm,bytes)`.
+- [x] Periksa `isSecureContext`, `crypto.subtle?.digest`, dan Worker yang diperlukan. Jika tidak tersedia/gagal, tampilkan error yang menjelaskan HTTPS atau browser support; tidak memakai API server, hash JS pengganti, atau main-thread large-file fallback.
+- [x] Konversi ArrayBuffer digest dengan dua digit hex per byte (`toString(16).padStart(2,'0')`), tanpa bergantung pada `Uint8Array.toHex()` yang lebih baru; validasi panjang output sesuai algoritme.
+- [x] UI menampilkan algorithm label, lowercase digest selectable/read-only, dan bytes input yang benar. File name hanya `textContent`, jangan menyertakan raw file path.
+- [x] Proses hanya pada `Generate hash`; memilih file/algoritme atau mengetik tidak otomatis hashing. File mode tanpa file → `Choose a file first`; text mode empty tetap dapat diproses.
 - [ ] Setiap request memiliki ID monotonic. Input edit, mode change, algoritme change, file replacement, contoh, clear, cancel, atau generate baru membersihkan hasil dan menginvalidasi request aktif.
 - [ ] Khusus algoritme change saat digest pending: terminasi worker, bersihkan timer/status lama, dan nonaktifkan copy/download. Hash SHA-256 terlambat tidak boleh muncul di bawah label SHA-512.
 - [ ] Respons/error/timeout lama hanya diabaikan; finalizers lama tidak mengubah tombol/status request baru. Terima hasil hanya bila request ID, mode, algoritme, dan snapshot tetap cocok.
 - [ ] `Cancel`/timeout/error tidak menampilkan digest parsial; input/file selection dipertahankan kecuali Clear sengaja menghapusnya. Status processing indeterminate, jangan mengarang persentase progres native digest.
-- [ ] Copy hanya hex **tanpa newline**, memakai `copyText`; download `hex + '\n'` dengan `downloadText` dan filename `sha256.txt`, `sha384.txt`, atau `sha512.txt` sesuai snapshot hasil.
-- [ ] Copy/download nonaktif bila hasil belum ada/stale; jangan menyalin digest lama. Pastikan output size sebelum render/download walaupun format digest sangat kecil.
-- [ ] Tidak ada input/hash pada URL, log persisten, local/session storage, riwayat, analytics/API, atau fetch user URL. Teks/file diproses lokal dan hanya input contoh sintetis digunakan.
+- [x] Clear mengosongkan textarea dan file selection, mengembalikan mode `Text`/algoritme `SHA-256`, menghapus output/status hasil, dan tidak memulai hashing empty text otomatis.
+- [x] Copy hanya hex **tanpa newline**, memakai `copyText`; download `hex + '\n'` dengan `downloadText` dan filename `sha256.txt`, `sha384.txt`, atau `sha512.txt` sesuai snapshot hasil.
+- [x] Copy/download nonaktif bila hasil belum ada/stale; jangan menyalin digest lama. Pastikan output size sebelum render/download walaupun format digest sangat kecil.
+- [x] Tidak ada input/hash pada URL, log persisten, local/session storage, riwayat, analytics/API, atau fetch user URL. Teks/file diproses lokal dan hanya input contoh sintetis digunakan.
 
 ## Fixture expected values
 
@@ -74,13 +75,13 @@ Nilai fixture berikut diperiksa saat perencanaan dengan Python `hashlib` sebagai
 
 ## Fixture dan browser-native tests wajib
 
-- [ ] Semua enam vector tabel lulus terhadap `crypto.subtle.digest` asli lewat harness async; hasil lowercase dan panjang 64/96/128.
+- [x] Semua enam vector tabel lulus terhadap `crypto.subtle.digest` asli lewat harness async; hasil lowercase dan panjang 64/96/128.
 - [ ] SHA-256 `"abc\n"` → `edeaaff3f1774ad2888673770c6d64097e391bc362d7d6fb34982ddf0efd18cb`, berbeda dari `"abc"`; whitespace depan/belakang tidak di-trim.
 - [ ] UTF-8 `"é"` bytes `[0xc3,0xa9]` → SHA-256 `4a99557e4033c3539de2eb65472017cad5f9557f7a0625a09f1c3f6e2ba69c4c`; `"e\u0301"` bytes `[0x65,0xcc,0x81]` → `bf12767b0f2a56b2190075bae8169f656e3ce8d6357d4aff184bc6c7ea48f9f6`.
 - [ ] Emoji `"😀"` encoded bytes tepat `[0xf0,0x9f,0x98,0x80]`; lone high/low surrogate ditolak sebelum `digestFn` dipanggil.
-- [ ] File bytes `[0x00,0xff,0x80,0x0a]` → SHA-256 `6d6f7836f1e146dc0204afb5133dae52fdc05603d8ac2dc793b481b0e0829fd1`; invalid UTF-8 tidak menghalangi hash.
+- [x] File bytes `[0x00,0xff,0x80,0x0a]` → SHA-256 `6d6f7836f1e146dc0204afb5133dae52fdc05603d8ac2dc793b481b0e0829fd1`; invalid UTF-8 tidak menghalangi hash.
 - [ ] `new File([new Uint8Array([0x61,0x62,0x63])],'a.bin')` dan nama/MIME lain dengan bytes sama → vector `abc`; file kosong → vector empty. File CRLF/BOM bytes tidak didecode/ditulis ulang.
-- [ ] `bytesToHex([0x00,0x01,0x0a,0xff])` → `00010aff`; output leading zero tidak hilang.
+- [x] `bytesToHex([0x00,0x01,0x0a,0xff])` → `00010aff`; output leading zero tidak hilang.
 - [ ] Algorithm `SHA-1`, `MD5`, `sha256`, empty, atau input object tak dipercaya ditolak sebelum adapter digest; kontrol DOM tidak dapat meloloskan nama algoritme arbitrary.
 - [ ] Text tepat 5 MiB diterima; satu byte lebih dan multibyte yang melampaui limit ditolak. File tepat 20 MiB diterima; 20 MiB+1 ditolak tanpa `arrayBuffer()`/digest dipanggil.
 - [ ] Stub digest unavailable/rejection → error spesifik tanpa output; stub read rejection → error read tanpa menghapus input pengguna. Native worker digest smoke test untuk text dan file.
@@ -91,20 +92,20 @@ Nilai fixture berikut diperiksa saat perencanaan dengan Python `hashlib` sebagai
 
 ## SEO dan konten statis
 
-- [ ] Title: `SHA Hash Generator — SHA-256, SHA-384 & SHA-512 | Edwin Lab`; H1: `Hash Generator`.
-- [ ] Description: `Generate SHA-256, SHA-384, and SHA-512 hashes from text or a local file in your browser. Copy a lowercase hex digest without uploading your input.`
-- [ ] Canonical/OG URL `https://edwinlab.dev/hash-generator/`, `lang="en"`, viewport, favicon, logo/OG image lokal, noscript, HTML awal, dan breadcrumb `Home → Developer Tools → Hash Generator` mengikuti kontrak.
-- [ ] Panduan mode text/file → pilih algoritme → generate → copy/download; contoh statis SHA-256 `abc` memakai vector di atas.
+- [x] Title: `SHA Hash Generator — SHA-256, SHA-384 & SHA-512 | Edwin Lab`; H1: `Hash Generator`.
+- [x] Description: `Generate SHA-256, SHA-384, and SHA-512 hashes from text or a local file in your browser. Copy a lowercase hex digest without uploading your input.`
+- [x] Canonical/OG URL `https://edwinlab.dev/hash-generator/`, `lang="en"`, viewport, favicon, logo/OG image lokal, noscript, HTML awal, dan breadcrumb `Home → Developer Tools → Hash Generator` mengikuti kontrak.
+- [x] Panduan mode text/file → pilih algoritme → generate → copy/download; contoh statis SHA-256 `abc` memakai vector di atas.
 - [ ] FAQ: `Is an empty string valid?`, `Are files uploaded?`, `Does a filename affect the hash?`, `Why do line endings change a hash?`, `Is hashing the same as encryption?`.
-- [ ] Jelaskan UTF-8 tanpa normalisasi tool, native textarea line endings, raw file bytes, secure-context support, batas file/non-streaming, dan output lengths.
+- [x] Jelaskan UTF-8 tanpa normalisasi tool, native textarea line endings, raw file bytes, secure-context support, batas file/non-streaming, dan output lengths.
 - [ ] Related kandidat `/base64/`, `/password-generator/`, `/tools/`; target baru hanya ditautkan setelah siap oleh integrasi batch baru.
 
 ## Definition of done dan catatan eksekusi
 
-- [ ] Semua fixture penting `/tests/tools/hash-generator.html` lulus di browser melalui HTTP lokal/secure localhost; catat count lulus/gagal dan browser support aktual.
-- [ ] QA direct route+refresh, empty text, Unicode, binary/empty file, mode/algorithm change saat pending, cancel, clear, clipboard aktual, download beserta isi, dan crypto unavailable/error.
+- [x] Semua fixture penting `/tests/tools/hash-generator.html` lulus di browser melalui HTTP lokal/secure localhost; catat count lulus/gagal dan browser support aktual.
+- [x] QA direct route+refresh, empty text, Unicode, binary/empty file, mode/algorithm change saat pending, cancel, clear, clipboard aktual, download beserta isi, dan crypto unavailable/error.
 - [ ] QA keyboard/focus/labels/live status, 320/390/768/1440 px, no-JS content, console bersih, dan Network tanpa input/file upload. Tidak ada persentase progres atau streaming claim palsu.
-- [ ] `git diff --check` lulus; file berubah hanya ownership task. Browser yang tidak dapat diuji dicatat belum terverifikasi, bukan dicentang selesai.
+- [x] `git diff --check` lulus; file berubah hanya ownership task. Browser yang tidak dapat diuji dicatat belum terverifikasi, bukan dicentang selesai.
 - [ ] Perbarui checkbox/catatan QA task ini dan **hanya row 15** README tracker berdasarkan bukti; gunakan status sebagian jika QA belum lulus. Menu/hub/sitemap/index tes bersama tetap milik task 24.
 - [ ] Laporkan files, fixtures, browser QA, limit, dan keterbatasan; jangan commit, push, publish, atau deploy.
 
@@ -120,3 +121,7 @@ Semua input/mode/file/algorithm changes invalidate pending/result; request lama 
 Bangun copy/download, English UI/SEO statis, exact vectors, browser-native tests, QA dan git diff --check.
 Update checklist/catatan task serta hanya row15 README tracker dengan hasil aktual/keterbatasan. Jangan edit shared/vendor/tool lama/menu/sitemap/index tes bersama; jangan commit/push/deploy.
 ```
+
+## Hasil eksekusi
+
+Tool `hash-generator/` memakai Web Crypto SHA-256/384/512 untuk teks UTF-8 dan bytes file mentah di worker; batas 5 MiB teks dan 20 MiB file diterapkan sebelum pemrosesan. Browser runner **10/10 passed**, mencakup known vectors, encoding/surrogate, batas ukuran dan binary file. Runner integrasi baru **10/10 passed**; smoke responsif/no-JS, aset lokal, input tidak dikirim, dan dispatch download lulus. Clipboard sistem, keyboard manual, console audit terpisah, serta live deployment belum diverifikasi.

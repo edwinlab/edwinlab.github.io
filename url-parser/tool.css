@@ -1,0 +1,2 @@
+.tools-page .query-rows{max-width:100%;overflow:auto}.tools-page .query-row{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr) repeat(3,auto);gap:8px;align-items:center;margin:8px 0}.tools-page .query-row input{min-width:0}.tools-page #normalized-url{overflow-wrap:anywhere}
+@media(max-width:700px){.tools-page .query-row{grid-template-columns:minmax(0,1fr) minmax(0,1fr)}.tools-page .query-row button{grid-column:auto}.tools-page .query-row button:last-child{grid-column:1/-1}}

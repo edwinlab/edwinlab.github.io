@@ -1,0 +1,2 @@
+import { generatePasswords } from './logic.js';
+self.onmessage = ({ data }) => { try { const pool=new Uint32Array(256);let offset=pool.length;const nextUint32=()=>{if(offset===pool.length){crypto.getRandomValues(pool);offset=0;}return pool[offset++];};const passwords = generatePasswords({ ...data, randomUint32: nextUint32 }); self.postMessage({ id: data.id, passwords }); } catch (error) { self.postMessage({ id: data.id, error: { code: error.code || 'GENERATION_FAILED', message: error.message } }); } };

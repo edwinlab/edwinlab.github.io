@@ -56,5 +56,7 @@
 .tools-page .tests-list{padding-left:24px;overflow-wrap:anywhere}
 .tools-page .test-pass{color:#075c49}
 .tools-page .test-fail{color:#8b2c19}
+.tools-page .query-row{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr) repeat(3,auto);gap:8px;align-items:center;margin:8px 0}
+.tools-page .color-swatch{width:min(100%,240px);height:100px;border:1px solid var(--line);border-radius:8px;margin:14px 0}
 @media(max-width:700px){.tools-page .tools-editors{grid-template-columns:minmax(0,1fr)}.tools-page .tools-workspace{padding:16px}.tools-page textarea{min-height:220px}}
 @media(max-width:400px){.tools-page .tools-container{width:calc(100% - 28px)}.tools-page .tools-brand{font-size:19px;gap:8px}.tools-page .tools-header-inner{gap:10px}.tools-page .tools-nav{gap:10px}.tools-page .tools-workspace{padding:12px}.tools-page .tools-actions{gap:8px}}

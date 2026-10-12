@@ -1,6 +1,6 @@
 # 19 — Markdown Preview
 
-Status: **rencana saja — belum diimplementasikan**. Semua checkbox eksekusi tetap kosong.
+Status: **belum dikerjakan; prasyarat 14a untuk Markdown Editor & Preview tidak dapat diverifikasi karena registry gagal di-resolve dari workspace.**
 Route: `/markdown-preview/`; canonical: `https://edwinlab.dev/markdown-preview/`.
 Model setiap tahap: **GPT-6 Luna · high**. Dependency dan security fixtures dikerjakan sebelum UI; satu tahap per chat.
 
@@ -93,6 +93,8 @@ Model: **GPT-6 Luna · high**. Completion memerlukan bukti security dan UI brows
 - [ ] Centang row 19 README hanya jika semua tahap/security fixtures/QA terbukti lulus. Browser unavailable atau security failing tetap belum selesai dengan reproduksi dan blocker yang jelas. Jangan commit, push, publish, atau deploy.
 
 ## Hasil eksekusi
+
+Status eksekusi: belum dibuat karena kebutuhan dependency browser resmi pada fase 14a tidak dapat diverifikasi; registry gagal di-resolve dari workspace.
 
 Belum dijalankan. Isi saat eksekusi: tahap/file berubah, pinned dependency versions, fixture lulus/gagal, security+network observations, browser+viewport, timing, actual limits dan integration requests.
 

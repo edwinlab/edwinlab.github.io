@@ -1,0 +1,10 @@
+import { test, assert, equal, throws, run } from './harness.js';
+import { buildAlphabet, generatePasswords, GROUPS, sampleIndex, parseBoundedInteger, serializePasswords } from '../../password-generator/logic.js';
+test('Alphabet matches configured character groups and similar-character filter',()=>{equal(buildAlphabet({lower:true,upper:false,digits:false,symbols:false}),GROUPS.lower);assert(!buildAlphabet({lower:true,upper:true,digits:true,symbols:true},true).includes('0'));});
+test('Rejection sampling discards values above the unbiased range',()=>{const values=[0xffffffff,9];let calls=0;equal(sampleIndex(()=>values[calls++],10),9);equal(calls,2);});
+test('Generation requires selected groups and returns bounded count',()=>{let n=0;const result=generatePasswords({length:8,count:2,selected:{lower:true},randomUint32:()=>{n++;return 0;}});equal(result.length,2);assert(result.every(p=>p==='aaaaaaaa'));});
+test('Each selected group is present in every generated password',()=>{const seq=[0,26,52,0,0,0,0,0];let i=0;const result=generatePasswords({length:8,count:1,selected:{lower:true,upper:true,digits:true,symbols:false},randomUint32:()=>seq[i++%seq.length]});assert(/[a-z]/.test(result[0])&&/[A-Z]/.test(result[0])&&/[0-9]/.test(result[0]));});
+test('Length, count, and no-group settings are rejected',()=>{throws(()=>generatePasswords({length:7,selected:{lower:true}}),'INVALID_LENGTH');throws(()=>generatePasswords({length:8,count:101,selected:{lower:true}}),'INVALID_COUNT');throws(()=>buildAlphabet({}),'NO_GROUPS');});
+test('Raw numeric settings reject exponent, signs, and fractions; serialization has no trailing newline',()=>{throws(()=>parseBoundedInteger('1e2',1,100,'Count'),'INVALID_INTEGER');throws(()=>parseBoundedInteger('+8',8,128,'Length'),'INVALID_INTEGER');equal(parseBoundedInteger(' 008 ',8,128,'Length'),8);equal(serializePasswords(['a','b']),'a\nb');});
+test('Sampling limits reject repeated biased values and unsatisfied group policies',()=>{throws(()=>sampleIndex(()=>0xffffffff,86),'RANDOM_LIMIT');throws(()=>generatePasswords({length:8,selected:{lower:true,upper:true},randomUint32:()=>0}),'POLICY_LIMIT');});
+await run();

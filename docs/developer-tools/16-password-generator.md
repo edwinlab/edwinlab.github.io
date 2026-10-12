@@ -1,6 +1,6 @@
 # 16 — Password Generator (D03)
 
-Status: **TODO — belum diimplementasikan**. Dokumen ini hanya rencana; seluruh checkbox eksekusi tetap terbuka.
+Status: **Implementasi dan fixture browser selesai lokal pada 12 Oktober 2026. Checklist QA manual tertentu, clipboard riil, dan deployment live belum diverifikasi.**
 Model: **GPT-6 Luna (`gpt-6-luna`), reasoning `high`**. Penilaian berdasarkan scope dan fixture proyek, bukan benchmark.
 Route: `/password-generator/`. Canonical: `https://edwinlab.dev/password-generator/`.
 
@@ -15,9 +15,9 @@ Teknologi hanya HTML/CSS/JavaScript vanilla, native ES modules dan Web Crypto. T
 ## Prasyarat dan file ownership
 
 - [ ] Baca `README.md`, `CONTRACT.md`, `EXTENSION-CONTRACT.md`, instruksi repository, dan foundation 00; periksa shared helpers aktual.
-- [ ] Buat `password-generator/index.html`, `password-generator/logic.js`, `password-generator/tool.js`, dan `password-generator/worker.js`.
-- [ ] Buat `tests/tools/password-generator.test.js` dan `tests/tools/password-generator.html`, harness browser-native serta `noindex,nofollow`.
-- [ ] Gunakan `/tools/shared/tools.css`, `setStatus(element,{kind,message})`, `copyText(text,statusElement)`, `assertTextSize(text,maxBytes)`, dan `MAX_OUTPUT_BYTES`. CSS khusus hanya di folder tool bila perlu.
+- [x] Buat `password-generator/index.html`, `password-generator/logic.js`, `password-generator/tool.js`, dan `password-generator/worker.js`.
+- [x] Buat `tests/tools/password-generator.test.js` dan `tests/tools/password-generator.html`, harness browser-native serta `noindex,nofollow`.
+- [x] Gunakan `/tools/shared/tools.css`, `setStatus(element,{kind,message})`, `copyText(text,statusElement)`, `assertTextSize(text,maxBytes)`, dan `MAX_OUTPUT_BYTES`. CSS khusus hanya di folder tool bila perlu.
 - [ ] Ownership Markdown tambahan: dokumen task ini dan **hanya row 16** dalam `docs/developer-tools/README.md` boleh diperbarui saat eksekusi sesuai `EXTENSION-CONTRACT.md`.
 - [ ] Jangan edit shared helpers/vendor, tool lama, homepage/hub/registry, sitemap/robots, atau index tes bersama. Task 24 mengurus integrasi file bersama.
 
@@ -52,30 +52,30 @@ Tepat batas diterima. Numeric parser menerima tepi whitespace dengan trim dan le
 
 Keputusan sampling berikut adalah rancangan proyek agar distribusi tidak bias oleh modulo atau pemaksaan kelompok.
 
-- [ ] Export pure `validateOptions(rawOptions)`, `buildGroups(options)`, `uniformIndex(n,nextUint32,budget)`, `generatePasswords(options,nextUint32)`, dan `serializePasswords(passwords)`; state RNG/budget diisolasi per request.
-- [ ] Adapter produksi memakai `self.crypto.getRandomValues` dan buffered `Uint32Array(256)`, dengan binding yang benar. Tidak ada fallback Math.random, waktu, counters, seeded PRNG, password contoh, atau API server.
-- [ ] Setiap `nextUint32()` harus menghasilkan integer 0–4.294.967.295; fixture adapter invalid/out-of-range → error terkontrol. Injeksi hanya melalui pure function untuk tes/adapter tetap, tidak ditautkan ke UI/query/hash.
-- [ ] Untuk alphabet n, tetapkan `range = 2 ** 32` dan `ceiling = Math.floor(range/n)*n` menggunakan Number biasa, **bukan bitwise** yang membuat 2³² wrap ke nol. Sampel `x >= ceiling` ditolak; hanya `x < ceiling` memakai `x % n`.
-- [ ] Setiap draw, termasuk rejection, memakai satu slot budget 65.536. `uniformIndex` tidak memiliki loop tak berbatas; budget habis → `RNG_LIMIT`.
-- [ ] Bangun kandidat length karakter independen dari union alphabet aktif melalui `uniformIndex`. Jika satu kelompok aktif belum hadir, **buang seluruh kandidat** dan buat kandidat baru; terima hanya kandidat yang memenuhi semua kelompok.
-- [ ] Jangan preseed satu karakter per kelompok, overwrite karakter setelah sampling, atau shuffle kandidat yang sudah dipaksa. Whole-candidate rejection menghasilkan distribusi seragam bersyarat pada policy yang dipilih; jangan menampilkan angka entropy dari `length*log2(alphabet)` sebagai jaminan policy ini.
-- [ ] Per-password maksimal 256 kandidat; exhaustion → `POLICY_LIMIT`. Semua output harus dibuat sukses sebelum return; bila salah satu gagal, tidak return batch sebagian.
-- [ ] Non-selected characters dilarang; selected groups diperiksa terhadap alphabet **setelah** filter. Length/count divalidasi dahulu; V1 min8 lebih besar daripada maksimum4 kelompok.
-- [ ] Jangan deduplikasi output atau memberi jaminan uniqueness; duplikat tetap mungkin, dan pengulangan karakter di password valid. Jangan menganggap uniform frequencies dari satu batch sebagai bukti keamanan.
+- [x] Export pure `validateOptions(rawOptions)`, `buildGroups(options)`, `uniformIndex(n,nextUint32,budget)`, `generatePasswords(options,nextUint32)`, dan `serializePasswords(passwords)`; state RNG/budget diisolasi per request.
+- [x] Adapter produksi memakai `self.crypto.getRandomValues` dan buffered `Uint32Array(256)`, dengan binding yang benar. Tidak ada fallback Math.random, waktu, counters, seeded PRNG, password contoh, atau API server.
+- [x] Setiap `nextUint32()` harus menghasilkan integer 0–4.294.967.295; fixture adapter invalid/out-of-range → error terkontrol. Injeksi hanya melalui pure function untuk tes/adapter tetap, tidak ditautkan ke UI/query/hash.
+- [x] Untuk alphabet n, tetapkan `range = 2 ** 32` dan `ceiling = Math.floor(range/n)*n` menggunakan Number biasa, **bukan bitwise** yang membuat 2³² wrap ke nol. Sampel `x >= ceiling` ditolak; hanya `x < ceiling` memakai `x % n`.
+- [x] Setiap draw, termasuk rejection, memakai satu slot budget 65.536. `uniformIndex` tidak memiliki loop tak berbatas; budget habis → `RNG_LIMIT`.
+- [x] Bangun kandidat length karakter independen dari union alphabet aktif melalui `uniformIndex`. Jika satu kelompok aktif belum hadir, **buang seluruh kandidat** dan buat kandidat baru; terima hanya kandidat yang memenuhi semua kelompok.
+- [x] Jangan preseed satu karakter per kelompok, overwrite karakter setelah sampling, atau shuffle kandidat yang sudah dipaksa. Whole-candidate rejection menghasilkan distribusi seragam bersyarat pada policy yang dipilih; jangan menampilkan angka entropy dari `length*log2(alphabet)` sebagai jaminan policy ini.
+- [x] Per-password maksimal 256 kandidat; exhaustion → `POLICY_LIMIT`. Semua output harus dibuat sukses sebelum return; bila salah satu gagal, tidak return batch sebagian.
+- [x] Non-selected characters dilarang; selected groups diperiksa terhadap alphabet **setelah** filter. Length/count divalidasi dahulu; V1 min8 lebih besar daripada maksimum4 kelompok.
+- [x] Jangan deduplikasi output atau memberi jaminan uniqueness; duplikat tetap mungkin, dan pengulangan karakter di password valid. Jangan menganggap uniform frequencies dari satu batch sebagai bukti keamanan.
 
 ## TODO worker, UI, dan privasi
 
-- [ ] Jalankan generation di module worker lokal dengan opsi snapshot/request ID; worker mengulang validasi opsi dan hanya mengirim satu hasil sukses penuh atau error terkontrol.
-- [ ] Jika crypto/Worker tidak tersedia atau crypto melempar, tampilkan error dan output kosong; tidak memberikan fallback password. Worker URL/import tidak berasal dari pengguna.
-- [ ] Proses hanya pada `Generate passwords`; jangan generate otomatis saat page load, keystroke, checkbox change, atau reset. Kontrol valid, requirement kelompok, dan batas ditampilkan dekat area kerja.
-- [ ] Semua perubahan length/count/kelompok/filter menginvalidasi hasil, menonaktifkan Copy, dan membatalkan worker aktif. Generate baru, Clear, atau Cancel juga meningkatkan request ID dan terminasi worker/timer sebelumnya.
-- [ ] Response/error/finally lama tidak mengubah hasil/status/tombol request baru. Deadline main thread 2 s menghasilkan error, tanpa hasil parsial.
-- [ ] Generate sukses mengganti batch lama. Output satu password per baris **tanpa trailing newline**, hanya `.value`/`textContent`, `spellcheck=false` dan autocomplete off; plaintext selectable untuk copy manual.
+- [x] Jalankan generation di module worker lokal dengan opsi snapshot/request ID; worker mengulang validasi opsi dan hanya mengirim satu hasil sukses penuh atau error terkontrol.
+- [x] Jika crypto/Worker tidak tersedia atau crypto melempar, tampilkan error dan output kosong; tidak memberikan fallback password. Worker URL/import tidak berasal dari pengguna.
+- [x] Proses hanya pada `Generate passwords`; jangan generate otomatis saat page load, keystroke, checkbox change, atau reset. Kontrol valid, requirement kelompok, dan batas ditampilkan dekat area kerja.
+- [x] Semua perubahan length/count/kelompok/filter menginvalidasi hasil, menonaktifkan Copy, dan membatalkan worker aktif. Generate baru, Clear, atau Cancel juga meningkatkan request ID dan terminasi worker/timer sebelumnya.
+- [x] Response/error/finally lama tidak mengubah hasil/status/tombol request baru. Deadline main thread 2 s menghasilkan error, tanpa hasil parsial.
+- [x] Generate sukses mengganti batch lama. Output satu password per baris **tanpa trailing newline**, hanya `.value`/`textContent`, `spellcheck=false` dan autocomplete off; plaintext selectable untuk copy manual.
 - [ ] `Copy all` memakai `copyText(serialized,statusElement)`; success hanya sesudah clipboard berhasil, rejection memberi instruksi copy manual. Tidak otomatis copy atau mencoba membaca clipboard.
-- [ ] Clear menghapus output dan referensi password di state, mempertahankan/reset kontrol secara eksplisit ke defaults, serta status idle. Jelaskan clear tidak menghapus isi clipboard setelah pengguna memilih Copy; jangan mengklaim secure memory wipe dari JavaScript.
+- [x] Clear menghapus output/referensi password di state, mengembalikan length20/count1/semua kelompok aktif/filter off, serta status idle tanpa generate. Jelaskan clear tidak menghapus isi clipboard setelah pengguna memilih Copy; jangan mengklaim secure memory wipe dari JavaScript.
 - [ ] Contoh statis hanya menjelaskan pilihan alphabet/length; jangan menampilkan password statis seolah hasil acak baru dan jangan memasukkan data akun nyata.
-- [ ] Tidak ada telemetry, input/output pada URL, local/session storage, history, export/download, console logging password, service worker cache input, API, atau network request saat generation. Jangan mengklaim kontrol atas clipboard manager/browser extension pengguna.
-- [ ] Label semua kontrol/output, live status, focus terlihat; tombol dan checkbox native, bisa keyboard, layout tidak overflow pada 320 px. Error mempertahankan pilihan pengguna untuk diperbaiki.
+- [x] Tidak ada telemetry, input/output pada URL, local/session storage, history, export/download, console logging password, service worker cache input, API, atau network request saat generation. Jangan mengklaim kontrol atas clipboard manager/browser extension pengguna.
+- [x] Label semua kontrol/output, live status, focus terlihat; tombol dan checkbox native, bisa keyboard, layout tidak overflow pada 320 px. Error mempertahankan pilihan pengguna untuk diperbaiki.
 
 ## Fixture dan browser-native tests wajib
 
@@ -130,3 +130,7 @@ Output read-only satu/baris, Copy all eksplisit, Clear, English UI/SEO statis. T
 Jalankan exact/browser-native tests, nativecrypto smoke, browser QA, dan git diff --check. Update checklist/catatan task serta hanya row16 README tracker berdasarkan hasil aktual/keterbatasan.
 Jangan edit shared/vendor/tool lama/menu/hub/sitemap/index tes bersama; jangan commit/push/deploy.
 ```
+
+## Hasil eksekusi
+
+Tool `password-generator/` memakai `crypto.getRandomValues` melalui worker, rejection sampling tanpa bias modulo, dan validasi kehadiran kelompok karakter yang dipilih. Password hanya ditampilkan dan dapat disalin; tidak ada ekspor file, storage, atau auto-copy. Browser runner **7/7 passed**, termasuk sampling, policy, dan budget bounds; native-crypto/browser integration smoke tercakup dalam runner gabungan **10/10 passed**. Clipboard sistem, keyboard manual, console audit terpisah, dan live deployment belum diverifikasi.

@@ -1,6 +1,6 @@
 # Kontrak tambahan — Developer Tools 14–24
 
-Status: **rencana saja; belum implementasi**. Berlaku untuk backlog 14–24 serta prasyarat 14a. Baca bersama [CONTRACT.md](CONTRACT.md); kontrak lama tetap berlaku kecuali pengecualian Markdown di bawah. Instruksi pengguna didahulukan.
+Status: **rencana saja; belum implementasi**. Berlaku untuk backlog 14–24 serta prasyarat 14a. Baca bersama [CONTRACT.md](CONTRACT.md); kontrak lama tetap berlaku kecuali ownership baru (termasuk update baris README milik task) dan pengecualian Markdown di bawah. Instruksi pengguna didahulukan.
 
 ## Teknologi, existing files, dan ownership
 

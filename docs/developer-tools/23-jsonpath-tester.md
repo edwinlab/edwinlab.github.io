@@ -1,7 +1,7 @@
 # 23 — JSONPath Tester
 
-Status: **RENCANA / BELUM DIIMPLEMENTASIKAN**. Dokumen ini adalah TODO untuk eksekusi berikutnya; membuat rencana tidak menandai tool selesai.
-Model: **GPT-6 Luna · high**; eskalasi ke GPT-6.1 Sol medium bila fixture penting masih gagal setelah satu perbaikan terarah.
+Status: **belum dikerjakan; prasyarat 14a fase D tidak dapat diverifikasi karena registry gagal di-resolve dari workspace.**
+Model: **GPT-6 Luna · high**, per tahap. Jika fixture gagal, perbaiki reproduksi kecil atau pecah tahap; pemilihan model lain hanya jika pemilik menginginkannya.
 
 ## Tujuan dan batas kerja
 
@@ -15,10 +15,10 @@ Model: **GPT-6 Luna · high**; eskalasi ke GPT-6.1 Sol medium bila fixture penti
 ## Prasyarat, dependency, dan kepemilikan
 
 - [ ] Baca instruksi repository, `README.md` repository, [README.md](README.md), [CONTRACT.md](CONTRACT.md), [EXTENSION-CONTRACT.md](EXTENSION-CONTRACT.md), [01-jsonlint.md](01-jsonlint.md), dan [14a-library-readiness.md](14a-library-readiness.md).
-- [ ] Foundation 00 dan readiness 14a harus selesai. Jangan mulai implementasi sebelum distribusi JSONPath Plus lokal, lisensi, versi tepat, checksum, import browser, worker, dan fixture aman dinyatakan siap oleh 14a.
+- [ ] Foundation 00 dan readiness 14a **fase D** harus selesai. Jangan mulai implementasi sebelum distribusi JSONPath Plus lokal, lisensi, versi tepat, checksum, import browser, worker, dan fixture aman dinyatakan siap oleh fase D. Fase A/B/C tidak menjadi prasyarat task ini.
 - [ ] Baca **file aktual** `tools/shared/json.js`, `limits.js`, `ui.js`, template, dan `tests/tools/harness.js`; jangan mengasumsikan helper tambahan sudah tersedia.
 - [ ] Miliki hanya `jsonpath-tester/index.html`, `tool.js`, `logic.js`, `worker.js`, opsional `tool.css`/`worker-client.js` di folder ini, `tests/tools/jsonpath-tester.test.js`, `tests/tools/jsonpath-tester.html`, dan checkbox/catatan hasil dalam dokumen task ini.
-- [ ] Pakai CSS/UI/parser/limits shared. Jangan mengubah shared helper, vendor/provenance, tool lain, homepage, hub, registry, sitemap, robots, global README, atau direktori tes umum. Ketidakcukupan shared/dependency dilaporkan dengan reproduksi, lalu diselesaikan melalui task pemiliknya.
+- [ ] Pakai CSS/UI/parser/limits shared. Boleh memperbarui **hanya row 23** dalam README tracker sesuai EXTENSION-CONTRACT. Jangan mengubah shared helper, vendor/provenance, tool lain, homepage, hub, registry, sitemap, robots, bagian README lain, atau direktori tes umum. Ketidakcukupan shared/dependency dilaporkan dengan reproduksi, lalu diselesaikan melalui task pemiliknya.
 - [ ] Import hanya entry lokal yang disahkan 14a; jangan bare-import package, mengambil source `src/` yang masih membutuhkan dependency, memakai CDN runtime, atau mengunduh dependency saat pengguna menjalankan tool.
 
 **Catatan riset 12 Oktober 2026, bukan bukti readiness selesai:** metadata registry resmi saat diperiksa menunjukkan `jsonpath-plus` **11.2.0**, MIT, arsip `https://registry.npmjs.org/jsonpath-plus/-/jsonpath-plus-11.2.0.tgz`. Distribusi `dist/index-browser-esm.js` dalam arsip itu tidak memiliki import eksternal; browser UMD juga tersedia sebagai `dist/index-browser-umd.cjs`. ESM menyertakan runtime JSEP beserta plugin assignment/regex: 14a harus memverifikasi versi/lisensi dependency yang benar-benar dibundel, bukan menyalin rentang semver sebagai versi tepat. Jangan memasang versi `latest` atau menganggap source branch utama sama dengan arsip rilis.
@@ -129,9 +129,9 @@ Kolom paths di bawah adalah string path persis dalam urutan hasil; assertion mem
 - [ ] Network/storage/URL menunjukkan tidak ada input dikirim/disimpan; main thread tidak menjalankan query engine. Batas/deadline nyata serta respons usang teruji.
 - [ ] `git diff --check` lulus dan diff hanya file milik task. Jangan commit/push/deploy.
 - [ ] Catat file, versi/checksum dependency dari 14a, fixture lulus/gagal, browser/viewport, deadline/cancel, limit, guard properti, serta limitation aktual dalam hasil eksekusi di bawah. Centang hanya pekerjaan yang terbukti; bila QA browser tidak tersedia, tool belum selesai.
-- [ ] Serahkan route/card/related links/test runner ke [24 — integrasi ekstensi](24-extension-integration.md) untuk global hub, sitemap, daftar tes, dan README. Tidak menambahkan live link ke tool yang belum siap.
+- [ ] Update checklist task ini dan hanya row 23 README berdasarkan bukti; gunakan status sebagian bila QA belum lulus. Serahkan route/card/related links/test runner ke [24 — integrasi ekstensi](24-extension-integration-seo.md) untuk hub, sitemap, daftar tes, dan dokumentasi route. Tidak menambahkan live link ke tool yang belum siap.
 
-Baris tracker yang perlu dipertahankan/ditambahkan oleh pemilik README saat perencanaan/integrasi; task ini tidak mengedit README global:
+Baris tracker sudah tersedia dalam README; executor hanya memperbarui status row 23 miliknya, tanpa mengubah rows lain:
 
 ```markdown
 | [ ] | [23 — JSONPath Tester](23-jsonpath-tester.md) | `/jsonpath-tester/` | GPT-6 Luna / high |
@@ -139,7 +139,7 @@ Baris tracker yang perlu dipertahankan/ditambahkan oleh pemilik README saat pere
 
 ## Prompt siap tempel — bertahap
 
-Pilih model/reasoning pada pengaturan chat; teks prompt tidak mengganti model otomatis. Mulai setelah 14a selesai.
+Pilih model/reasoning pada pengaturan chat; teks prompt tidak mengganti model otomatis. Mulai setelah 14a fase D selesai.
 
 **Tahap 1 — implementasi tool dan fixture:**
 
@@ -152,7 +152,7 @@ Buildless HTML/CSS/vanilla JS, UI Inggris, route /jsonpath-tester/, dependency l
 Grammar selector allowlist saja; eval:false selalu, tidak ada filter/script/type/parent/property operator.
 Parse dengan parseSafeJSON di worker, preserve literal own properties, adapter root falsy dan guard member JSON.
 Wajib worker 2 detik/termination, 2.000 kandidat, output 2 MiB UTF-8, callback abort, stale request cancellation.
-Jangan ubah shared/vendor/global README/hub/sitemap/tool lain dan jangan commit/push/deploy.
+Jangan ubah shared/vendor/hub/sitemap/tool lain atau bagian README selain row23. Jangan commit/push/deploy.
 Jalankan fixture browser-native dan QA worker/UI sampai scope selesai, lalu catat bukti dan limitation aktual.
 Jika dependency/contract belum memadai, berikan reproduksi dan blocker 14a; jangan membuat engine/build pengganti.
 ```
@@ -163,14 +163,14 @@ Jika dependency/contract belum memadai, berikan reproduksi dan blocker 14a; jang
 Lanjutkan task 23 saja. Perbaiki fixture/QA yang masih gagal dengan reproduksi minimal,
 tanpa memperluas grammar atau menonaktifkan eval:false/worker/budget/guard properti.
 Pertahankan ownership dan perubahan pengguna. Ulangi tes terkait serta QA yang terkena perubahan.
-Jika satu perbaikan terarah belum menyelesaikan fixture penting, laporkan untuk GPT-6.1 Sol medium.
+Jika fixture penting tetap gagal, catat reproduksi dan pecah langkah berikutnya dengan Luna yang sama.
 Jangan centang hasil yang belum terbukti dan jangan commit/push/deploy.
 ```
 
 **Tahap 3 — integrasi oleh pemilik task 24:**
 
 ```text
-Integrasikan JSONPath Tester yang sudah lulus task 23 melalui docs/developer-tools/24-extension-integration.md.
+Integrasikan JSONPath Tester yang sudah lulus task 23 melalui docs/developer-tools/24-extension-integration-seo.md.
 Perbarui hanya file global yang dimiliki task 24: hub/related links, registry bila ada, sitemap,
 direktori tes, dan README/tracker sesuai kontrak. Periksa route nyata dan metadata setelah integrasi.
 Jangan membuat link ke tool yang belum selesai; jangan menandai deployment/public QA selesai tanpa bukti.
@@ -179,4 +179,4 @@ Jangan commit/push/deploy kecuali ada instruksi pengguna terpisah.
 
 ## Hasil eksekusi
 
-Belum ada implementasi, fixture browser, atau QA tool. Isi bagian ini hanya setelah task dijalankan.
+Belum ada implementasi, fixture browser, atau QA tool. Readiness library fase D tidak dapat dijalankan karena registry gagal di-resolve (`Could not resolve host: registry.npmjs.org`); tidak dibuat engine pengganti.
