@@ -46,6 +46,8 @@ Public code descriptions come from these repositories and their READMEs:
 
 Writing titles and original dates come from the owner's blog. These entries are presented as archived notes, not current technical recommendations.
 
+Additional Developer Tools TODOs (14–23), browser-library readiness (14a), and batch integration (24) are in [docs/developer-tools/README.md](docs/developer-tools/README.md). These are unimplemented plans with scoped prompts, browser fixtures, and GPT-6 Luna medium/high recommendations.
+
 ## Checks
 
 ```sh
