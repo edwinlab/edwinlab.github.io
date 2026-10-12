@@ -18,6 +18,32 @@
   <style>
     .age-fields{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:1rem}.age-field{min-width:0}.age-field input{width:100%}.age-actions{display:flex;flex-wrap:wrap;gap:.75rem;margin-top:1rem}.age-result{margin-top:1.25rem;padding:1.25rem;border:1px solid var(--line);border-radius:.5rem;background:var(--paper)}.age-result-main{font-size:clamp(1.5rem,4vw,2.3rem);line-height:1.3;font-weight:800;overflow-wrap:anywhere}.age-total{font-size:1.15rem;font-weight:700}.age-summary{display:block;width:100%;min-height:112px;margin-top:1rem;padding:12px;background:white;font:14px/1.6 'DM Mono',monospace;resize:vertical}.age-prose{max-width:800px;margin-top:3rem}@media(max-width:560px){.age-fields{grid-template-columns:minmax(0,1fr)}}
   </style>
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "BreadcrumbList",
+    "itemListElement": [
+      {
+        "@type": "ListItem",
+        "position": 1,
+        "name": "Beranda",
+        "item": "https://edwinlab.dev/"
+      },
+      {
+        "@type": "ListItem",
+        "position": 2,
+        "name": "Alat Online",
+        "item": "https://edwinlab.dev/alat/"
+      },
+      {
+        "@type": "ListItem",
+        "position": 3,
+        "name": "Kalkulator Usia",
+        "item": "https://edwinlab.dev/kalkulator-usia/"
+      }
+    ]
+  }
+  </script>
 </head>
 <body class="tools-page">
   <a class="tools-skip" href="#workspace">Lewati ke kalkulator</a>
@@ -26,7 +52,7 @@
     <nav class="tools-nav" aria-label="Navigasi utama"><a href="/">Beranda</a><a href="/alat/">Alat Online</a></nav>
   </div></header>
   <main class="tools-container">
-    <nav class="tools-breadcrumb" aria-label="Jejak halaman"><ol><li><a href="/">Beranda</a></li><li aria-current="page">Kalkulator usia</li></ol></nav>
+    <nav class="tools-breadcrumb" aria-label="Jejak halaman"><ol><li><a href="/">Beranda</a></li><li><a href="/alat/">Alat Online</a></li><li aria-current="page">Kalkulator usia</li></ol></nav>
     <h1>Kalkulator Usia</h1>
     <p class="tools-intro">Pilih tanggal lahir dan tanggal acuan untuk mengetahui usia yang sudah berlalu. Hasil menunjukkan tahun penuh, bulan penuh berikutnya, sisa hari, dan total hari kalender.</p>
     <noscript><p class="tools-status" data-kind="warning">Aktifkan JavaScript untuk menghitung usia. Cara perhitungan, contoh, dan jawaban umum tetap tersedia di bawah.</p></noscript>

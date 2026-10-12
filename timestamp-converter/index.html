@@ -114,6 +114,7 @@
         <h2>Seconds, milliseconds, UTC, and WIB</h2>
         <p>Many APIs and command-line tools use seconds, such as <code>1704067200</code>. JavaScript's <code>Date.now()</code> returns milliseconds, such as <code>1704067200000</code>. Both represent <code>2024-01-01T00:00:00.000Z</code>. In Asia/Jakarta, that instant is 07:00 WIB, or UTC+07:00.</p>
         <p>Auto detection is only a digit-count heuristic: values with up to 10 digits are treated as seconds, and longer values as milliseconds. Choose a unit manually whenever the source system specifies one. The selected display time zone does not change the underlying epoch.</p>
+        <p>The explicit numeric-offset examples use the date-time format described in <a href="https://www.rfc-editor.org/rfc/rfc3339.html" target="_blank" rel="noopener noreferrer">RFC 3339</a>.</p>
       </section>
       <section>
         <h2>Convert an ISO 8601 date</h2>

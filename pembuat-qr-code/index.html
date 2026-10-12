@@ -18,6 +18,32 @@
   <style>
     .qr-mode{display:flex;flex-wrap:wrap;gap:1rem;margin-bottom:1rem}.qr-mode label{display:inline-flex;align-items:center;gap:.55rem;margin:0;font-weight:600}.qr-mode input{width:1.15rem;height:1.15rem;min-height:auto;margin:0;accent-color:var(--accent)}.qr-input{width:100%;min-height:140px;white-space:pre-wrap;resize:vertical}.qr-actions{display:flex;flex-wrap:wrap;gap:.75rem;margin-top:1rem}.qr-result{display:grid;justify-items:center;gap:1rem;margin-top:1.5rem;padding:1rem;border:1px solid var(--line);border-radius:.5rem;background:var(--paper);min-width:0}.qr-result canvas{display:block;width:auto;max-width:100%;height:auto;image-rendering:pixelated;background:#fff}.qr-output{width:100%;min-height:92px;background:white!important;font:13px/1.5 'DM Mono',monospace;white-space:pre-wrap;overflow-wrap:anywhere}.qr-prose{max-width:800px;margin-top:3rem}@media(max-width:560px){.qr-result{padding:.75rem}}
   </style>
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "BreadcrumbList",
+    "itemListElement": [
+      {
+        "@type": "ListItem",
+        "position": 1,
+        "name": "Beranda",
+        "item": "https://edwinlab.dev/"
+      },
+      {
+        "@type": "ListItem",
+        "position": 2,
+        "name": "Alat Online",
+        "item": "https://edwinlab.dev/alat/"
+      },
+      {
+        "@type": "ListItem",
+        "position": 3,
+        "name": "Pembuat QR Code",
+        "item": "https://edwinlab.dev/pembuat-qr-code/"
+      }
+    ]
+  }
+  </script>
 </head>
 <body class="tools-page">
   <a class="tools-skip" href="#workspace">Lewati ke pembuat QR</a>
@@ -26,7 +52,7 @@
     <nav class="tools-nav" aria-label="Navigasi utama"><a href="/">Beranda</a><a href="/alat/">Alat Online</a></nav>
   </div></header>
   <main class="tools-container">
-    <nav class="tools-breadcrumb" aria-label="Jejak halaman"><ol><li><a href="/">Beranda</a></li><li aria-current="page">Pembuat QR Code</li></ol></nav>
+    <nav class="tools-breadcrumb" aria-label="Jejak halaman"><ol><li><a href="/">Beranda</a></li><li><a href="/alat/">Alat Online</a></li><li aria-current="page">Pembuat QR Code</li></ol></nav>
     <h1>Pembuat QR Code</h1>
     <p class="tools-intro">Buat QR code statis dari link website atau teks, lalu unduh sebagai gambar PNG. Isi QR diproses di browser; tidak dikirim ke layanan pembuat QR.</p>
     <noscript><p class="tools-status" data-kind="warning">Aktifkan JavaScript untuk membuat dan mengunduh QR. Panduan, contoh, dan batas input tetap tersedia di bawah.</p></noscript>
@@ -78,7 +104,6 @@
         <h3>Mengapa QR perlu ruang putih?</h3><p>Ruang putih di sekeliling pola membantu pemindai mengenali batas QR. Jangan memangkas area tersebut saat mencetak.</p>
         <h3>Apakah semua kamera dapat membaca setiap QR?</h3><p>Tidak dijamin. Teks yang lebih panjang menghasilkan pola lebih padat. Uji file dan ukuran cetak sebelum membagikannya.</p>
       </section>
-      <section><h2>Alat terkait</h2><p>Buat <a href="/link-whatsapp/">link WhatsApp</a> dengan nomor seluler Indonesia dan pesan awal sebelum mengubahnya menjadi QR.</p></section>
     </article>
   <nav class="tools-related" aria-label="Alat terkait"><h2>Alat terkait</h2><ul><li><a href="/link-whatsapp/"><strong>Pembuat Link WhatsApp</strong><span>Buat tautan wa.me untuk nomor Indonesia dengan pesan awal.</span></a></li></ul></nav>
   </main>

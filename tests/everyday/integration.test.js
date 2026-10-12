@@ -36,7 +36,40 @@ test('hub memuat 11 card HTML statis pada empat kategori dan tanpa script', asyn
   equal(doc.querySelectorAll('script').length, 0); equal(doc.querySelectorAll('meta[name="robots"]').length, 0);
   equal(doc.querySelector('link[rel="canonical"]').getAttribute('href'), 'https://edwinlab.dev/alat/');
   assert(doc.querySelector('nav a[href="/tools/"]')); assert(doc.querySelector('a[href="/"]'));
+  for (const id of ['teks-title', 'kalkulator-title', 'tautan-title', 'gambar-title']) {
+    assert(doc.querySelector(`.alat-shortcuts a[href="#${id}"]`), `Shortcut ${id} missing`);
+    assert(doc.getElementById(id), `Shortcut target ${id} missing`);
+  }
   for (const tool of tools) assert(doc.querySelector(`.alat-card[href="/${tool.slug}/"]`), `Card ${tool.slug} tidak ada`);
+});
+
+test('breadcrumb visual dan JSON-LD alat harian mengikuti hierarchy hub', async () => {
+  const hub = await page('/alat/');
+  const hubTrail = hub.querySelectorAll('.tools-breadcrumb li'); equal(hubTrail.length, 2);
+  assert(hubTrail[0].querySelector('a[href="/"]')); equal(hubTrail[1].textContent.trim(), 'Alat Online');
+  const hubSchema = [...hub.querySelectorAll('script[type="application/ld+json"]')].map(s => JSON.parse(s.textContent)).find(x => x['@type'] === 'BreadcrumbList');
+  equal(hubSchema.itemListElement.length, 2); equal(hubSchema.itemListElement[1].item, 'https://edwinlab.dev/alat/');
+  for (const tool of tools) {
+    const path = `/${tool.slug}/`, doc = await page(path), trail = doc.querySelectorAll('.tools-breadcrumb li');
+    equal(trail.length, 3, `${tool.slug} breadcrumb depth`);
+    assert(trail[0].querySelector('a[href="/"]')); assert(trail[1].querySelector('a[href="/alat/"]'));
+    assert(trail[2].hasAttribute('aria-current')); equal(trail[2].querySelectorAll('a').length, 0);
+    const schema = [...doc.querySelectorAll('script[type="application/ld+json"]')].map(s => JSON.parse(s.textContent)).find(x => x['@type'] === 'BreadcrumbList');
+    equal(JSON.stringify(schema.itemListElement.map(x => x.position)), JSON.stringify([1, 2, 3]));
+    equal(schema.itemListElement[1].item, 'https://edwinlab.dev/alat/');
+    equal(schema.itemListElement[2].item, `https://edwinlab.dev${path}`);
+  }
+});
+
+test('homepage Person markup matches the visible profile links', async () => {
+  const doc = await page('/');
+  const profile = [...doc.querySelectorAll('script[type="application/ld+json"]')].map(s => JSON.parse(s.textContent)).find(x => x['@type'] === 'ProfilePage');
+  assert(profile?.mainEntity?.['@type'] === 'Person');
+  equal(profile.mainEntity.name, 'Edwin Andrianto'); equal(profile.mainEntity.jobTitle, 'Technical Lead');
+  equal(profile.mainEntity.worksFor?.name, 'OCBC Indonesia');
+  assert(profile.mainEntity.sameAs.includes('https://www.linkedin.com/in/edwinlab/'));
+  assert(profile.mainEntity.sameAs.includes('https://github.com/edwinlab'));
+  assert(!profile.mainEntity.image, 'Brand logo must not be marked as a portrait');
 });
 
 test('menu homepage mempertahankan Developer Tools dan menambahkan Alat Online', async () => {

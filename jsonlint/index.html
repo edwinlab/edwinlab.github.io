@@ -10,8 +10,15 @@
   <meta property="og:title" content="JSON Validator &amp; Formatter Online — Edwin Lab">
   <meta property="og:description" content="Validate, format, and minify JSON in your browser. Find syntax errors by line and column while preserving large numbers and original values.">
   <meta property="og:url" content="https://edwinlab.dev/jsonlint/">
-  <meta property="og:image" content="https://edwinlab.dev/assets/edwinlab-logo.png">
-  <meta name="twitter:card" content="summary">
+  <meta property="og:image" content="https://edwinlab.dev/assets/social/jsonlint.png">
+  <meta property="og:image:width" content="1200">
+  <meta property="og:image:height" content="630">
+  <meta property="og:image:alt" content="JSON Validator social preview graphic">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:image:alt" content="JSON Validator social preview graphic">
+  <meta name="twitter:image" content="https://edwinlab.dev/assets/social/jsonlint.png">
+  <meta name="twitter:description" content="Validate, format, and minify JSON in your browser. Find syntax errors by line and column while preserving large numbers and original values.">
+  <meta name="twitter:title" content="JSON Validator &amp; Formatter Online — Edwin Lab">
   <link rel="icon" href="/favicon/favicon.ico">
   <link rel="stylesheet" href="/tools/shared/tools.css">
   <script type="application/ld+json">
@@ -89,7 +96,7 @@
         <p>JSON is a text format with quoted property names and double-quoted strings. This validator checks syntax, not whether fields match an API schema or application rules.</p>
       </section>
       <section>
-        <h2>Common JSON syntax errors</h2>
+      <h2>Common JSON syntax errors</h2>
         <h3>Trailing comma</h3>
         <p>Invalid: <code>{"name":"Edwin",}</code>. Remove the comma after the last property.</p>
         <h3>Single quotes</h3>
@@ -100,7 +107,7 @@
         <p>JSON does not allow JavaScript comments such as <code>// note</code> or <code>/* note */</code>. Remove them before parsing strict JSON.</p>
       </section>
       <section>
-        <h2>Example JSON</h2>
+      <h2>Example JSON</h2>
         <p>This sample is valid JSON. Formatting changes whitespace and indentation while retaining source value tokens, key order, duplicate properties, escapes, and large number text.</p>
         <pre><code>{
   "service": "profile-api",
@@ -108,6 +115,7 @@
   "retryLimit": 3,
   "regions": ["Jakarta", "Singapore"]
 }</code></pre>
+        <p>These syntax examples follow the <a href="https://www.rfc-editor.org/rfc/rfc8259.html" target="_blank" rel="noopener noreferrer">JSON data format specification (RFC 8259)</a>.</p>
       </section>
       <section>
         <h2>Frequently asked questions</h2>

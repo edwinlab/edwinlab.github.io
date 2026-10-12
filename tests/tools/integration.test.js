@@ -22,6 +22,30 @@ async function framePage(src, runTest, width = 1440) {
   const loaded = new Promise((resolve, reject) => { frame.onload = resolve; frame.onerror = reject; }); frame.src = src; document.body.append(frame);
   try { await loaded; await runTest(frame.contentDocument, frame.contentWindow, frame); } finally { frame.remove(); }
 }
+test('Selected pages have complete large-image social cards and local PNG assets', async () => {
+  const targets = [
+    { path: '/', image: '/assets/social/home.png' },
+    { path: '/tools/', image: '/assets/social/developer-tools.png' },
+    { path: '/alat/', image: '/assets/social/everyday-tools.png' },
+    { path: '/jsonlint/', image: '/assets/social/jsonlint.png' },
+    { path: '/link-whatsapp/', image: '/assets/social/whatsapp-link.png' },
+    { path: '/kompres-gambar/', image: '/assets/social/image-compressor.png' }
+  ];
+  for (const target of targets) {
+    const doc = await page(target.path), canonical = doc.querySelector('link[rel="canonical"]')?.href;
+    equal(doc.querySelector('meta[property="og:url"]')?.content, canonical);
+    equal(new URL(doc.querySelector('meta[property="og:image"]')?.content).pathname, target.image);
+    equal(doc.querySelector('meta[property="og:image:width"]')?.content, '1200');
+    equal(doc.querySelector('meta[property="og:image:height"]')?.content, '630');
+    assert(doc.querySelector('meta[property="og:image:alt"]')?.content);
+    equal(doc.querySelector('meta[name="twitter:card"]')?.content, 'summary_large_image');
+    assert(doc.querySelector('meta[name="twitter:title"]')?.content);
+    assert(doc.querySelector('meta[name="twitter:description"]')?.content);
+    equal(new URL(doc.querySelector('meta[name="twitter:image"]')?.content).pathname, target.image);
+    assert(doc.querySelector('meta[name="twitter:image:alt"]')?.content);
+    const asset = await get(target.image); assert(asset.headers.get('content-type')?.includes('image/png'));
+  }
+});
 for (const { slug } of tools) test(`${slug}: unique static SEO, canonical, navigation, and available links/assets`, async () => {
   const path = `/${slug}/`, doc = await page(path), base = new URL(path, location.origin);
   equal(doc.documentElement.lang, 'en'); equal(doc.querySelectorAll('h1').length, 1);

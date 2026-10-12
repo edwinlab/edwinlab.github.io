@@ -18,6 +18,32 @@
   <style>
     .date-mode{max-width:32rem;margin-bottom:1rem}.date-mode select{width:100%}.date-fields{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:1rem}.date-field{min-width:0}.date-field input,.date-field select{width:100%}.date-actions{display:flex;flex-wrap:wrap;gap:.75rem;margin-top:1rem}.date-result{margin-top:1.25rem;padding:1.25rem;border:1px solid var(--line);border-radius:.5rem;background:var(--paper)}.date-result-main{font-size:clamp(1.5rem,4vw,2.3rem);line-height:1.3;font-weight:800;overflow-wrap:anywhere}.date-summary{display:block;width:100%;min-height:112px;margin-top:1rem;padding:12px;background:white;font:14px/1.6 'DM Mono',monospace;resize:vertical}.date-prose{max-width:800px;margin-top:3rem}@media(max-width:560px){.date-fields{grid-template-columns:minmax(0,1fr)}}
   </style>
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "BreadcrumbList",
+    "itemListElement": [
+      {
+        "@type": "ListItem",
+        "position": 1,
+        "name": "Beranda",
+        "item": "https://edwinlab.dev/"
+      },
+      {
+        "@type": "ListItem",
+        "position": 2,
+        "name": "Alat Online",
+        "item": "https://edwinlab.dev/alat/"
+      },
+      {
+        "@type": "ListItem",
+        "position": 3,
+        "name": "Kalkulator Tanggal",
+        "item": "https://edwinlab.dev/kalkulator-tanggal/"
+      }
+    ]
+  }
+  </script>
 </head>
 <body class="tools-page">
   <a class="tools-skip" href="#workspace">Lewati ke kalkulator</a>
@@ -26,7 +52,7 @@
     <nav class="tools-nav" aria-label="Navigasi utama"><a href="/">Beranda</a><a href="/alat/">Alat Online</a></nav>
   </div></header>
   <main class="tools-container">
-    <nav class="tools-breadcrumb" aria-label="Jejak halaman"><ol><li><a href="/">Beranda</a></li><li aria-current="page">Kalkulator tanggal</li></ol></nav>
+    <nav class="tools-breadcrumb" aria-label="Jejak halaman"><ol><li><a href="/">Beranda</a></li><li><a href="/alat/">Alat Online</a></li><li aria-current="page">Kalkulator tanggal</li></ol></nav>
     <h1>Kalkulator Tanggal</h1>
     <p class="tools-intro">Hitung jarak dua tanggal dalam hari kalender, atau cari tanggal setelah menambah dan mengurangi sejumlah hari. Sabtu, Minggu, dan tanggal libur tetap masuk hitungan.</p>
     <noscript><p class="tools-status" data-kind="warning">Aktifkan JavaScript untuk menghitung. Contoh, arti selisih, dan panduan tetap tersedia di bawah.</p></noscript>
@@ -39,7 +65,7 @@
         <div class="date-field" id="count-field" hidden><label for="day-count">Jumlah hari</label><input id="day-count" type="text" inputmode="numeric" maxlength="7" autocomplete="off" aria-describedby="date-hint"></div>
         <div class="date-field" id="operation-field" hidden><label for="operation-select">Operasi</label><select id="operation-select"><option value="add">Tambah</option><option value="subtract">Kurangi</option></select></div>
       </div>
-      <p id="date-hint" class="tools-note">Tanggal memakai format kalender YYYY-MM-DD. Selisih menghitung pergantian tanggal, bukan menghitung kedua endpoint secara inklusif. Jumlah hari harus bilangan bulat 0–3652058.</p>
+      <p id="date-hint" class="tools-note">Selisih menghitung jumlah pergantian tanggal, bukan memasukkan kedua tanggal ke dalam hitungan. Contoh: 28 Februari ke 1 Maret 2024 berjarak 2 hari.</p>
       <div class="date-actions"><button class="tools-primary" type="button" id="calculate-button">Hitung selisih</button><button type="button" id="example-button">Isi contoh</button><button type="button" id="clear-button">Bersihkan</button><button type="button" id="copy-button" disabled>Salin hasil</button></div>
       <section id="result-card" class="date-result" aria-labelledby="result-heading" hidden><h2 id="result-heading">Hasil perhitungan</h2><p id="result-main" class="date-result-main"></p><p id="result-detail"></p><label for="copy-output">Ringkasan yang dapat dipilih untuk disalin</label><textarea id="copy-output" class="date-summary" readonly spellcheck="false"></textarea></section>
       <p id="tool-status" class="tools-status" role="status" aria-live="polite" aria-atomic="true">Pilih mode dan tanggal untuk memulai.</p>

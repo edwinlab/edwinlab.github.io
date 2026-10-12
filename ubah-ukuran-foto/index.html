@@ -18,6 +18,32 @@
   <style>
     .resize-field{max-width:42rem;margin-bottom:1.25rem}.resize-field input[type=file],.resize-field select,.resize-field input[type=text]{width:100%}.resize-options{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:1rem;max-width:760px}.resize-actions{display:flex;flex-wrap:wrap;gap:.75rem;margin-top:1rem}.resize-previews{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:1rem;margin-top:1.25rem}.resize-preview{min-width:0;margin:0;padding:1rem;border:1px solid var(--line);border-radius:.5rem;background:var(--paper)}.resize-preview img{display:block;max-width:100%;max-height:420px;width:auto;height:auto;margin:.75rem auto 0;object-fit:contain;background:white}.resize-preview figcaption{font-weight:800}.resize-meta{font-size:13px;color:var(--muted);overflow-wrap:anywhere}.resize-result{margin-top:1.25rem;padding:1.25rem;border:1px solid var(--line);border-radius:.5rem;background:white}.resize-prose{max-width:800px;margin-top:3rem}@media(max-width:650px){.resize-options,.resize-previews{grid-template-columns:minmax(0,1fr)}}
   </style>
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "BreadcrumbList",
+    "itemListElement": [
+      {
+        "@type": "ListItem",
+        "position": 1,
+        "name": "Beranda",
+        "item": "https://edwinlab.dev/"
+      },
+      {
+        "@type": "ListItem",
+        "position": 2,
+        "name": "Alat Online",
+        "item": "https://edwinlab.dev/alat/"
+      },
+      {
+        "@type": "ListItem",
+        "position": 3,
+        "name": "Ubah Ukuran Foto",
+        "item": "https://edwinlab.dev/ubah-ukuran-foto/"
+      }
+    ]
+  }
+  </script>
 </head>
 <body class="tools-page">
   <a class="tools-skip" href="#workspace">Lewati ke pengubah ukuran foto</a>
@@ -26,7 +52,7 @@
     <nav class="tools-nav" aria-label="Navigasi utama"><a href="/">Beranda</a><a href="/alat/">Alat Online</a></nav>
   </div></header>
   <main class="tools-container">
-    <nav class="tools-breadcrumb" aria-label="Jejak halaman"><ol><li><a href="/">Beranda</a></li><li aria-current="page">Ubah ukuran foto</li></ol></nav>
+    <nav class="tools-breadcrumb" aria-label="Jejak halaman"><ol><li><a href="/">Beranda</a></li><li><a href="/alat/">Alat Online</a></li><li aria-current="page">Ubah ukuran foto</li></ol></nav>
     <h1>Ubah Ukuran Foto</h1>
     <p class="tools-intro">Perkecil dimensi foto JPG atau PNG berdasarkan lebar, tinggi, atau persen. Rasio foto tetap dijaga, dengan unduhan PNG, JPEG, atau WebP di browser.</p>
     <noscript><p class="tools-status" data-kind="warning">Aktifkan JavaScript untuk memilih foto dan mengubah dimensinya. Panduan format dan batas file tetap tersedia di bawah.</p></noscript>

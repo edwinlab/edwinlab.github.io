@@ -31,6 +31,32 @@
     .percent-examples { min-width:600px; }
     @media(max-width:600px) { .percent-fields { grid-template-columns:minmax(0,1fr); } }
   </style>
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "BreadcrumbList",
+    "itemListElement": [
+      {
+        "@type": "ListItem",
+        "position": 1,
+        "name": "Beranda",
+        "item": "https://edwinlab.dev/"
+      },
+      {
+        "@type": "ListItem",
+        "position": 2,
+        "name": "Alat Online",
+        "item": "https://edwinlab.dev/alat/"
+      },
+      {
+        "@type": "ListItem",
+        "position": 3,
+        "name": "Kalkulator Persen",
+        "item": "https://edwinlab.dev/kalkulator-persen/"
+      }
+    ]
+  }
+  </script>
 </head>
 <body class="tools-page">
   <a class="tools-skip" href="#workspace">Lewati ke kalkulator</a>
@@ -39,7 +65,7 @@
     <nav class="tools-nav" aria-label="Navigasi utama"><a href="/">Beranda</a><a href="/alat/">Alat Online</a></nav>
   </div></header>
   <main class="tools-container">
-    <nav class="tools-breadcrumb" aria-label="Jejak halaman"><ol><li><a href="/">Beranda</a></li><li aria-current="page">Kalkulator persen</li></ol></nav>
+    <nav class="tools-breadcrumb" aria-label="Jejak halaman"><ol><li><a href="/">Beranda</a></li><li><a href="/alat/">Alat Online</a></li><li aria-current="page">Kalkulator persen</li></ol></nav>
     <h1>Kalkulator Persen</h1>
     <p class="tools-intro">Pilih jenis perhitungan persen, masukkan dua angka, lalu lihat hasil dan rumusnya. Gunakan koma atau titik untuk angka desimal.</p>
     <noscript><p class="tools-status" data-kind="warning">Aktifkan JavaScript untuk menghitung. Rumus, contoh, dan panduan tetap tersedia di bawah.</p></noscript>

@@ -25,6 +25,32 @@
     .case-note { color:var(--muted); font-size:.875rem; }
     @media (max-width:700px) { .case-editors { grid-template-columns:minmax(0,1fr); } }
   </style>
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "BreadcrumbList",
+    "itemListElement": [
+      {
+        "@type": "ListItem",
+        "position": 1,
+        "name": "Beranda",
+        "item": "https://edwinlab.dev/"
+      },
+      {
+        "@type": "ListItem",
+        "position": 2,
+        "name": "Alat Online",
+        "item": "https://edwinlab.dev/alat/"
+      },
+      {
+        "@type": "ListItem",
+        "position": 3,
+        "name": "Ubah Huruf Besar dan Kecil",
+        "item": "https://edwinlab.dev/ubah-huruf/"
+      }
+    ]
+  }
+  </script>
 </head>
 <body class="tools-page">
   <a class="tools-skip" href="#workspace">Lewati ke alat</a>
@@ -33,7 +59,7 @@
     <nav class="tools-nav" aria-label="Navigasi utama"><a href="/">Beranda</a><a href="/alat/">Alat Online</a></nav>
   </div></header>
   <main class="tools-container">
-    <nav class="tools-breadcrumb" aria-label="Jejak halaman"><ol><li><a href="/">Beranda</a></li><li aria-current="page">Ubah huruf</li></ol></nav>
+    <nav class="tools-breadcrumb" aria-label="Jejak halaman"><ol><li><a href="/">Beranda</a></li><li><a href="/alat/">Alat Online</a></li><li aria-current="page">Ubah huruf</li></ol></nav>
     <h1>Ubah Huruf Besar dan Kecil</h1>
     <p class="tools-intro">Rapikan kapitalisasi teks tanpa mengetik ulang. Pilih bentuk huruf, ubah teks, lalu salin hasilnya.</p>
     <noscript><p class="tools-status" data-kind="warning">Aktifkan JavaScript untuk mengubah teks. Panduan dan contoh tetap dapat dibaca di bawah.</p></noscript>
@@ -47,7 +73,7 @@
             <option value="lower">huruf kecil</option>
             <option value="title">Kapital Awal Kata (sederhana)</option>
           </select>
-          <p id="mode-note" class="tools-note">Kapital awal sederhana mengawali setiap token dengan huruf besar. Singkatan dan nama merek seperti NASA atau iPhone dapat berubah.</p>
+          <p id="mode-note" class="tools-note">Kapital awal membuat huruf pertama tiap kata menjadi besar. Singkatan dan merek seperti NASA atau iPhone bisa ikut berubah.</p>
         </div>
       </div>
       <div class="case-editors">
@@ -59,7 +85,7 @@
         <div class="case-panel">
           <label for="case-output">Hasil</label>
           <textarea id="case-output" readonly spellcheck="false" aria-describedby="output-note"></textarea>
-          <p id="output-note" class="tools-note">Batas hasil 800.000 byte UTF-8. Hasil unduhan berasal dari teks awal; textarea browser biasanya menyimpan newline sebagai LF.</p>
+          <p id="output-note" class="tools-note">Hasil dapat disalin atau diunduh sebagai TXT. Maksimal hasil 800.000 byte UTF-8.</p>
         </div>
       </div>
       <div class="case-actions">
@@ -83,8 +109,8 @@
           <thead><tr><th scope="col">Teks awal</th><th scope="col">HURUF BESAR</th><th scope="col">huruf kecil</th><th scope="col">Kapital awal kata</th></tr></thead>
           <tbody><tr><td>Halo dunia</td><td>HALO DUNIA</td><td>halo dunia</td><td>Halo Dunia</td></tr></tbody>
         </table></div>
-        <p>Mode kapital awal kata sederhana memakai huruf besar pada setiap token, termasuk kata seperti “dan”, “di”, serta “ke”. Ini bukan kaidah judul bahasa Indonesia. Singkatan atau nama merek dapat berubah, misalnya NASA menjadi Nasa dan iPhone menjadi Iphone.</p>
-        <p>Semua spasi, tab, tanda baca, digit, emoji, dan baris dipertahankan. Area teks browser biasanya menyimpan newline sebagai LF; perubahan dan unduhan memakai isi textarea tersebut.</p>
+        <p>Mode kapital awal kata membuat huruf pertama setiap kata besar, termasuk kata “dan”, “di”, dan “ke”. Contoh: <code>halo dunia</code> menjadi <code>Halo Dunia</code>. Ini perubahan format sederhana, bukan aturan penulisan judul bahasa Indonesia. Nama seperti NASA dapat berubah menjadi Nasa, dan iPhone menjadi Iphone.</p>
+        <p>Spasi, tab, tanda baca, angka, emoji, dan baris tetap seperti semula. Batas masukan adalah 100.000 code points dan 400.000 byte UTF-8; hasil maksimal 800.000 byte UTF-8. Browser biasanya menyimpan pemisah baris sebagai LF; unduhan memakai teks hasil yang sama.</p>
         <p>Batas teks awal adalah 100.000 Unicode code points dan 400.000 byte UTF-8. Hasil maksimal 800.000 byte UTF-8. Masukan dan hasil diproses di browser; alat tidak mengirim teks ke server.</p>
       </section>
       <section>

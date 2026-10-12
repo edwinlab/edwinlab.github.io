@@ -10,14 +10,47 @@
   <meta property="og:title" content="Pembuat Link WhatsApp +62 dengan Pesan | Edwin Lab">
   <meta property="og:description" content="Ubah nomor seluler Indonesia menjadi link wa.me dengan pesan awal opsional. Buat dan salin link di browser.">
   <meta property="og:url" content="https://edwinlab.dev/link-whatsapp/">
-  <meta property="og:image" content="https://edwinlab.dev/assets/edwinlab-logo.png">
-  <meta name="twitter:card" content="summary">
+  <meta property="og:image" content="https://edwinlab.dev/assets/social/whatsapp-link.png">
+  <meta property="og:image:width" content="1200">
+  <meta property="og:image:height" content="630">
+  <meta property="og:image:alt" content="Pembuat Link WhatsApp social preview graphic">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:image:alt" content="Pembuat Link WhatsApp social preview graphic">
+  <meta name="twitter:image" content="https://edwinlab.dev/assets/social/whatsapp-link.png">
+  <meta name="twitter:description" content="Ubah nomor seluler Indonesia menjadi link wa.me dengan pesan awal opsional. Buat dan salin link di browser.">
+  <meta name="twitter:title" content="Pembuat Link WhatsApp +62 dengan Pesan | Edwin Lab">
   <link rel="icon" href="/assets/edwinlab-logo.png" type="image/png">
   <link rel="stylesheet" href="/tools/shared/tools.css">
   <link rel="stylesheet" href="/tools/everyday-links.css">
   <style>
     .wa-field{max-width:42rem;margin-bottom:1rem}.wa-field input,.wa-field textarea{width:100%}.wa-field textarea{min-height:128px;white-space:pre-wrap;resize:vertical}.wa-actions{display:flex;flex-wrap:wrap;gap:.75rem;margin-top:1rem}.wa-result{margin-top:1.25rem;padding:1.25rem;border:1px solid var(--line);border-radius:.5rem;background:var(--paper);min-width:0}.wa-result-url{display:block;width:100%;min-height:74px;margin:.5rem 0 1rem;padding:12px;background:white;font:13px/1.5 'DM Mono',monospace;overflow-wrap:anywhere;resize:vertical}.wa-preview{padding:.75rem;border-inline-start:3px solid var(--accent);background:white;white-space:pre-wrap;overflow-wrap:anywhere}.wa-result-actions{display:flex;flex-wrap:wrap;align-items:center;gap:1rem;margin-top:1rem}.wa-prose{max-width:800px;margin-top:3rem}@media(max-width:560px){.wa-result{padding:1rem}}
   </style>
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "BreadcrumbList",
+    "itemListElement": [
+      {
+        "@type": "ListItem",
+        "position": 1,
+        "name": "Beranda",
+        "item": "https://edwinlab.dev/"
+      },
+      {
+        "@type": "ListItem",
+        "position": 2,
+        "name": "Alat Online",
+        "item": "https://edwinlab.dev/alat/"
+      },
+      {
+        "@type": "ListItem",
+        "position": 3,
+        "name": "Pembuat Link WhatsApp",
+        "item": "https://edwinlab.dev/link-whatsapp/"
+      }
+    ]
+  }
+  </script>
 </head>
 <body class="tools-page">
   <a class="tools-skip" href="#workspace">Lewati ke pembuat link</a>
@@ -26,7 +59,7 @@
     <nav class="tools-nav" aria-label="Navigasi utama"><a href="/">Beranda</a><a href="/alat/">Alat Online</a></nav>
   </div></header>
   <main class="tools-container">
-    <nav class="tools-breadcrumb" aria-label="Jejak halaman"><ol><li><a href="/">Beranda</a></li><li aria-current="page">Pembuat link WhatsApp</li></ol></nav>
+    <nav class="tools-breadcrumb" aria-label="Jejak halaman"><ol><li><a href="/">Beranda</a></li><li><a href="/alat/">Alat Online</a></li><li aria-current="page">Pembuat link WhatsApp</li></ol></nav>
     <h1>Pembuat Link WhatsApp</h1>
     <p class="tools-intro">Ubah nomor seluler Indonesia menjadi tautan wa.me yang siap dibagikan. Tambahkan pesan awal bila diperlukan, lalu salin tautannya atau pilih sendiri untuk membukanya di WhatsApp.</p>
     <noscript><p class="tools-status" data-kind="warning">Aktifkan JavaScript untuk membuat link. Contoh format, panduan, dan informasi privasi tetap tersedia di bawah.</p></noscript>
@@ -40,7 +73,7 @@
       <div class="wa-field">
         <label for="message-input">Pesan awal (opsional)</label>
         <textarea id="message-input" rows="4" aria-describedby="message-hint message-count"></textarea>
-        <p id="message-hint" class="tools-note">Maksimal 500 karakter Unicode dan 2000 byte UTF-8. Emoji dihitung satu karakter. Baris baru dan tab diperbolehkan.</p>
+        <p id="message-hint" class="tools-note">Maksimal 500 code point Unicode dan 2000 byte UTF-8. Emoji gabungan dapat dihitung sebagai beberapa karakter (misalnya emoji keluarga). Baris baru dan tab diperbolehkan.</p>
         <p id="message-count" class="tools-note" aria-live="polite">0/500 karakter</p>
       </div>
       <div class="wa-actions">

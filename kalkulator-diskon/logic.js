@@ -141,7 +141,7 @@ export function presentDiscount(priceDecimal, discountDecimals) {
     `Harga akhir: ${finalText}`,
     `Total hemat: ${savedText}`,
     `Persen hemat efektif: ${effectiveText}`,
-    'Pembulatan: harga bersih dibulatkan ke cent terdekat pada setiap tahap; setengah cent dibulatkan ke atas.',
+    'Pembulatan: harga bersih dibulatkan ke Rp0,01 (satu sen) terdekat pada setiap tahap; setengah sen dibulatkan ke atas.',
   ].join('\n');
   assertDiscountOutput([originalText, finalText, savedText, effectiveText, ...steps.flatMap(step => [step.beforeText, step.discountAmountText, step.afterText])], copyText);
   return { ...calculation, discountTexts, originalText, finalText, savedText, effectiveText, steps, copyText };

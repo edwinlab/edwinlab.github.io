@@ -2,6 +2,10 @@
 
 Personal website for Edwin Andrianto, a backend engineer and Technical Lead based in Tangerang, Indonesia.
 
+## SEO review and improvement backlog
+
+The website is live at https://edwinlab.dev/. The 12 October 2026 review and implementation TODOs for the homepage, blog integration, developer tools, and everyday tools are in [docs/seo-improvements/README.md](docs/seo-improvements/README.md). The review separates verified source/live findings from Search Console, HTTP-header, analytics, and performance checks that still need evidence. Creating the backlog does not mark its implementation tasks complete.
+
 ## Preview
 
 No installation or build is required. From the repository root:
@@ -26,7 +30,7 @@ Open http://127.0.0.1:4173/.
 - `tests/tools/index.html`: the noindex browser-fixture directory.
 - `.nojekyll`: serve ready static files on GitHub Pages.
 
-`index-master.html`, `css/style.min.css`, and `js/app.min.js` are legacy files; the redesigned homepage does not load them.
+`index-master.html` is an archived 2022 profile marked `noindex`, with links to the current homepage and LinkedIn profile. `css/style.min.css` and `js/app.min.js` are legacy files; the redesigned homepage does not load them.
 
 The homepage and developer tools are ready for the existing GitHub Pages user site, served from the repository root. The existing `CNAME` is `edwinlab.dev`. Routes are real directories with `index.html` files: `/`, `/tools/`, and the twelve tools listed below. GitHub Pages can serve them directly; there is no compiler, package installation, framework, or build step. Native JavaScript modules load over HTTP/HTTPS. Opening pages with `file://` is not supported because root-relative assets and module imports need a web server. Blog content remains at https://edwinlab.dev/blog/ and is linked using absolute URLs.
 

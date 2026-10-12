@@ -27,6 +27,32 @@
     .word-note { color:var(--muted,#505866); }
     @media (max-width: 480px) { .word-actions > button { flex:1 1 8rem; } }
   </style>
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "BreadcrumbList",
+    "itemListElement": [
+      {
+        "@type": "ListItem",
+        "position": 1,
+        "name": "Beranda",
+        "item": "https://edwinlab.dev/"
+      },
+      {
+        "@type": "ListItem",
+        "position": 2,
+        "name": "Alat Online",
+        "item": "https://edwinlab.dev/alat/"
+      },
+      {
+        "@type": "ListItem",
+        "position": 3,
+        "name": "Penghitung Kata dan Karakter",
+        "item": "https://edwinlab.dev/penghitung-kata/"
+      }
+    ]
+  }
+  </script>
 </head>
 <body class="tools-page">
   <a class="tools-skip" href="#main">Lewati ke alat</a>
@@ -36,7 +62,7 @@
   </div>
   </header>
   <main id="main" class="tools-container">
-    <nav class="tools-breadcrumb" aria-label="Jejak halaman"><ol><li><a href="/">Beranda</a></li><li aria-current="page">Penghitung kata</li></ol></nav>
+    <nav class="tools-breadcrumb" aria-label="Jejak halaman"><ol><li><a href="/">Beranda</a></li><li><a href="/alat/">Alat Online</a></li><li aria-current="page">Penghitung kata</li></ol></nav>
     <header class="page-heading">
       <h1>Penghitung Kata dan Karakter</h1>
       <p class="tools-intro">Tempel tulisan untuk melihat jumlah kata dan karakter, lalu perkirakan waktu bacanya dengan kecepatan yang Anda pilih.</p>
@@ -84,7 +110,7 @@
       <ol><li>Tempel atau ketik teks di kotak.</li><li>Pilih kecepatan baca antara 50 dan 1.000 kata per menit.</li><li>Pilih <strong>Hitung</strong> untuk melihat enam hasil, lalu salin ringkasannya bila diperlukan.</li></ol>
       <h2>Apa yang dihitung?</h2>
       <p>Kata mengikuti segmentasi teks Bahasa Indonesia yang tersedia di browser; segmen kata dan angka dihitung, sementara tanda baca atau emoji saja tidak. Pemisahan kata majemuk, singkatan, dan bahasa lain bisa berbeda antarversi browser, jadi hasilnya tidak dijanjikan sama dengan Word atau aplikasi lain.</p>
-      <p>Karakter berarti grapheme cluster yang biasanya dirasakan sebagai satu karakter. Karakter tanpa spasi, tab, dan baris baru mengecualikan grapheme yang seluruhnya cocok dengan definisi whitespace JavaScript. Tanda baca dan emoji tetap dihitung. Baris kosong terakhir setelah baris baru tetap dihitung sebagai baris; paragraf adalah kelompok baris nonblank.</p>
+      <p>Jumlah karakter mengikuti unit teks yang biasanya terlihat sebagai satu karakter, termasuk tanda baca dan emoji. Jumlah tanpa spasi tidak memasukkan spasi, tab, atau baris baru. Baris kosong terakhir tetap dihitung sebagai baris; paragraf adalah kelompok baris yang berisi teks.</p>
       <p>Perkiraan waktu baca memakai rumus jumlah kata dibagi laju pilihan, dibulatkan ke detik berikutnya. Contohnya, 401 kata pada 200 kata per menit menjadi 2 menit 1 detik. Angka 200 adalah nilai awal alat, bukan klaim tentang kecepatan setiap pembaca.</p>
       <h3>Contoh singkat</h3>
       <p><code>Halo dunia!</code> berisi 2 kata dan 11 karakter. Batas masukan adalah 100.000 Unicode code points dan 400.000 byte UTF-8; tepat batas masih dapat dihitung.</p>

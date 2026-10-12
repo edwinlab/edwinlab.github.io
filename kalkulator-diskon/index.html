@@ -18,6 +18,32 @@
   <style>
     .discount-mode{max-width:30rem;margin-bottom:1rem}.discount-fields{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:1rem;padding:1rem;border:1px solid var(--line);border-radius:.5rem}.discount-field{min-width:0}.discount-field input,.discount-mode select{width:100%}.discount-hint{margin-top:.5rem}.discount-actions{display:flex;flex-wrap:wrap;gap:.75rem;margin-top:1rem}.discount-result{margin-top:1.25rem;padding:1.25rem;border:1px solid var(--line);border-radius:.5rem;background:var(--paper)}.discount-summary{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:1rem;margin-block:1rem}.discount-metric{padding:1rem;border-radius:.5rem;background:white;min-width:0}.discount-metric strong{display:block;font-size:clamp(1.4rem,4vw,2.1rem);line-height:1.25;overflow-wrap:anywhere}.discount-effective{margin:0;font-weight:700}.discount-rounding{color:var(--muted);font-size:.875rem}.discount-prose{max-width:800px;margin-top:3rem}.discount-table{min-width:620px}@media(max-width:560px){.discount-fields,.discount-summary{grid-template-columns:minmax(0,1fr)}}
   </style>
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "BreadcrumbList",
+    "itemListElement": [
+      {
+        "@type": "ListItem",
+        "position": 1,
+        "name": "Beranda",
+        "item": "https://edwinlab.dev/"
+      },
+      {
+        "@type": "ListItem",
+        "position": 2,
+        "name": "Alat Online",
+        "item": "https://edwinlab.dev/alat/"
+      },
+      {
+        "@type": "ListItem",
+        "position": 3,
+        "name": "Kalkulator Diskon",
+        "item": "https://edwinlab.dev/kalkulator-diskon/"
+      }
+    ]
+  }
+  </script>
 </head>
 <body class="tools-page">
   <a class="tools-skip" href="#workspace">Lewati ke kalkulator</a>
@@ -26,7 +52,7 @@
     <nav class="tools-nav" aria-label="Navigasi utama"><a href="/">Beranda</a><a href="/alat/">Alat Online</a></nav>
   </div></header>
   <main class="tools-container">
-    <nav class="tools-breadcrumb" aria-label="Jejak halaman"><ol><li><a href="/">Beranda</a></li><li aria-current="page">Kalkulator diskon</li></ol></nav>
+    <nav class="tools-breadcrumb" aria-label="Jejak halaman"><ol><li><a href="/">Beranda</a></li><li><a href="/alat/">Alat Online</a></li><li aria-current="page">Kalkulator diskon</li></ol></nav>
     <h1>Kalkulator Diskon</h1>
     <p class="tools-intro">Masukkan harga awal dan persentase diskon untuk melihat harga akhirnya. Pilih dua diskon jika potongan kedua berlaku pada harga yang sudah didiskon.</p>
     <noscript><p class="tools-status" data-kind="warning">Aktifkan JavaScript untuk menghitung. Rumus, contoh, dan panduan tetap tersedia di bawah.</p></noscript>
@@ -39,7 +65,7 @@
         <div class="discount-field" id="second-field" hidden><label for="discount-two">Diskon kedua (%)</label><input id="discount-two" type="text" inputmode="decimal" autocomplete="off" aria-describedby="input-hint"></div>
       </div>
       <p id="input-hint" class="tools-note discount-hint">Tulis 100000 atau 100000,50. Titik/koma adalah desimal, bukan pemisah ribuan. Harga 0–1.000.000.000.000; diskon 0–100 dengan paling banyak empat digit desimal. Maksimum 64 karakter tiap input.</p>
-      <p id="mode-note" class="tools-note">Harga bersih dibulatkan ke dua angka desimal pada setiap tahap; setengah cent dibulatkan ke atas. Contoh: diskon 20% lalu 10% berarti hemat efektif 28%, bukan 30%.</p>
+      <p id="mode-note" class="tools-note">Harga bersih dibulatkan ke Rp0,01 (satu sen) terdekat pada setiap tahap; tepat setengah sen dibulatkan ke atas. Contoh Rp200000: diskon 20% lalu 10% menghasilkan Rp144000 dan hemat 28%, bukan 30%.</p>
       <div class="discount-actions">
         <button class="tools-primary" type="button" id="calculate-button">Hitung diskon</button>
         <button type="button" id="example-button">Isi contoh</button>
@@ -61,11 +87,11 @@
 
     <article class="tools-prose discount-prose" aria-label="Panduan kalkulator diskon">
       <section><h2>Cara menghitung harga setelah diskon</h2><p>Rumus harga bersih adalah harga awal × (1 − diskon/100). Misalnya harga Rp200000 dengan diskon 20% menjadi Rp160000.</p><p>Jika ada dua diskon berurutan, hitung diskon pertama dahulu lalu terapkan diskon kedua pada harga yang tersisa. Harga Rp200000 dengan diskon 20% lalu 10% menjadi Rp144000: total hemat Rp56000 atau 28% dari harga awal, bukan 30%.</p></section>
-      <section><h2>Pembulatan pada setiap tahap</h2><p>Kalkulator menyimpan uang sebagai cent dan membulatkan harga bersih ke cent terdekat setelah setiap tahap. Jika tepat setengah cent, nilai dibulatkan ke atas. Contohnya Rp0,05 dengan diskon 50% menjadi Rp0,03, lalu diskon 50% berikutnya menjadi Rp0,02. Ini adalah kebijakan kalkulator; struk toko dapat berbeda.</p><p>Gunakan angka tanpa pemisah ribuan. Koma atau titik berfungsi sebagai tanda desimal. Perhitungan berjalan di browser ini dan tidak memasukkan pajak, ongkir, atau biaya lain.</p></section>
+      <section><h2>Pembulatan pada setiap tahap</h2><p>Kalkulator menyimpan uang dalam satuan Rp0,01 (satu sen) dan membulatkan harga bersih ke sen terdekat setelah setiap tahap. Jika tepat setengah sen, nilai dibulatkan ke atas. Contohnya Rp0,05 dengan diskon 50% menjadi Rp0,03; diskon 50% berikutnya membuatnya menjadi Rp0,02. Ini adalah kebijakan kalkulator; struk toko dapat berbeda.</p><p>Gunakan angka tanpa pemisah ribuan. Koma atau titik berfungsi sebagai tanda desimal. Perhitungan berjalan di browser ini dan tidak memasukkan pajak, ongkir, atau biaya lain.</p></section>
       <section><h2>Pertanyaan umum</h2>
         <h3>Apakah diskon 20% lalu 10% sama dengan 30%?</h3><p>Tidak. Diskon kedua diterapkan pada sisa harga. Dari Rp200000, setelah diskon 20% tersisa Rp160000; diskon 10% berikutnya membuat harga Rp144000. Total hematnya 28%.</p>
         <h3>Mengapa hasil bisa berbeda dari struk?</h3><p>Toko dapat menerapkan aturan pembulatan berbeda atau menambahkan biaya yang tidak dihitung oleh kalkulator ini.</p>
-        <h3>Mengapa ada dua angka desimal?</h3><p>Kalkulator memakai cent sebagai unit hitung dan selalu menampilkan dua angka desimal agar kebijakan pembulatan setiap tahap terlihat.</p>
+        <h3>Mengapa ada dua angka desimal?</h3><p>Harga disimpan dalam kelipatan Rp0,01 (satu sen). Hasil selalu menampilkan dua angka desimal agar nilai sen dan pembulatan setiap tahap terlihat.</p>
         <h3>Apakah pajak dan ongkir dihitung?</h3><p>Tidak. Hasil hanya memperhitungkan harga dan satu atau dua diskon persentase.</p>
         <h3>Apakah saya boleh memakai pemisah ribuan?</h3><p>Tidak. Masukkan angka tanpa pengelompokan digit; gunakan koma atau titik hanya untuk tanda desimal.</p>
       </section>
