@@ -1,0 +1,78 @@
+<!doctype html>
+<html lang="id">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Kalkulator Diskon dan Diskon Bertingkat | Edwin Lab</title>
+  <meta name="description" content="Hitung harga setelah diskon, total hemat, dan dua diskon berurutan. Lihat rincian tiap tahap serta pembulatan harga hingga dua angka desimal.">
+  <link rel="canonical" href="https://edwinlab.dev/kalkulator-diskon/">
+  <meta property="og:type" content="website">
+  <meta property="og:title" content="Kalkulator Diskon dan Diskon Bertingkat | Edwin Lab">
+  <meta property="og:description" content="Hitung harga setelah diskon, total hemat, dan dua diskon berurutan dengan rincian tiap tahap.">
+  <meta property="og:url" content="https://edwinlab.dev/kalkulator-diskon/">
+  <meta property="og:image" content="https://edwinlab.dev/assets/edwinlab-logo.png">
+  <meta name="twitter:card" content="summary">
+  <link rel="icon" href="/assets/edwinlab-logo.png" type="image/png">
+  <link rel="stylesheet" href="/tools/shared/tools.css">
+  <link rel="stylesheet" href="/tools/everyday-links.css">
+  <style>
+    .discount-mode{max-width:30rem;margin-bottom:1rem}.discount-fields{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:1rem;padding:1rem;border:1px solid var(--line);border-radius:.5rem}.discount-field{min-width:0}.discount-field input,.discount-mode select{width:100%}.discount-hint{margin-top:.5rem}.discount-actions{display:flex;flex-wrap:wrap;gap:.75rem;margin-top:1rem}.discount-result{margin-top:1.25rem;padding:1.25rem;border:1px solid var(--line);border-radius:.5rem;background:var(--paper)}.discount-summary{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:1rem;margin-block:1rem}.discount-metric{padding:1rem;border-radius:.5rem;background:white;min-width:0}.discount-metric strong{display:block;font-size:clamp(1.4rem,4vw,2.1rem);line-height:1.25;overflow-wrap:anywhere}.discount-effective{margin:0;font-weight:700}.discount-rounding{color:var(--muted);font-size:.875rem}.discount-prose{max-width:800px;margin-top:3rem}.discount-table{min-width:620px}@media(max-width:560px){.discount-fields,.discount-summary{grid-template-columns:minmax(0,1fr)}}
+  </style>
+</head>
+<body class="tools-page">
+  <a class="tools-skip" href="#workspace">Lewati ke kalkulator</a>
+  <header class="tools-header"><div class="tools-container tools-header-inner">
+    <a class="tools-brand" href="/" aria-label="Beranda Edwin Lab"><img src="/assets/edwinlab-logo.png" alt="" width="44" height="44">Edwin Lab</a>
+    <nav class="tools-nav" aria-label="Navigasi utama"><a href="/">Beranda</a><a href="/alat/">Alat Online</a></nav>
+  </div></header>
+  <main class="tools-container">
+    <nav class="tools-breadcrumb" aria-label="Jejak halaman"><ol><li><a href="/">Beranda</a></li><li aria-current="page">Kalkulator diskon</li></ol></nav>
+    <h1>Kalkulator Diskon</h1>
+    <p class="tools-intro">Masukkan harga awal dan persentase diskon untuk melihat harga akhirnya. Pilih dua diskon jika potongan kedua berlaku pada harga yang sudah didiskon.</p>
+    <noscript><p class="tools-status" data-kind="warning">Aktifkan JavaScript untuk menghitung. Rumus, contoh, dan panduan tetap tersedia di bawah.</p></noscript>
+
+    <section id="workspace" class="tools-workspace" aria-label="Kalkulator diskon">
+      <div class="discount-mode"><label for="discount-mode">Jenis diskon</label><select id="discount-mode"><option value="single">Satu diskon</option><option value="double">Dua diskon berurutan</option></select></div>
+      <div class="discount-fields">
+        <div class="discount-field"><label for="price-input">Harga awal (Rp)</label><input id="price-input" type="text" inputmode="decimal" autocomplete="off" aria-describedby="input-hint"></div>
+        <div class="discount-field"><label for="discount-one">Diskon pertama (%)</label><input id="discount-one" type="text" inputmode="decimal" autocomplete="off" aria-describedby="input-hint"></div>
+        <div class="discount-field" id="second-field" hidden><label for="discount-two">Diskon kedua (%)</label><input id="discount-two" type="text" inputmode="decimal" autocomplete="off" aria-describedby="input-hint"></div>
+      </div>
+      <p id="input-hint" class="tools-note discount-hint">Tulis 100000 atau 100000,50. Titik/koma adalah desimal, bukan pemisah ribuan. Harga 0–1.000.000.000.000; diskon 0–100 dengan paling banyak empat digit desimal. Maksimum 64 karakter tiap input.</p>
+      <p id="mode-note" class="tools-note">Harga bersih dibulatkan ke dua angka desimal pada setiap tahap; setengah cent dibulatkan ke atas. Contoh: diskon 20% lalu 10% berarti hemat efektif 28%, bukan 30%.</p>
+      <div class="discount-actions">
+        <button class="tools-primary" type="button" id="calculate-button">Hitung diskon</button>
+        <button type="button" id="example-button">Isi contoh</button>
+        <button type="button" id="clear-button">Bersihkan</button>
+        <button type="button" id="copy-button" disabled>Salin rincian</button>
+      </div>
+      <section id="result-card" class="discount-result" aria-labelledby="result-heading" hidden>
+        <h2 id="result-heading">Rincian hasil</h2>
+        <div class="discount-summary">
+          <div class="discount-metric"><span>Harga akhir</span><strong id="final-price"></strong></div>
+          <div class="discount-metric"><span>Total hemat</span><strong id="total-saved"></strong></div>
+        </div>
+        <p class="discount-effective">Persen hemat efektif: <span id="effective-saved"></span></p>
+        <p id="sequential-note" class="tools-note" hidden>Diskon kedua dihitung dari harga setelah diskon pertama.</p>
+        <div class="tools-table-wrap"><table class="discount-table"><thead><tr><th>Tahap</th><th>Harga sebelum</th><th>Diskon</th><th>Potongan</th><th>Harga sesudah</th></tr></thead><tbody id="stage-rows"></tbody></table></div>
+      </section>
+      <p id="tool-status" class="tools-status" role="status" aria-live="polite" aria-atomic="true">Masukkan harga dan persentase diskon untuk memulai.</p>
+    </section>
+
+    <article class="tools-prose discount-prose" aria-label="Panduan kalkulator diskon">
+      <section><h2>Cara menghitung harga setelah diskon</h2><p>Rumus harga bersih adalah harga awal × (1 − diskon/100). Misalnya harga Rp200000 dengan diskon 20% menjadi Rp160000.</p><p>Jika ada dua diskon berurutan, hitung diskon pertama dahulu lalu terapkan diskon kedua pada harga yang tersisa. Harga Rp200000 dengan diskon 20% lalu 10% menjadi Rp144000: total hemat Rp56000 atau 28% dari harga awal, bukan 30%.</p></section>
+      <section><h2>Pembulatan pada setiap tahap</h2><p>Kalkulator menyimpan uang sebagai cent dan membulatkan harga bersih ke cent terdekat setelah setiap tahap. Jika tepat setengah cent, nilai dibulatkan ke atas. Contohnya Rp0,05 dengan diskon 50% menjadi Rp0,03, lalu diskon 50% berikutnya menjadi Rp0,02. Ini adalah kebijakan kalkulator; struk toko dapat berbeda.</p><p>Gunakan angka tanpa pemisah ribuan. Koma atau titik berfungsi sebagai tanda desimal. Perhitungan berjalan di browser ini dan tidak memasukkan pajak, ongkir, atau biaya lain.</p></section>
+      <section><h2>Pertanyaan umum</h2>
+        <h3>Apakah diskon 20% lalu 10% sama dengan 30%?</h3><p>Tidak. Diskon kedua diterapkan pada sisa harga. Dari Rp200000, setelah diskon 20% tersisa Rp160000; diskon 10% berikutnya membuat harga Rp144000. Total hematnya 28%.</p>
+        <h3>Mengapa hasil bisa berbeda dari struk?</h3><p>Toko dapat menerapkan aturan pembulatan berbeda atau menambahkan biaya yang tidak dihitung oleh kalkulator ini.</p>
+        <h3>Mengapa ada dua angka desimal?</h3><p>Kalkulator memakai cent sebagai unit hitung dan selalu menampilkan dua angka desimal agar kebijakan pembulatan setiap tahap terlihat.</p>
+        <h3>Apakah pajak dan ongkir dihitung?</h3><p>Tidak. Hasil hanya memperhitungkan harga dan satu atau dua diskon persentase.</p>
+        <h3>Apakah saya boleh memakai pemisah ribuan?</h3><p>Tidak. Masukkan angka tanpa pengelompokan digit; gunakan koma atau titik hanya untuk tanda desimal.</p>
+      </section>
+    </article>
+  <nav class="tools-related" aria-label="Alat terkait"><h2>Alat terkait</h2><ul><li><a href="/kalkulator-persen/"><strong>Kalkulator Persen</strong><span>Hitung persentase nilai dan perubahan naik atau turun.</span></a></li></ul></nav>
+  </main>
+  <footer class="tools-footer"><div class="tools-container"><span>Edwin Lab · Alat sehari-hari</span><a href="/">Tentang Edwin</a></div></footer>
+  <script type="module" src="./tool.js"></script>
+</body>
+</html>

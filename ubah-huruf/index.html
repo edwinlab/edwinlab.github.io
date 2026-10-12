@@ -1,0 +1,103 @@
+<!doctype html>
+<html lang="id">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Ubah Huruf Besar, Kecil, dan Kapital Online | Edwin Lab</title>
+  <meta name="description" content="Ubah teks menjadi huruf besar, huruf kecil, atau kapital awal kata. Salin hasil atau unduh TXT, dengan spasi dan baris tetap dipertahankan.">
+  <link rel="canonical" href="https://edwinlab.dev/ubah-huruf/">
+  <meta property="og:type" content="website">
+  <meta property="og:title" content="Ubah Huruf Besar, Kecil, dan Kapital Online | Edwin Lab">
+  <meta property="og:description" content="Ubah teks menjadi huruf besar, huruf kecil, atau kapital awal kata. Salin hasil atau unduh TXT, dengan spasi dan baris tetap dipertahankan.">
+  <meta property="og:url" content="https://edwinlab.dev/ubah-huruf/">
+  <meta property="og:image" content="https://edwinlab.dev/assets/edwinlab-logo.png">
+  <meta name="twitter:card" content="summary">
+  <link rel="icon" href="/assets/edwinlab-logo.png" type="image/png">
+  <link rel="stylesheet" href="/tools/shared/tools.css">
+  <link rel="stylesheet" href="/tools/everyday-links.css">
+  <style>
+    .case-controls { display:grid; grid-template-columns:minmax(0,1fr); gap:1rem; margin-bottom:1.25rem; }
+    .case-mode { max-width:24rem; }
+    .case-editors { display:grid; grid-template-columns:minmax(0,1fr) minmax(0,1fr); gap:1.25rem; }
+    .case-panel { min-width:0; }
+    .case-panel textarea { min-height:15rem; }
+    .case-actions { display:flex; flex-wrap:wrap; gap:.75rem; margin-top:1rem; }
+    .case-note { color:var(--muted); font-size:.875rem; }
+    @media (max-width:700px) { .case-editors { grid-template-columns:minmax(0,1fr); } }
+  </style>
+</head>
+<body class="tools-page">
+  <a class="tools-skip" href="#workspace">Lewati ke alat</a>
+  <header class="tools-header"><div class="tools-container tools-header-inner">
+    <a class="tools-brand" href="/" aria-label="Beranda Edwin Lab"><img src="/assets/edwinlab-logo.png" alt="" width="44" height="44">Edwin Lab</a>
+    <nav class="tools-nav" aria-label="Navigasi utama"><a href="/">Beranda</a><a href="/alat/">Alat Online</a></nav>
+  </div></header>
+  <main class="tools-container">
+    <nav class="tools-breadcrumb" aria-label="Jejak halaman"><ol><li><a href="/">Beranda</a></li><li aria-current="page">Ubah huruf</li></ol></nav>
+    <h1>Ubah Huruf Besar dan Kecil</h1>
+    <p class="tools-intro">Rapikan kapitalisasi teks tanpa mengetik ulang. Pilih bentuk huruf, ubah teks, lalu salin hasilnya.</p>
+    <noscript><p class="tools-status" data-kind="warning">Aktifkan JavaScript untuk mengubah teks. Panduan dan contoh tetap dapat dibaca di bawah.</p></noscript>
+
+    <section id="workspace" class="tools-workspace" aria-label="Alat ubah huruf">
+      <div class="case-controls">
+        <div class="case-mode">
+          <label for="case-mode">Bentuk huruf</label>
+          <select id="case-mode" aria-describedby="mode-note">
+            <option value="upper">HURUF BESAR</option>
+            <option value="lower">huruf kecil</option>
+            <option value="title">Kapital Awal Kata (sederhana)</option>
+          </select>
+          <p id="mode-note" class="tools-note">Kapital awal sederhana mengawali setiap token dengan huruf besar. Singkatan dan nama merek seperti NASA atau iPhone dapat berubah.</p>
+        </div>
+      </div>
+      <div class="case-editors">
+        <div class="case-panel">
+          <label for="case-input">Teks awal</label>
+          <textarea id="case-input" spellcheck="false" autocapitalize="off" autocomplete="off" maxlength="400000" aria-describedby="input-note" placeholder="Ketik atau tempel teks di sini…"></textarea>
+          <p id="input-note" class="tools-note">Batas masukan 100.000 code points dan 400.000 byte UTF-8. Teks diproses secara lokal di browser.</p>
+        </div>
+        <div class="case-panel">
+          <label for="case-output">Hasil</label>
+          <textarea id="case-output" readonly spellcheck="false" aria-describedby="output-note"></textarea>
+          <p id="output-note" class="tools-note">Batas hasil 800.000 byte UTF-8. Hasil unduhan berasal dari teks awal; textarea browser biasanya menyimpan newline sebagai LF.</p>
+        </div>
+      </div>
+      <div class="case-actions">
+        <button class="tools-primary" type="button" id="transform-button">Ubah huruf</button>
+        <button type="button" id="example-button">Isi contoh</button>
+        <button type="button" id="clear-button">Bersihkan</button>
+        <button type="button" id="copy-button" disabled>Salin hasil</button>
+        <button type="button" id="download-button" disabled>Unduh TXT</button>
+      </div>
+      <p id="tool-status" class="tools-status" role="status" aria-live="polite" aria-atomic="true">Siap mengubah teks di browser ini.</p>
+    </section>
+
+    <article class="tools-prose" aria-label="Panduan ubah huruf">
+      <section>
+        <h2>Cara menggunakan alat ubah huruf</h2>
+        <ol><li>Ketik atau tempel teks pada kolom <strong>Teks awal</strong>.</li><li>Pilih huruf besar, huruf kecil, atau kapital awal kata sederhana.</li><li>Pilih <strong>Ubah huruf</strong>, lalu salin hasil atau unduh sebagai TXT.</li></ol>
+      </section>
+      <section>
+        <h2>Contoh perubahan huruf</h2>
+        <div class="tools-table-wrap"><table>
+          <thead><tr><th scope="col">Teks awal</th><th scope="col">HURUF BESAR</th><th scope="col">huruf kecil</th><th scope="col">Kapital awal kata</th></tr></thead>
+          <tbody><tr><td>Halo dunia</td><td>HALO DUNIA</td><td>halo dunia</td><td>Halo Dunia</td></tr></tbody>
+        </table></div>
+        <p>Mode kapital awal kata sederhana memakai huruf besar pada setiap token, termasuk kata seperti “dan”, “di”, serta “ke”. Ini bukan kaidah judul bahasa Indonesia. Singkatan atau nama merek dapat berubah, misalnya NASA menjadi Nasa dan iPhone menjadi Iphone.</p>
+        <p>Semua spasi, tab, tanda baca, digit, emoji, dan baris dipertahankan. Area teks browser biasanya menyimpan newline sebagai LF; perubahan dan unduhan memakai isi textarea tersebut.</p>
+        <p>Batas teks awal adalah 100.000 Unicode code points dan 400.000 byte UTF-8. Hasil maksimal 800.000 byte UTF-8. Masukan dan hasil diproses di browser; alat tidak mengirim teks ke server.</p>
+      </section>
+      <section>
+        <h2>Pertanyaan umum</h2>
+        <h3>Apakah spasi dan baris baru ikut berubah?</h3><p>Tidak. Logika mempertahankan whitespace dan baris. Textarea browser biasanya menyimpan newline sebagai LF; hasil dan unduhan berasal dari isi textarea yang diproses.</p>
+        <h3>Apakah kapital awal mengikuti kaidah judul Indonesia?</h3><p>Tidak. Setiap token yang diawali huruf mendapat kapital, tanpa pengecualian kata. Gunakan mode ini sebagai perubahan format sederhana.</p>
+        <h3>Mengapa NASA menjadi Nasa?</h3><p>Mode kapital awal lebih dulu membuat huruf lain menjadi kecil, lalu mengawali setiap token dengan kapital. Mode ini tidak mengenali singkatan atau merek.</p>
+        <h3>Apakah teks dikirim ke server?</h3><p>Tidak. Transformasi berjalan di browser dan alat tidak mengirim teks awal ke server.</p>
+      </section>
+    </article>
+  <nav class="tools-related" aria-label="Alat terkait"><h2>Alat terkait</h2><ul><li><a href="/penghitung-kata/"><strong>Penghitung Kata dan Karakter</strong><span>Hitung kata, karakter, baris, paragraf, dan perkiraan waktu baca.</span></a></li></ul></nav>
+  </main>
+  <footer class="tools-footer"><div class="tools-container"><span>Edwin Lab · Alat sehari-hari</span><a href="/">Tentang Edwin</a></div></footer>
+  <script type="module" src="./tool.js"></script>
+</body>
+</html>

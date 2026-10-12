@@ -1,0 +1,103 @@
+<!doctype html>
+<html lang="id">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Kompres Gambar JPG dan PNG Online | Edwin Lab</title>
+  <meta name="description" content="Kompres gambar JPG atau PNG menjadi JPEG atau WebP. Atur kualitas, bandingkan ukuran file, dan unduh hasil dengan pemrosesan lokal di browser.">
+  <link rel="canonical" href="https://edwinlab.dev/kompres-gambar/">
+  <meta property="og:type" content="website">
+  <meta property="og:title" content="Kompres Gambar JPG dan PNG Online | Edwin Lab">
+  <meta property="og:description" content="Atur kualitas gambar JPEG atau WebP, bandingkan ukuran hasil, dan unduh file yang diproses di browser.">
+  <meta property="og:url" content="https://edwinlab.dev/kompres-gambar/">
+  <meta property="og:image" content="https://edwinlab.dev/assets/edwinlab-logo.png">
+  <meta name="twitter:card" content="summary">
+  <link rel="icon" href="/assets/edwinlab-logo.png" type="image/png">
+  <link rel="stylesheet" href="/tools/shared/tools.css">
+  <link rel="stylesheet" href="/tools/everyday-links.css">
+  <style>
+    .compress-field{max-width:42rem;margin-bottom:1.25rem}.compress-field input[type=file],.compress-field select{width:100%}.compress-options{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:1rem;max-width:760px}.quality-row{display:flex;align-items:center;gap:1rem}.quality-row input{width:100%;min-height:auto;padding:0;border:0;background:transparent;accent-color:var(--accent)}.quality-row output{min-width:3.5rem;font-weight:800}.compress-actions{display:flex;flex-wrap:wrap;gap:.75rem;margin-top:1rem}.image-previews{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:1rem;margin-top:1.25rem}.image-preview{min-width:0;margin:0;padding:1rem;border:1px solid var(--line);border-radius:.5rem;background:var(--paper)}.image-preview img{display:block;max-width:100%;max-height:420px;width:auto;height:auto;margin:.75rem auto 0;object-fit:contain;background:white}.image-preview figcaption{font-weight:800}.image-meta{font-size:13px;color:var(--muted);overflow-wrap:anywhere}.compress-result{margin-top:1.25rem;padding:1.25rem;border:1px solid var(--line);border-radius:.5rem;background:white}.compress-result p{margin:.4rem 0}.larger-notice{padding:.75rem;border-inline-start:3px solid #b55d00;background:#fff4d9;color:#715008}.compress-prose{max-width:800px;margin-top:3rem}@media(max-width:650px){.compress-options,.image-previews{grid-template-columns:minmax(0,1fr)}}
+  </style>
+</head>
+<body class="tools-page">
+  <a class="tools-skip" href="#workspace">Lewati ke kompresor gambar</a>
+  <header class="tools-header"><div class="tools-container tools-header-inner">
+    <a class="tools-brand" href="/" aria-label="Beranda Edwin Lab"><img src="/assets/edwinlab-logo.png" alt="" width="44" height="44">Edwin Lab</a>
+    <nav class="tools-nav" aria-label="Navigasi utama"><a href="/">Beranda</a><a href="/alat/">Alat Online</a></nav>
+  </div></header>
+  <main class="tools-container">
+    <nav class="tools-breadcrumb" aria-label="Jejak halaman"><ol><li><a href="/">Beranda</a></li><li aria-current="page">Kompres gambar</li></ol></nav>
+    <h1>Kompres Gambar</h1>
+    <p class="tools-intro">Kompres gambar JPG atau PNG menjadi JPEG atau WebP. Atur kualitas, bandingkan ukuran file, dan unduh hasil dengan pemrosesan lokal di browser.</p>
+    <noscript><p class="tools-status" data-kind="warning">Aktifkan JavaScript untuk memilih gambar dan mengompresnya. Batas file serta panduan format tetap tersedia di bawah.</p></noscript>
+
+    <section id="workspace" class="tools-workspace" aria-label="Kompres gambar">
+      <div class="compress-field">
+        <label for="image-file">Pilih satu gambar JPEG atau PNG</label>
+        <input id="image-file" type="file" accept="image/jpeg,image/png" aria-describedby="file-hint">
+        <p id="file-hint" class="tools-note">Maksimal 10 MiB, 12 juta piksel, dan 8192 px per sisi. Batas ukuran file menggunakan MiB (1 MiB = 1.048.576 byte); file diperiksa dari isi, bukan nama ekstensi.</p>
+        <p id="file-info" class="tools-note" aria-live="polite">Belum ada gambar dipilih.</p>
+      </div>
+      <div class="compress-options">
+        <div class="compress-field">
+          <label for="output-format">Format hasil</label>
+          <select id="output-format"><option value="jpeg">JPEG</option><option value="webp">WebP</option></select>
+          <p class="tools-note">JPEG mengisi area transparan PNG dengan latar putih. WebP hanya tersedia bila browser mendukung ekspor WebP.</p>
+        </div>
+        <div class="compress-field">
+          <label for="quality-input">Kualitas hasil</label>
+          <div class="quality-row"><input id="quality-input" type="range" min="60" max="95" step="1" value="80" aria-describedby="quality-hint"><output id="quality-value" for="quality-input">80%</output></div>
+          <p id="quality-hint" class="tools-note">Pilih bilangan bulat 60–95. Kualitas lebih tinggi dapat menghasilkan file lebih besar. Slider tidak mengompres otomatis.</p>
+        </div>
+      </div>
+      <div class="compress-actions">
+        <button class="tools-primary" type="button" id="compress-button" disabled>Kompres gambar</button>
+        <button type="button" id="example-button">Gunakan contoh</button>
+        <button type="button" id="clear-button">Bersihkan</button>
+        <button type="button" id="download-button" disabled>Unduh hasil</button>
+      </div>
+      <p class="tools-note">Nama file hasil mengikuti format pilihan. Foto baru dibuat dari bitmap browser; sebagian metadata atau profil warna dapat berubah dan tidak dijamin tetap utuh. File tidak diunggah oleh alat ini.</p>
+      <section id="result-card" class="compress-result" aria-label="Perbandingan gambar" hidden>
+        <h2>Perbandingan hasil</h2>
+        <div class="image-previews">
+          <figure class="image-preview"><figcaption>Gambar asli</figcaption><p id="original-meta" class="image-meta"></p><img id="original-preview" alt=""></figure>
+          <figure class="image-preview"><figcaption>Hasil kompresi</figcaption><p id="result-meta" class="image-meta"></p><img id="result-preview" alt=""></figure>
+        </div>
+        <p id="size-summary"></p>
+        <p id="size-change"></p>
+        <p id="larger-notice" class="larger-notice" hidden>Hasil lebih besar dari file asli. Coba kualitas lebih rendah atau gunakan file asli.</p>
+        <p class="tools-note">Ukuran byte di atas adalah ukuran file sebenarnya. KiB dan MiB memakai basis 1024. Dimensi piksel ditampilkan terpisah dari ukuran file.</p>
+      </section>
+      <p id="tool-status" class="tools-status" role="status" aria-live="polite" aria-atomic="true">Pilih satu file JPEG atau PNG untuk memulai.</p>
+    </section>
+
+    <article class="tools-prose compress-prose" aria-label="Panduan kompres gambar">
+      <section>
+        <h2>Cara menggunakan kompresor gambar</h2>
+        <ol><li>Pilih satu gambar JPEG atau PNG, atau muat contoh sintetis.</li><li>Pilih JPEG atau WebP dan atur kualitas 60–95.</li><li>Pilih Kompres gambar, bandingkan pratinjau serta ukuran, lalu unduh hasil jika sesuai.</li></ol>
+        <p>File dan foto diproses di browser tanpa diunggah ke layanan kompresi. Batas input adalah 10 MiB, maksimal 12 juta piksel, dan maksimal 8192 piksel pada setiap sisi. File hasil dibatasi 20 MiB.</p>
+      </section>
+      <section>
+        <h2>Ukuran file berbeda dari dimensi piksel</h2>
+        <p>Ukuran file diukur dalam byte dan memengaruhi kebutuhan penyimpanan atau transfer. Dimensi seperti 1200 × 800 px adalah jumlah piksel gambar dan tidak diubah oleh tool ini. Contoh hitung: file 100000 byte menjadi 60000 byte berarti turun 40000 byte atau 40%; itu hanya aritmetika contoh, bukan janji setiap gambar akan mengecil sebesar itu.</p>
+        <p>JPEG dan WebP menggunakan kompresi lossy; perubahan kualitas dapat mengubah detail atau tampilan. Jika hasil lebih besar, tool tetap menampilkan dan mengizinkan unduhan hasil tersebut, tetapi menyarankan untuk mencoba kualitas lebih rendah atau memakai file asli.</p>
+      </section>
+      <section>
+        <h2>Format dan transparansi</h2>
+        <p>JPEG tidak mendukung transparansi. Saat PNG diekspor sebagai JPEG, area transparan diisi putih. WebP dapat mempertahankan alpha jika encoder browser mendukungnya; bila format tersebut tidak tersedia, tool menampilkan error dan meminta Anda memilih JPEG, tanpa menyamarkan JPEG sebagai WebP.</p>
+        <p>Ukuran hasil encoder native dapat berbeda antar browser. Pengkodean ulang dapat mengubah metadata atau profil warna, dan tool tidak menjanjikan penghapusan metadata secara forensik.</p>
+      </section>
+      <section>
+        <h2>Pertanyaan umum</h2>
+        <h3>Apakah gambar saya diunggah?</h3><p>Tidak. File dibaca dan diproses di browser pada halaman ini; tool tidak mengirim gambar untuk dikompres. Aset halaman tetap dimuat dari host website.</p>
+        <h3>Apakah ukuran piksel berubah?</h3><p>Tidak. Dimensi bitmap hasil tetap sama dengan gambar yang dibaca browser, termasuk orientasi foto yang didukung.</p>
+        <h3>Mengapa file hasil bisa lebih besar?</h3><p>Ukuran dipengaruhi format sumber, konten, kualitas, dan encoder browser. Gambar yang sudah efisien atau sangat kecil dapat menghasilkan file yang lebih besar setelah dikodekan ulang.</p>
+        <h3>Bisakah saya menetapkan target 200 KB?</h3><p>Tidak pada versi ini. Tool menyediakan pengaturan kualitas 60–95 dan membandingkan ukuran hasil; ukuran target pasti tidak dijanjikan.</p>
+      </section>
+    </article>
+  <nav class="tools-related" aria-label="Alat terkait"><h2>Alat terkait</h2><ul><li><a href="/ubah-ukuran-foto/"><strong>Ubah Ukuran Foto</strong><span>Perkecil dimensi foto berdasarkan lebar, tinggi, atau persentase.</span></a></li></ul></nav>
+  </main>
+  <footer class="tools-footer"><div class="tools-container"><span>Edwin Lab · Alat sehari-hari</span><a href="/">Tentang Edwin</a></div></footer>
+  <script type="module" src="./tool.js"></script>
+</body>
+</html>

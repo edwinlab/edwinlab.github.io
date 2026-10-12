@@ -1,0 +1,119 @@
+<!doctype html>
+<html lang="id">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Kalkulator Persen: Hitung Persentase dan Perubahan | Edwin Lab</title>
+  <meta name="description" content="Hitung persen dari angka, cari A berapa persen dari B, atau ukur kenaikan dan penurunan persen. Lihat rumus dan contoh dengan input desimal koma atau titik.">
+  <link rel="canonical" href="https://edwinlab.dev/kalkulator-persen/">
+  <meta property="og:type" content="website">
+  <meta property="og:title" content="Kalkulator Persen: Hitung Persentase dan Perubahan | Edwin Lab">
+  <meta property="og:description" content="Hitung persen dari angka, cari A berapa persen dari B, atau ukur kenaikan dan penurunan persen dengan rumus yang terlihat.">
+  <meta property="og:url" content="https://edwinlab.dev/kalkulator-persen/">
+  <meta property="og:image" content="https://edwinlab.dev/assets/edwinlab-logo.png">
+  <meta name="twitter:card" content="summary">
+  <link rel="icon" href="/assets/edwinlab-logo.png" type="image/png">
+  <link rel="stylesheet" href="/tools/shared/tools.css">
+  <link rel="stylesheet" href="/tools/everyday-links.css">
+  <style>
+    .percent-mode { max-width:34rem; margin-bottom:1.25rem; }
+    .percent-fields { display:grid; grid-template-columns:minmax(0,1fr) minmax(0,1fr); gap:1rem; padding:1rem; border:1px solid var(--line); border-radius:.5rem; }
+    .percent-fields legend { padding-inline:.4rem; font-weight:700; }
+    .percent-field { min-width:0; }
+    .percent-field input { width:100%; }
+    .percent-actions { display:flex; flex-wrap:wrap; gap:.75rem; margin-top:1rem; }
+    .percent-result { margin-top:1.5rem; padding:1.25rem; border:1px solid var(--line); border-radius:.5rem; background:var(--paper); }
+    .percent-result-value { display:block; margin:.35rem 0; font-size:clamp(1.75rem,5vw,2.75rem); line-height:1.2; font-weight:800; overflow-wrap:anywhere; }
+    .percent-detail { display:grid; gap:.35rem; margin-block:1rem; }
+    .percent-detail p { margin:0; overflow-wrap:anywhere; }
+    .percent-formula { font-family:'DM Mono',monospace; font-size:.9rem; }
+    .percent-rounding { color:var(--muted); font-size:.875rem; }
+    .percent-examples { min-width:600px; }
+    @media(max-width:600px) { .percent-fields { grid-template-columns:minmax(0,1fr); } }
+  </style>
+</head>
+<body class="tools-page">
+  <a class="tools-skip" href="#workspace">Lewati ke kalkulator</a>
+  <header class="tools-header"><div class="tools-container tools-header-inner">
+    <a class="tools-brand" href="/" aria-label="Beranda Edwin Lab"><img src="/assets/edwinlab-logo.png" alt="" width="44" height="44">Edwin Lab</a>
+    <nav class="tools-nav" aria-label="Navigasi utama"><a href="/">Beranda</a><a href="/alat/">Alat Online</a></nav>
+  </div></header>
+  <main class="tools-container">
+    <nav class="tools-breadcrumb" aria-label="Jejak halaman"><ol><li><a href="/">Beranda</a></li><li aria-current="page">Kalkulator persen</li></ol></nav>
+    <h1>Kalkulator Persen</h1>
+    <p class="tools-intro">Pilih jenis perhitungan persen, masukkan dua angka, lalu lihat hasil dan rumusnya. Gunakan koma atau titik untuk angka desimal.</p>
+    <noscript><p class="tools-status" data-kind="warning">Aktifkan JavaScript untuk menghitung. Rumus, contoh, dan panduan tetap tersedia di bawah.</p></noscript>
+
+    <section id="workspace" class="tools-workspace" aria-label="Kalkulator persen">
+      <div class="percent-mode">
+        <label for="percent-mode">Jenis perhitungan</label>
+        <select id="percent-mode">
+          <option value="portion">P persen dari N</option>
+          <option value="ratio">A berapa persen dari B</option>
+          <option value="change">Perubahan persen dari nilai awal ke akhir</option>
+        </select>
+      </div>
+      <fieldset class="percent-fields">
+        <legend id="fields-legend">Masukkan angka untuk rumus</legend>
+        <div class="percent-field">
+          <label for="first-value" id="first-label">Persentase P (%)</label>
+          <input type="text" id="first-value" inputmode="decimal" autocomplete="off" aria-describedby="input-hint">
+        </div>
+        <div class="percent-field">
+          <label for="second-value" id="second-label">Nilai N</label>
+          <input type="text" id="second-value" inputmode="decimal" autocomplete="off" aria-describedby="input-hint">
+        </div>
+      </fieldset>
+      <p id="input-hint" class="tools-note">Gunakan 12,5 atau 12.5; tanpa pemisah ribuan. Maksimum 64 karakter dan nilai absolut 1.000.000.000.000; hingga enam digit desimal. Angka dihitung langsung di browser.</p>
+      <p id="mode-note" class="tools-note">Rumus: P × N ÷ 100. P boleh negatif atau lebih besar dari 100.</p>
+      <div class="percent-actions">
+        <button class="tools-primary" type="button" id="calculate-button">Hitung</button>
+        <button type="button" id="example-button">Isi contoh</button>
+        <button type="button" id="clear-button">Bersihkan</button>
+        <button type="button" id="copy-button" disabled>Salin hasil</button>
+      </div>
+      <section id="result-card" class="percent-result" aria-labelledby="result-heading" hidden>
+        <h2 id="result-heading">Hasil perhitungan</h2>
+        <span id="result-value" class="percent-result-value"></span>
+        <p id="result-meaning"></p>
+        <div class="percent-detail">
+          <p><strong>Nilai yang dihitung:</strong> <span id="result-inputs"></span></p>
+          <p><strong>Rumus:</strong> <span id="result-formula" class="percent-formula"></span></p>
+          <p id="rounding-note" class="percent-rounding" hidden>Dibulatkan hingga 6 angka desimal.</p>
+        </div>
+      </section>
+      <p id="tool-status" class="tools-status" role="status" aria-live="polite" aria-atomic="true">Masukkan dua angka untuk memulai.</p>
+    </section>
+
+    <article class="tools-prose" aria-label="Panduan menghitung persen">
+      <section>
+        <h2>Cara memakai kalkulator persen</h2>
+        <ol><li>Pilih jenis perhitungan yang ingin dilakukan.</li><li>Masukkan dua angka dengan koma atau titik untuk desimal, tanpa pemisah ribuan.</li><li>Pilih <strong>Hitung</strong> untuk melihat hasil dan rumus; salin hasil jika diperlukan.</li></ol>
+      </section>
+      <section>
+        <h2>Tiga rumus persentase</h2>
+        <div class="tools-table-wrap"><table class="percent-examples">
+          <thead><tr><th scope="col">Perhitungan</th><th scope="col">Rumus</th><th scope="col">Contoh</th></tr></thead>
+          <tbody>
+            <tr><td>P persen dari N</td><td>P × N ÷ 100</td><td>20% dari 150 = 30</td></tr>
+            <tr><td>A berapa persen dari B</td><td>A ÷ B × 100</td><td>45 dari 180 = 25%</td></tr>
+            <tr><td>Perubahan persen</td><td>(akhir − awal) ÷ awal × 100</td><td>80 ke 100 = naik 25%</td></tr>
+          </tbody>
+        </table></div>
+        <p>Perubahan dihitung terhadap nilai awal. Jadi 100 ke 80 adalah turun 20%, bukan 25%, karena penyebutnya 100. Mode perubahan persen hanya menerima nilai awal positif. Mode perbandingan mengizinkan nilai B negatif; hasil bertanda mengikuti rumus dan bukan peluang.</p>
+        <p>Nilai absolut setiap input paling besar 1.000.000.000.000 dengan hingga enam digit pecahan. Koma dan titik sama-sama menjadi tanda desimal: <code>1,000</code> berarti satu dengan tiga digit desimal, bukan seribu. Input dan perhitungan dilakukan di browser, tanpa dikirim ke server.</p>
+      </section>
+      <section>
+        <h2>Pertanyaan umum</h2>
+        <h3>Mengapa persen naik dan turun tidak selalu sama?</h3><p>Persentase perubahan menggunakan nilai awal sebagai penyebut. Ketika nilai awal berbeda, perubahan yang sama besar menghasilkan persentase berbeda.</p>
+        <h3>Bisakah menggunakan koma desimal?</h3><p>Bisa. Gunakan satu koma atau titik untuk desimal, misalnya 12,5 atau 12.5. Jangan gunakan pemisah ribuan.</p>
+        <h3>Mengapa nilai awal nol atau negatif ditolak pada perubahan persen?</h3><p>Mode ini menetapkan nilai awal positif sebagai basis agar arah perubahan dan penyebutnya memiliki arti yang jelas.</p>
+        <h3>Apa arti simbol ≈?</h3><p>Hasil rasional dibulatkan hingga paling banyak enam angka desimal; simbol ≈ menandai bahwa tampilannya merupakan perkiraan.</p>
+      </section>
+    </article>
+  <nav class="tools-related" aria-label="Alat terkait"><h2>Alat terkait</h2><ul><li><a href="/kalkulator-diskon/"><strong>Kalkulator Diskon</strong><span>Hitung harga setelah diskon dan bandingkan diskon bertingkat.</span></a></li></ul></nav>
+  </main>
+  <footer class="tools-footer"><div class="tools-container"><span>Edwin Lab · Alat sehari-hari</span><a href="/">Tentang Edwin</a></div></footer>
+  <script type="module" src="./tool.js"></script>
+</body>
+</html>

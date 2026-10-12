@@ -1,0 +1,89 @@
+<!doctype html>
+<html lang="id">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Pembuat QR Code Gratis untuk Link dan Teks | Edwin Lab</title>
+  <meta name="description" content="Buat QR code statis dari link website atau teks dan unduh sebagai PNG. Tanpa akun, dengan pemrosesan langsung di browser.">
+  <link rel="canonical" href="https://edwinlab.dev/pembuat-qr-code/">
+  <meta property="og:type" content="website">
+  <meta property="og:title" content="Pembuat QR Code Gratis untuk Link dan Teks | Edwin Lab">
+  <meta property="og:description" content="Buat QR code statis hitam putih dari link website atau teks, lalu unduh sebagai PNG.">
+  <meta property="og:url" content="https://edwinlab.dev/pembuat-qr-code/">
+  <meta property="og:image" content="https://edwinlab.dev/assets/edwinlab-logo.png">
+  <meta name="twitter:card" content="summary">
+  <link rel="icon" href="/assets/edwinlab-logo.png" type="image/png">
+  <link rel="stylesheet" href="/tools/shared/tools.css">
+  <link rel="stylesheet" href="/tools/everyday-links.css">
+  <style>
+    .qr-mode{display:flex;flex-wrap:wrap;gap:1rem;margin-bottom:1rem}.qr-mode label{display:inline-flex;align-items:center;gap:.55rem;margin:0;font-weight:600}.qr-mode input{width:1.15rem;height:1.15rem;min-height:auto;margin:0;accent-color:var(--accent)}.qr-input{width:100%;min-height:140px;white-space:pre-wrap;resize:vertical}.qr-actions{display:flex;flex-wrap:wrap;gap:.75rem;margin-top:1rem}.qr-result{display:grid;justify-items:center;gap:1rem;margin-top:1.5rem;padding:1rem;border:1px solid var(--line);border-radius:.5rem;background:var(--paper);min-width:0}.qr-result canvas{display:block;width:auto;max-width:100%;height:auto;image-rendering:pixelated;background:#fff}.qr-output{width:100%;min-height:92px;background:white!important;font:13px/1.5 'DM Mono',monospace;white-space:pre-wrap;overflow-wrap:anywhere}.qr-prose{max-width:800px;margin-top:3rem}@media(max-width:560px){.qr-result{padding:.75rem}}
+  </style>
+</head>
+<body class="tools-page">
+  <a class="tools-skip" href="#workspace">Lewati ke pembuat QR</a>
+  <header class="tools-header"><div class="tools-container tools-header-inner">
+    <a class="tools-brand" href="/" aria-label="Beranda Edwin Lab"><img src="/assets/edwinlab-logo.png" alt="" width="44" height="44">Edwin Lab</a>
+    <nav class="tools-nav" aria-label="Navigasi utama"><a href="/">Beranda</a><a href="/alat/">Alat Online</a></nav>
+  </div></header>
+  <main class="tools-container">
+    <nav class="tools-breadcrumb" aria-label="Jejak halaman"><ol><li><a href="/">Beranda</a></li><li aria-current="page">Pembuat QR Code</li></ol></nav>
+    <h1>Pembuat QR Code</h1>
+    <p class="tools-intro">Buat QR code statis dari link website atau teks, lalu unduh sebagai gambar PNG. Isi QR diproses di browser; tidak dikirim ke layanan pembuat QR.</p>
+    <noscript><p class="tools-status" data-kind="warning">Aktifkan JavaScript untuk membuat dan mengunduh QR. Panduan, contoh, dan batas input tetap tersedia di bawah.</p></noscript>
+
+    <section id="workspace" class="tools-workspace" aria-label="Pembuat QR code">
+      <fieldset class="qr-mode" aria-describedby="mode-hint">
+        <legend>Pilih isi QR</legend>
+        <label><input type="radio" name="payload-mode" value="url" checked> Tautan website</label>
+        <label><input type="radio" name="payload-mode" value="text"> Teks</label>
+      </fieldset>
+      <p id="mode-hint" class="tools-note">Mode tautan hanya menerima URL http:// atau https:// dengan host yang valid, tanpa username atau password.</p>
+      <label for="payload-input">Tautan website untuk QR</label>
+      <textarea id="payload-input" class="qr-input" rows="5" aria-label="Tautan website untuk QR" aria-describedby="payload-hint byte-count"></textarea>
+      <p id="payload-hint" class="tools-note">Maksimal 1000 byte UTF-8. Jumlah byte berbeda dari jumlah karakter; emoji biasanya memakai beberapa byte. Teks dipertahankan apa adanya; spasi tepi pada URL dihapus.</p>
+      <p id="byte-count" class="tools-note" aria-live="polite">0/1000 byte UTF-8</p>
+      <div class="qr-actions">
+        <button class="tools-primary" type="button" id="create-button">Buat QR</button>
+        <button type="button" id="example-button">Isi contoh</button>
+        <button type="button" id="clear-button">Bersihkan</button>
+        <button type="button" id="download-button" disabled>Unduh PNG</button>
+      </div>
+      <section id="result-card" class="qr-result" aria-label="Hasil QR code" hidden>
+        <h2>QR code siap</h2>
+        <canvas id="qr-canvas" width="0" height="0" role="img"></canvas>
+        <div class="qr-output-wrap">
+          <label for="payload-output">Isi QR sebagai teks</label>
+          <textarea id="payload-output" class="qr-output" readonly spellcheck="false"></textarea>
+        </div>
+        <p class="tools-note">QR ini statis dan tidak memiliki masa berlaku bawaan. Tujuan tautan dapat berubah atau tidak tersedia. Uji hasil dengan kamera sebelum dicetak; QR yang padat belum tentu terbaca oleh semua kamera.</p>
+      </section>
+      <p id="tool-status" class="tools-status" role="status" aria-live="polite" aria-atomic="true">Pilih mode dan masukkan tautan atau teks untuk memulai.</p>
+    </section>
+
+    <article class="tools-prose qr-prose" aria-label="Panduan membuat QR code">
+      <section>
+        <h2>Cara membuat QR code</h2>
+        <ol><li>Pilih Tautan website atau Teks.</li><li>Masukkan isi yang ingin disematkan. Contoh tautan: <code>https://edwinlab.dev/</code>.</li><li>Pilih Buat QR, lalu unduh PNG dan uji file sebelum dicetak atau dibagikan.</li></ol>
+        <p>Mode tautan menerima alamat yang diawali <code>http://</code> atau <code>https://</code> dan memiliki host. Mode teks dapat menyimpan kalimat, emoji, atau beberapa baris. Input dibatasi 1000 byte UTF-8, bukan 1000 karakter; karakter Unicode tertentu memakai lebih dari satu byte.</p>
+      </section>
+      <section>
+        <h2>QR statis dan pencetakan</h2>
+        <p>QR statis menyimpan isi yang sama sampai QR baru dibuat. Jika berisi alamat website, perubahan alamat atau server tujuan dapat membuat tautan lama tidak tersedia; QR yang sudah dicetak tidak bisa mengganti tujuan dengan sendirinya. Gambar memakai hitam, putih, dan ruang putih standar di sekeliling pola. Jangan memotong ruang putih saat tata letak poster, dan selalu uji hasil cetak dari jarak serta kamera yang akan digunakan.</p>
+      </section>
+      <section>
+        <h2>Pertanyaan umum</h2>
+        <h3>Apakah QR code ini kedaluwarsa?</h3><p>Tidak ada masa berlaku bawaan pada gambar QR statis. Ketersediaan kontennya mengikuti isi QR; untuk URL, situs tujuan masih harus aktif.</p>
+        <h3>Bisa mengubah tujuan setelah dicetak?</h3><p>Tidak. Isi QR statis tidak berubah. Buat dan cetak QR baru bila tujuan berubah.</p>
+        <h3>Apakah input diunggah?</h3><p>Generator membuat pola dan PNG di browser. Input tidak dikirim ke layanan QR. Halaman dan library lokal tetap dimuat dari host website.</p>
+        <h3>Mengapa QR perlu ruang putih?</h3><p>Ruang putih di sekeliling pola membantu pemindai mengenali batas QR. Jangan memangkas area tersebut saat mencetak.</p>
+        <h3>Apakah semua kamera dapat membaca setiap QR?</h3><p>Tidak dijamin. Teks yang lebih panjang menghasilkan pola lebih padat. Uji file dan ukuran cetak sebelum membagikannya.</p>
+      </section>
+      <section><h2>Alat terkait</h2><p>Buat <a href="/link-whatsapp/">link WhatsApp</a> dengan nomor seluler Indonesia dan pesan awal sebelum mengubahnya menjadi QR.</p></section>
+    </article>
+  <nav class="tools-related" aria-label="Alat terkait"><h2>Alat terkait</h2><ul><li><a href="/link-whatsapp/"><strong>Pembuat Link WhatsApp</strong><span>Buat tautan wa.me untuk nomor Indonesia dengan pesan awal.</span></a></li></ul></nav>
+  </main>
+  <footer class="tools-footer"><div class="tools-container"><span>Edwin Lab · Alat sehari-hari</span><a href="/">Tentang Edwin</a></div></footer>
+  <script src="/everyday/vendor/qrcode-generator/2.0.4/qrcode.js"></script>
+  <script type="module" src="./tool.js"></script>
+</body>
+</html>

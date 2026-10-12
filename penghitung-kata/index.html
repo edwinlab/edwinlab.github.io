@@ -1,0 +1,102 @@
+<!doctype html>
+<html lang="id">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Penghitung Kata dan Karakter Online | Edwin Lab</title>
+  <meta name="description" content="Hitung kata, karakter, baris, paragraf, dan perkiraan waktu baca teks. Atur kecepatan baca dan proses teks langsung di browser tanpa unggah dokumen.">
+  <link rel="canonical" href="https://edwinlab.dev/penghitung-kata/">
+  <meta property="og:type" content="website">
+  <meta property="og:title" content="Penghitung Kata dan Karakter Online | Edwin Lab">
+  <meta property="og:description" content="Hitung kata, karakter, baris, paragraf, dan perkiraan waktu baca teks langsung di browser.">
+  <meta property="og:url" content="https://edwinlab.dev/penghitung-kata/">
+  <meta property="og:image" content="https://edwinlab.dev/assets/edwinlab-logo.png">
+  <link rel="icon" href="/assets/edwinlab-logo.png" type="image/png">
+  <link rel="stylesheet" href="/tools/shared/tools.css">
+  <link rel="stylesheet" href="/tools/everyday-links.css">
+  <style>
+    .word-form { display:grid; gap:1rem; }
+    .word-form textarea { min-height:12rem; resize:vertical; }
+    .word-options { max-width:18rem; }
+    .word-actions { display:flex; flex-wrap:wrap; gap:.65rem; }
+    .word-results { display:grid; grid-template-columns:repeat(auto-fit,minmax(min(100%,10rem),1fr)); gap:.75rem; margin-block:1.25rem; }
+    .word-stat { padding:1rem; border:1px solid var(--border,#d8dee8); border-radius:.75rem; }
+    .word-stat dt { font-size:.9rem; }
+    .word-stat dd { margin:.35rem 0 0; font-size:1.4rem; font-weight:700; overflow-wrap:anywhere; }
+    .word-copy { width:100%; min-height:5rem; }
+    .word-note { color:var(--muted,#505866); }
+    @media (max-width: 480px) { .word-actions > button { flex:1 1 8rem; } }
+  </style>
+</head>
+<body class="tools-page">
+  <a class="tools-skip" href="#main">Lewati ke alat</a>
+  <header class="tools-header"><div class="tools-container tools-header-inner">
+    <a class="tools-brand" href="/" aria-label="Beranda Edwin Lab"><img src="/assets/edwinlab-logo.png" width="44" height="44" alt="">Edwin Lab</a>
+    <nav class="tools-nav" aria-label="Navigasi utama"><a href="/">Beranda</a><a href="/alat/">Alat Online</a></nav>
+  </div>
+  </header>
+  <main id="main" class="tools-container">
+    <nav class="tools-breadcrumb" aria-label="Jejak halaman"><ol><li><a href="/">Beranda</a></li><li aria-current="page">Penghitung kata</li></ol></nav>
+    <header class="page-heading">
+      <h1>Penghitung Kata dan Karakter</h1>
+      <p class="tools-intro">Tempel tulisan untuk melihat jumlah kata dan karakter, lalu perkirakan waktu bacanya dengan kecepatan yang Anda pilih.</p>
+    </header>
+
+    <section class="tools-workspace" aria-labelledby="form-title">
+      <h2 id="form-title">Hitung teks Anda</h2>
+      <form id="word-form" class="word-form" novalidate>
+        <div>
+          <label for="source-text">Teks yang ingin dihitung</label>
+          <textarea id="source-text" name="text" maxlength="400000" aria-describedby="input-help" placeholder="Tempel atau ketik teks di sini…"></textarea>
+          <p id="input-help" class="tools-note">Maksimum 100.000 Unicode code points dan 400.000 byte UTF-8. Teks dihitung di browser Anda.</p>
+        </div>
+        <div class="word-options">
+          <label for="reading-rate">Kecepatan baca (kata per menit)</label>
+          <input id="reading-rate" name="rate" type="text" inputmode="numeric" value="200" maxlength="8" aria-describedby="rate-help">
+          <p id="rate-help" class="tools-note">Masukkan bilangan bulat 50–1.000. Nilai awal 200 adalah parameter alat, bukan kecepatan semua pembaca.</p>
+        </div>
+        <div class="word-actions">
+          <button type="submit" id="count-button" class="tools-primary">Hitung</button>
+          <button type="button" id="example-button">Isi contoh</button>
+          <button type="button" id="clear-button" class="secondary">Bersihkan</button>
+        </div>
+      </form>
+      <p id="tool-status" class="tools-status" aria-live="polite" aria-atomic="true"></p>
+      <section id="results" aria-labelledby="results-title" hidden>
+        <h2 id="results-title">Hasil hitung</h2>
+        <dl class="word-results">
+          <div class="word-stat"><dt>Kata</dt><dd id="result-words">0</dd></div>
+          <div class="word-stat"><dt>Karakter</dt><dd id="result-characters">0</dd></div>
+          <div class="word-stat"><dt>Karakter tanpa spasi, tab, dan baris baru</dt><dd id="result-no-whitespace">0</dd></div>
+          <div class="word-stat"><dt>Baris</dt><dd id="result-lines">0</dd></div>
+          <div class="word-stat"><dt>Paragraf</dt><dd id="result-paragraphs">0</dd></div>
+          <div class="word-stat"><dt>Perkiraan waktu baca</dt><dd id="result-time">0 detik</dd><small id="result-rate">Pada 200 kata/menit</small></div>
+        </dl>
+        <label for="copy-summary">Ringkasan hasil</label>
+        <textarea id="copy-summary" class="word-copy" readonly rows="8" aria-label="Ringkasan hasil yang dapat diseleksi"></textarea>
+        <button type="button" id="copy-button" disabled>Salin ringkasan</button>
+      </section>
+      <noscript><p>Aktifkan JavaScript untuk menghitung teks. Artikel dan panduan di bawah tetap dapat dibaca.</p></noscript>
+    </section>
+
+    <article class="tools-prose">
+      <h2>Cara menggunakan penghitung kata</h2>
+      <ol><li>Tempel atau ketik teks di kotak.</li><li>Pilih kecepatan baca antara 50 dan 1.000 kata per menit.</li><li>Pilih <strong>Hitung</strong> untuk melihat enam hasil, lalu salin ringkasannya bila diperlukan.</li></ol>
+      <h2>Apa yang dihitung?</h2>
+      <p>Kata mengikuti segmentasi teks Bahasa Indonesia yang tersedia di browser; segmen kata dan angka dihitung, sementara tanda baca atau emoji saja tidak. Pemisahan kata majemuk, singkatan, dan bahasa lain bisa berbeda antarversi browser, jadi hasilnya tidak dijanjikan sama dengan Word atau aplikasi lain.</p>
+      <p>Karakter berarti grapheme cluster yang biasanya dirasakan sebagai satu karakter. Karakter tanpa spasi, tab, dan baris baru mengecualikan grapheme yang seluruhnya cocok dengan definisi whitespace JavaScript. Tanda baca dan emoji tetap dihitung. Baris kosong terakhir setelah baris baru tetap dihitung sebagai baris; paragraf adalah kelompok baris nonblank.</p>
+      <p>Perkiraan waktu baca memakai rumus jumlah kata dibagi laju pilihan, dibulatkan ke detik berikutnya. Contohnya, 401 kata pada 200 kata per menit menjadi 2 menit 1 detik. Angka 200 adalah nilai awal alat, bukan klaim tentang kecepatan setiap pembaca.</p>
+      <h3>Contoh singkat</h3>
+      <p><code>Halo dunia!</code> berisi 2 kata dan 11 karakter. Batas masukan adalah 100.000 Unicode code points dan 400.000 byte UTF-8; tepat batas masih dapat dihitung.</p>
+      <h2>Pertanyaan umum</h2>
+      <h3>Apakah emoji dihitung sebagai karakter?</h3><p>Ya. Satu grapheme dapat tersusun dari beberapa code points, seperti emoji keluarga, dan dihitung sebagai satu karakter.</p>
+      <h3>Mengapa jumlah kata berbeda dari aplikasi lain?</h3><p>Aturan segmentasi browser dan data Unicode dapat berbeda. Tool ini memakai segmentasi kata browser untuk locale Indonesia, bukan meniru aplikasi tertentu.</p>
+      <h3>Apakah waktu baca pasti?</h3><p>Tidak. Ini perkiraan berdasarkan jumlah kata dan laju yang Anda pilih.</p>
+      <h3>Apakah teks diunggah?</h3><p>Tidak. Penghitungan dilakukan di browser dan tool tidak mengirim teks ke server.</p>
+    </article>
+  <nav class="tools-related" aria-label="Alat terkait"><h2>Alat terkait</h2><ul><li><a href="/ubah-huruf/"><strong>Ubah Huruf Besar dan Kecil</strong><span>Ubah teks menjadi huruf besar, kecil, atau kapital awal kata.</span></a></li></ul></nav>
+  </main>
+  <footer class="tools-footer"><div class="tools-container"><span>Edwin Lab · Alat sehari-hari</span><a href="/">Tentang Edwin</a></div></footer>
+  <script type="module" src="./tool.js"></script>
+</body>
+</html>

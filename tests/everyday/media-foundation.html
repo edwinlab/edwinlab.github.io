@@ -1,0 +1,28 @@
+<!doctype html>
+<html lang="id">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <meta name="robots" content="noindex,nofollow">
+  <title>Tes fondasi media | Edwin Lab</title>
+  <link rel="icon" href="/favicon/favicon.ico">
+  <link rel="stylesheet" href="/tools/shared/tools.css">
+</head>
+<body class="tools-page">
+  <main class="tools-container">
+    <h1>Tes fondasi media</h1>
+    <p>Fixture JPEG dan PNG sintetis, QR didekode library independen, dan PDF dibuat serta dimuat ulang oleh worker browser.</p>
+    <p class="tools-status" data-test-summary data-kind="idle" data-state="running" role="status" aria-live="polite">Tes sedang dimuat…</p>
+    <ol class="tests-list" data-test-results></ol>
+    <section class="tools-prose">
+      <h2>Pemeriksaan manual</h2>
+      <p>Setelah task media tersedia, verifikasi halaman dari URL langsung pada lebar 320, 390, 768, dan 1440 piksel. Coba pilih, ganti, bersihkan, pratinjau, dan unduh file. Runner ini sendiri tidak mengunggah gambar. IAB dapat memvalidasi byte dan struktur PDF, tetapi PDF smoke perlu dibuka di viewer yang benar-benar merender halaman.</p>
+      <p><a href="./index.html">Daftar tes</a> · <a href="/">Beranda</a></p>
+    </section>
+  </main>
+  <script src="/everyday/vendor/qrcode-generator/2.0.4/qrcode.js"></script>
+  <script src="/everyday/vendor/pdf-lib/1.17.1/pdf-lib.min.js"></script>
+  <script src="./vendor/jsqr/1.4.0/jsQR.js"></script>
+  <script type="module" src="./media-foundation.test.js"></script>
+</body>
+</html>

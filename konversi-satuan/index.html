@@ -1,0 +1,71 @@
+<!doctype html>
+<html lang="id">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Konversi Satuan Panjang, Berat, Suhu, Luas &amp; Volume | Edwin Lab</title>
+  <meta name="description" content="Ubah cm ke meter, gram ke kilogram, Celsius ke Fahrenheit, hektare ke m², dan liter ke m³. Pilih satuan dan lihat hasil beserta aturan konversinya.">
+  <link rel="canonical" href="https://edwinlab.dev/konversi-satuan/">
+  <meta property="og:type" content="website">
+  <meta property="og:title" content="Konversi Satuan Panjang, Berat, Suhu, Luas &amp; Volume | Edwin Lab">
+  <meta property="og:description" content="Konversi panjang, massa, suhu, luas, dan volume. Masukkan nilai desimal dan lihat hasil serta rumusnya.">
+  <meta property="og:url" content="https://edwinlab.dev/konversi-satuan/">
+  <meta property="og:image" content="https://edwinlab.dev/assets/edwinlab-logo.png">
+  <meta name="twitter:card" content="summary">
+  <link rel="icon" href="/assets/edwinlab-logo.png" type="image/png">
+  <link rel="stylesheet" href="/tools/shared/tools.css">
+  <link rel="stylesheet" href="/tools/everyday-links.css">
+  <style>
+    .convert-fields{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:1rem}.convert-field{min-width:0}.convert-field input,.convert-field select{width:100%}.convert-actions{display:flex;flex-wrap:wrap;gap:.75rem;margin-top:1rem}.convert-result{margin-top:1.25rem;padding:1.25rem;border:1px solid var(--line);border-radius:.5rem;background:var(--paper)}.convert-value{display:block;margin:.4rem 0;font-size:clamp(1.7rem,5vw,2.6rem);line-height:1.25;font-weight:800;overflow-wrap:anywhere}.convert-formula{padding:12px;background:white;border-radius:.4rem;overflow-wrap:anywhere}.convert-summary{display:block;width:100%;min-height:110px;margin-top:1rem;padding:12px;background:white;font:14px/1.6 'DM Mono',monospace;resize:vertical}.convert-prose{max-width:860px;margin-top:3rem}.unit-list{columns:2;column-gap:2rem}.unit-list li{break-inside:avoid}@media(max-width:560px){.convert-fields{grid-template-columns:minmax(0,1fr)}.unit-list{columns:1}}
+  </style>
+</head>
+<body class="tools-page">
+  <a class="tools-skip" href="#workspace">Lewati ke konversi</a>
+  <header class="tools-header"><div class="tools-container tools-header-inner">
+    <a class="tools-brand" href="/" aria-label="Beranda Edwin Lab"><img src="/assets/edwinlab-logo.png" alt="" width="44" height="44">Edwin Lab</a>
+    <nav class="tools-nav" aria-label="Navigasi utama"><a href="/">Beranda</a><a href="/alat/">Alat Online</a></nav>
+  </div></header>
+  <main class="tools-container">
+    <nav class="tools-breadcrumb" aria-label="Jejak halaman"><ol><li><a href="/">Beranda</a></li><li aria-current="page">Konversi satuan</li></ol></nav>
+    <h1>Konversi Satuan</h1>
+    <p class="tools-intro">Pilih kategori dan dua satuan untuk mengubah nilai panjang, massa, suhu, luas, atau volume. Masukkan desimal dengan koma atau titik tanpa pemisah ribuan.</p>
+    <noscript><p class="tools-status" data-kind="warning">Aktifkan JavaScript untuk mengonversi. Daftar satuan, contoh, rumus, dan panduan tetap tersedia di bawah.</p></noscript>
+
+    <section id="workspace" class="tools-workspace" aria-label="Konversi satuan">
+      <div class="convert-fields">
+        <div class="convert-field"><label for="category-select">Kategori</label><select id="category-select"><option value="length">Panjang</option><option value="mass">Massa (berat)</option><option value="temperature">Suhu</option><option value="area">Luas</option><option value="volume">Volume</option></select></div>
+        <div class="convert-field"><label for="value-input">Nilai</label><input id="value-input" type="text" inputmode="decimal" maxlength="24" autocomplete="off" aria-describedby="input-hint"></div>
+        <div class="convert-field"><label for="from-select">Dari satuan</label><select id="from-select"><option value="cm">Sentimeter (cm)</option><option value="m">Meter (m)</option></select></div>
+        <div class="convert-field"><label for="to-select">Ke satuan</label><select id="to-select"><option value="cm">Sentimeter (cm)</option><option value="m" selected>Meter (m)</option></select></div>
+      </div>
+      <p id="input-hint" class="tools-note">Contoh desimal: 1,5 atau 1.5. Tulis 1000 tanpa pemisah ribuan. Maksimal 9 digit integer, 6 digit desimal, dan 24 karakter.</p>
+      <p id="category-note" class="tools-note">Masukkan nilai panjang. Hasil memakai faktor internasional dan maksimal 12 digit signifikan; angka sangat kecil atau besar dapat memakai notasi e.</p>
+      <div class="convert-actions"><button class="tools-primary" type="button" id="convert-button">Konversi</button><button type="button" id="swap-button">Tukar satuan</button><button type="button" id="example-button">Isi contoh</button><button type="button" id="clear-button">Bersihkan</button><button type="button" id="copy-button" disabled>Salin hasil</button></div>
+      <section id="result-card" class="convert-result" aria-labelledby="result-heading" hidden><h2 id="result-heading">Hasil konversi</h2><span id="result-value" class="convert-value"></span><p id="result-formula" class="convert-formula"></p><label for="copy-output">Ringkasan yang dapat dipilih untuk disalin</label><textarea id="copy-output" class="convert-summary" readonly spellcheck="false"></textarea></section>
+      <p id="tool-status" class="tools-status" role="status" aria-live="polite" aria-atomic="true">Masukkan nilai, pilih satuan, lalu konversi.</p>
+    </section>
+
+    <article class="tools-prose convert-prose" aria-label="Panduan konversi satuan">
+      <section><h2>Cara memakai konverter</h2><ol><li>Pilih kategori satuan.</li><li>Masukkan angka bulat atau desimal, lalu pilih satuan asal dan tujuan.</li><li>Pilih Konversi untuk melihat hasil dan rumus ringkas.</li></ol><p>Contoh: 2,5 km = 2500 m; 1 ha = 10000 m²; 0 °C = 32 °F. Gunakan koma atau titik sebagai tanda desimal. Jangan memakai pemisah ribuan.</p><p>Hasil ditampilkan hingga 12 digit signifikan dengan presisi angka JavaScript. Ini bukan alat untuk metrologi atau pengukuran presisi tinggi. Notasi seperti 1e-16 menyatakan 1 × 10⁻¹⁶.</p></section>
+      <section><h2>Daftar satuan yang tersedia</h2>
+        <h3>Panjang (dasar meter)</h3><ul class="unit-list"><li>Milimeter (mm)</li><li>Sentimeter (cm)</li><li>Meter (m)</li><li>Kilometer (km)</li><li>Inci (in)</li><li>Kaki internasional (ft)</li><li>Yard (yd)</li><li>Mil internasional (mi)</li></ul>
+        <h3>Massa (berat, dasar kilogram)</h3><ul class="unit-list"><li>Miligram (mg)</li><li>Gram (g)</li><li>Kilogram (kg)</li><li>Ton metrik (t)</li><li>Pound avoirdupois (lb)</li><li>Ounce avoirdupois (oz)</li></ul><p>Ounce di sini adalah satuan massa avoirdupois, bukan ons Indonesia 100 gram, troy ounce, atau fluid ounce.</p>
+        <h3>Suhu</h3><ul><li>Celsius (°C)</li><li>Fahrenheit (°F)</li><li>Kelvin (K)</li></ul>
+        <h3>Luas (dasar meter persegi)</h3><ul><li>Sentimeter persegi (cm²)</li><li>Meter persegi (m²)</li><li>Kilometer persegi (km²)</li><li>Hektare (ha)</li></ul>
+        <h3>Volume (dasar meter kubik)</h3><ul><li>Mililiter (mL)</li><li>Liter (L)</li><li>Sentimeter kubik (cm³)</li><li>Meter kubik (m³)</li></ul>
+      </section>
+      <section><h2>Faktor dan rumus konversi</h2><p>Untuk panjang, kaki internasional = 0,3048 m; yard = 0,9144 m; inci = 1/12 kaki; mil internasional = 5280 kaki. Untuk massa, pound avoirdupois = 0,45359237 kg dan ounce = pound/16. Faktor tersebut mengikuti definisi standar; representasi dan hasil tetap dibatasi presisi angka JavaScript.</p><p>Hektare = 10000 m², liter = 0,001 m³, dan ton metrik = 1000 kg. Satuan luas dan volume memakai faktor dimensinya sendiri.</p><p>Suhu dikonversi melalui Celsius: °C = (°F − 32) × 5/9; °F = °C × 9/5 + 32; K = °C + 273,15. Konversi ini mengubah nilai suhu, bukan selisih suhu.</p><ul><li><a href="https://www.nist.gov/pml/special-publication-811/nist-guide-si-appendix-b-conversion-factors">NIST Appendix B — conversion factors, termasuk panjang internasional</a></li><li><a href="https://www.nist.gov/pml/special-publication-811/nist-guide-si-footnotes">NIST footnotes — pound avoirdupois</a></li><li><a href="https://www.nist.gov/pml/special-publication-811/nist-guide-si-chapter-5-units-outside-si">NIST Chapter 5, Table 6 — units outside SI</a></li><li><a href="https://www.nist.gov/pml/special-publication-811/nist-guide-si-appendix-b-conversion-factors/nist-guide-si-appendix-b8">NIST Appendix B.8 — Celsius/Fahrenheit</a></li></ul></section>
+      <section><h2>Pertanyaan umum</h2>
+        <h3>Apakah 1 ounce sama dengan 1 ons Indonesia?</h3><p>Tidak. Ounce massa avoirdupois sekitar 28,35 gram, sedangkan ons Indonesia adalah 100 gram.</p>
+        <h3>Mengapa gram tidak dapat langsung diubah menjadi liter?</h3><p>Gram mengukur massa dan liter mengukur volume. Konversi membutuhkan massa jenis bahan tertentu, yang tidak disediakan alat ini.</p>
+        <h3>Apakah titik boleh dipakai sebagai pemisah ribuan?</h3><p>Tidak. Satu titik atau koma hanya digunakan sebagai tanda desimal, misalnya 1.5 atau 1,5.</p>
+        <h3>Mengapa hasil dapat memakai huruf e?</h3><p>Notasi ilmiah digunakan untuk nilai sangat kecil atau besar. Contoh 1e-16 berarti 1 × 10⁻¹⁶.</p>
+        <h3>Apa beda konversi suhu dan selisih suhu?</h3><p>Alat ini mengonversi nilai suhu, termasuk offset 32 dan 273,15. Konversi selisih suhu yang hanya memakai faktor skala tidak termasuk.</p>
+      </section>
+      <section class="tools-related" aria-label="Alat terkait"><h2>Alat terkait</h2><ul><li><a href="/kalkulator-persen/"><strong>Kalkulator persen</strong><span>Hitung persentase nilai dan perubahan naik atau turun.</span></a></li><li><a href="/kalkulator-tanggal/"><strong>Kalkulator tanggal</strong><span>Cari selisih hari atau tanggal setelah menambah hari kalender.</span></a></li></ul></section>
+    </article>
+  </main>
+  <footer class="tools-footer"><div class="tools-container"><span>Edwin Lab · Alat sehari-hari</span><a href="/">Tentang Edwin</a></div></footer>
+  <script type="module" src="./tool.js"></script>
+</body>
+</html>

@@ -1,0 +1,8 @@
+.tools-page .tools-related{max-width:800px;margin:40px auto 0;padding-top:24px;border-top:1px solid var(--line)}
+.tools-page .tools-related h2{font-size:20px;margin:0 0 12px}
+.tools-page .tools-related ul{list-style:none;padding:0;margin:0}
+.tools-page .tools-related li{min-width:0}
+.tools-page .tools-related a{display:flex;flex-direction:column;gap:3px;padding:12px 15px;border:1px solid var(--line);border-radius:6px;background:white;text-decoration:none}
+.tools-page .tools-related a:hover{border-color:var(--accent)}
+.tools-page .tools-related strong{font-size:15px}
+.tools-page .tools-related span{color:var(--muted);font-size:13px;overflow-wrap:anywhere}

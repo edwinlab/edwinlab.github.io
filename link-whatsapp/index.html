@@ -1,0 +1,93 @@
+<!doctype html>
+<html lang="id">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Pembuat Link WhatsApp +62 dengan Pesan | Edwin Lab</title>
+  <meta name="description" content="Buat link WhatsApp untuk nomor Indonesia 08, 62, atau +62 dengan pesan awal opsional. Salin tautan wa.me tanpa menyimpan nomor ke kontak.">
+  <link rel="canonical" href="https://edwinlab.dev/link-whatsapp/">
+  <meta property="og:type" content="website">
+  <meta property="og:title" content="Pembuat Link WhatsApp +62 dengan Pesan | Edwin Lab">
+  <meta property="og:description" content="Ubah nomor seluler Indonesia menjadi link wa.me dengan pesan awal opsional. Buat dan salin link di browser.">
+  <meta property="og:url" content="https://edwinlab.dev/link-whatsapp/">
+  <meta property="og:image" content="https://edwinlab.dev/assets/edwinlab-logo.png">
+  <meta name="twitter:card" content="summary">
+  <link rel="icon" href="/assets/edwinlab-logo.png" type="image/png">
+  <link rel="stylesheet" href="/tools/shared/tools.css">
+  <link rel="stylesheet" href="/tools/everyday-links.css">
+  <style>
+    .wa-field{max-width:42rem;margin-bottom:1rem}.wa-field input,.wa-field textarea{width:100%}.wa-field textarea{min-height:128px;white-space:pre-wrap;resize:vertical}.wa-actions{display:flex;flex-wrap:wrap;gap:.75rem;margin-top:1rem}.wa-result{margin-top:1.25rem;padding:1.25rem;border:1px solid var(--line);border-radius:.5rem;background:var(--paper);min-width:0}.wa-result-url{display:block;width:100%;min-height:74px;margin:.5rem 0 1rem;padding:12px;background:white;font:13px/1.5 'DM Mono',monospace;overflow-wrap:anywhere;resize:vertical}.wa-preview{padding:.75rem;border-inline-start:3px solid var(--accent);background:white;white-space:pre-wrap;overflow-wrap:anywhere}.wa-result-actions{display:flex;flex-wrap:wrap;align-items:center;gap:1rem;margin-top:1rem}.wa-prose{max-width:800px;margin-top:3rem}@media(max-width:560px){.wa-result{padding:1rem}}
+  </style>
+</head>
+<body class="tools-page">
+  <a class="tools-skip" href="#workspace">Lewati ke pembuat link</a>
+  <header class="tools-header"><div class="tools-container tools-header-inner">
+    <a class="tools-brand" href="/" aria-label="Beranda Edwin Lab"><img src="/assets/edwinlab-logo.png" alt="" width="44" height="44">Edwin Lab</a>
+    <nav class="tools-nav" aria-label="Navigasi utama"><a href="/">Beranda</a><a href="/alat/">Alat Online</a></nav>
+  </div></header>
+  <main class="tools-container">
+    <nav class="tools-breadcrumb" aria-label="Jejak halaman"><ol><li><a href="/">Beranda</a></li><li aria-current="page">Pembuat link WhatsApp</li></ol></nav>
+    <h1>Pembuat Link WhatsApp</h1>
+    <p class="tools-intro">Ubah nomor seluler Indonesia menjadi tautan wa.me yang siap dibagikan. Tambahkan pesan awal bila diperlukan, lalu salin tautannya atau pilih sendiri untuk membukanya di WhatsApp.</p>
+    <noscript><p class="tools-status" data-kind="warning">Aktifkan JavaScript untuk membuat link. Contoh format, panduan, dan informasi privasi tetap tersedia di bawah.</p></noscript>
+
+    <section id="workspace" class="tools-workspace" aria-label="Pembuat link WhatsApp">
+      <div class="wa-field">
+        <label for="phone-input">Nomor seluler Indonesia (+62)</label>
+        <input id="phone-input" type="tel" maxlength="64" autocomplete="tel-national" inputmode="tel" aria-describedby="phone-hint">
+        <p id="phone-hint" class="tools-note">Contoh format: 08…, 628…, atau +628…. Gunakan digit ASCII. Tool ini hanya menerapkan kebijakan format nomor seluler Indonesia.</p>
+      </div>
+      <div class="wa-field">
+        <label for="message-input">Pesan awal (opsional)</label>
+        <textarea id="message-input" rows="4" aria-describedby="message-hint message-count"></textarea>
+        <p id="message-hint" class="tools-note">Maksimal 500 karakter Unicode dan 2000 byte UTF-8. Emoji dihitung satu karakter. Baris baru dan tab diperbolehkan.</p>
+        <p id="message-count" class="tools-note" aria-live="polite">0/500 karakter</p>
+      </div>
+      <div class="wa-actions">
+        <button class="tools-primary" type="button" id="create-button">Buat link</button>
+        <button type="button" id="example-button">Isi contoh</button>
+        <button type="button" id="clear-button">Bersihkan</button>
+      </div>
+      <section id="result-card" class="wa-result" aria-labelledby="result-heading" hidden>
+        <h2 id="result-heading">Link WhatsApp Anda</h2>
+        <p>Nomor yang digunakan: <strong id="normalized-phone"></strong></p>
+        <label for="result-url">Link hasil, dapat dipilih dan disalin</label>
+        <textarea id="result-url" class="wa-result-url" readonly spellcheck="false" aria-label="Link WhatsApp hasil"></textarea>
+        <h3>Pratinjau pesan</h3>
+        <p id="message-preview" class="wa-preview"></p>
+        <div class="wa-result-actions">
+          <button type="button" id="copy-button" disabled>Salin link</button>
+          <a id="open-link" class="tools-button" target="_blank" rel="noopener noreferrer" referrerpolicy="no-referrer" hidden>Buka di WhatsApp</a>
+        </div>
+        <p class="tools-note">Saat Anda sendiri memilih “Buka di WhatsApp”, nomor dan pesan pada link akan dikirim ke WhatsApp. Link hanya menyiapkan chat; pesan baru terkirim setelah Anda menekan tombol kirim di WhatsApp.</p>
+      </section>
+      <p id="tool-status" class="tools-status" role="status" aria-live="polite" aria-atomic="true">Masukkan nomor seluler Indonesia untuk mulai.</p>
+    </section>
+
+    <article class="tools-prose wa-prose" aria-label="Panduan pembuat link WhatsApp">
+      <section>
+        <h2>Cara menggunakan pembuat link</h2>
+        <ol><li>Masukkan nomor seluler Indonesia dengan awalan 08, 62, atau +62.</li><li>Tambahkan pesan awal bila ingin; kolom boleh dibiarkan kosong.</li><li>Pilih Buat link, lalu salin tautan atau buka WhatsApp secara sadar.</li></ol>
+        <p>Contoh normalisasi: <code>0812-3456-7890</code> menjadi <code>6281234567890</code>. Nol trunk pertama pada bentuk 08 diganti dengan kode negara 62; digit nol lain tetap dipertahankan. Generator membentuk alamat <code>https://wa.me/</code> sesuai format click-to-chat yang dijelaskan di <a href="https://faq.whatsapp.com/5913398998672934" target="_blank" rel="noopener noreferrer" referrerpolicy="no-referrer">Pusat Bantuan WhatsApp</a>.</p>
+      </section>
+      <section>
+        <h2>Privasi dan batas yang perlu diketahui</h2>
+        <p>Pembuatan link dan pratinjau pesan dilakukan di browser pada halaman ini. Tool tidak mencari akun aktif dan tidak dapat memastikan nomor terdaftar. Penerima perlu memiliki akun WhatsApp aktif agar chat dapat digunakan. Saat Anda membuka link eksternal atau membagikan hasil, nomor dan pesan di dalam URL keluar dari halaman ini menuju WhatsApp atau penerima link.</p>
+        <p>Tautan tidak mengirim pesan dengan sendirinya. Membukanya hanya menyiapkan chat dan teks awal; Anda tetap menekan tombol kirim di WhatsApp. Nomor V1 dibatasi pada format seluler Indonesia 08, 62, dan +62 dengan panjang yang ditetapkan tool. Pesan dibatasi 500 code point dan 2000 byte UTF-8.</p>
+      </section>
+      <section>
+        <h2>Pertanyaan umum</h2>
+        <h3>Apakah nomor harus diawali +62?</h3><p>Tidak. Bentuk 08, 62, dan +62 diterima lalu dinormalisasi menjadi angka internasional 62 tanpa tanda plus.</p>
+        <h3>Apakah tool memeriksa akun WhatsApp aktif?</h3><p>Tidak. Tool hanya menerapkan aturan format input V1 dan tidak memeriksa alokasi operator atau akun aktif.</p>
+        <h3>Apakah pesan langsung terkirim?</h3><p>Tidak. Link menyiapkan chat dan pesan awal; pengiriman baru terjadi jika Anda menekan tombol kirim di WhatsApp.</p>
+        <h3>Kapan nomor dan pesan keluar dari browser?</h3><p>Saat Anda membuka link WhatsApp atau membagikan URL hasil. Jangan masukkan informasi yang tidak ingin dibagikan.</p>
+        <h3>Mengapa pesan terlihat memiliki %20?</h3><p>Spasi dan karakter tertentu di-encode agar dapat menjadi bagian URL. WhatsApp mengubah encoding tersebut kembali menjadi teks pesan.</p>
+        <h3>Apakah nomor luar Indonesia didukung?</h3><p>Tidak. Versi ini hanya menerima nomor seluler Indonesia dengan awalan 08, 62, atau +62.</p>
+      </section>
+    </article>
+  <nav class="tools-related" aria-label="Alat terkait"><h2>Alat terkait</h2><ul><li><a href="/pembuat-qr-code/"><strong>Pembuat QR Code</strong><span>Buat QR code statis dari tautan website atau teks.</span></a></li></ul></nav>
+  </main>
+  <footer class="tools-footer"><div class="tools-container"><span>Edwin Lab · Alat sehari-hari</span><a href="/">Tentang Edwin</a></div></footer>
+  <script type="module" src="./tool.js"></script>
+</body>
+</html>

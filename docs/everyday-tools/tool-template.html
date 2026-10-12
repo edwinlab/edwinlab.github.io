@@ -1,0 +1,53 @@
+<!doctype html>
+<html lang="id">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <!-- Salin ke /TOOL_SLUG/index.html, ganti semua placeholder, lalu hapus noindex hanya saat tool siap. -->
+  <meta name="robots" content="noindex,nofollow">
+  <title>TOOL_NAME | Edwin Lab</title>
+  <meta name="description" content="TOOL_DESCRIPTION">
+  <link rel="canonical" href="https://edwinlab.dev/TOOL_SLUG/">
+  <meta property="og:type" content="website">
+  <meta property="og:title" content="TOOL_NAME | Edwin Lab">
+  <meta property="og:description" content="TOOL_DESCRIPTION">
+  <meta property="og:url" content="https://edwinlab.dev/TOOL_SLUG/">
+  <meta property="og:image" content="https://edwinlab.dev/assets/edwinlab-logo.png">
+  <meta name="twitter:card" content="summary">
+  <link rel="icon" href="/favicon/favicon.ico">
+  <link rel="stylesheet" href="/tools/shared/tools.css">
+</head>
+<body class="tools-page">
+  <a class="tools-skip" href="#workspace">Lewati ke alat</a>
+  <header class="tools-header">
+    <div class="tools-container tools-header-inner">
+      <a class="tools-brand" href="/" aria-label="Beranda Edwin Lab"><img src="/assets/edwinlab-logo.png" alt="" width="44" height="44">Edwin Lab</a>
+      <nav class="tools-nav" aria-label="Navigasi utama"><a href="/">Beranda</a><!-- Tambahkan /alat/ setelah hub tersedia. --></nav>
+    </div>
+  </header>
+  <main class="tools-container">
+    <nav class="tools-breadcrumb" aria-label="Jejak halaman"><ol><li><a href="/">Beranda</a></li><li aria-current="page">TOOL_NAME</li></ol></nav>
+    <h1>TOOL_NAME</h1>
+    <p class="tools-intro">TOOL_INTRO — Ganti dengan satu kalimat yang menjelaskan tugas dan hasil alat.</p>
+    <noscript><p class="tools-status" data-kind="warning">Aktifkan JavaScript untuk memproses masukan. Petunjuk dan contoh tetap tersedia di bawah.</p></noscript>
+    <section class="tools-workspace" id="workspace" aria-label="Area alat">
+      <div class="tools-controls"><div class="tools-control"><label for="tool-option">TOOL_OPTION_LABEL</label><select id="tool-option" disabled><option>TOOL_OPTION</option></select></div></div>
+      <div class="tools-actions"><button class="tools-primary" type="button" id="process" disabled>Proses</button><button type="button" id="example" disabled>Muat contoh</button><button type="button" id="clear" disabled>Hapus</button></div>
+      <div class="tools-editors">
+        <div class="tools-panel"><label for="input">Masukan</label><textarea id="input" spellcheck="false" autocapitalize="off" autocomplete="off" aria-describedby="input-note"></textarea><p class="tools-note" id="input-note">Batas masukan: TOOL_INPUT_LIMIT. Proses berlangsung di browser ini.</p></div>
+        <div class="tools-panel"><label for="output">Hasil</label><textarea id="output" readonly spellcheck="false" aria-describedby="output-note"></textarea><div class="tools-actions"><button type="button" id="copy" disabled>Salin hasil</button><button type="button" id="download" disabled>Unduh hasil</button></div><p class="tools-note" id="output-note">Jika clipboard tidak tersedia, pilih hasil untuk menyalinnya secara manual.</p></div>
+      </div>
+      <p class="tools-status" id="status" role="status" aria-live="polite" aria-atomic="true" data-kind="idle">Kerangka alat. Aktifkan hanya kontrol yang didukung oleh implementasi tool.js.</p>
+    </section>
+    <article class="tools-prose" aria-label="Petunjuk penggunaan">
+      <section><h2>Cara menggunakan TOOL_NAME</h2><ol><li>TOOL_STEP_1</li><li>TOOL_STEP_2</li><li>TOOL_STEP_3</li></ol></section>
+      <section><h2>Contoh</h2><p>TOOL_EXAMPLE_EXPLANATION</p><pre><code>TOOL_STATIC_EXAMPLE</code></pre></section>
+      <section><h2>Batas dan pertanyaan umum</h2><p>TOOL_LIMITATIONS — Jelaskan masukan, error, dan ketelitian hasil.</p><h3>Apakah masukan saya diunggah?</h3><p>Masukan diproses di browser ini. Alat tidak mengirim teks Anda ke server.</p></section>
+      <!-- Tambahkan tautan terkait hanya untuk halaman yang sudah siap. -->
+    </article>
+  </main>
+  <footer class="tools-footer"><div class="tools-container"><span>Edwin Lab · Alat sehari-hari</span><a href="/">Tentang Edwin</a></div></footer>
+  <!-- Setelah disalin ke TOOL_SLUG/, ganti modul kosong ini dengan src="./tool.js". -->
+  <script type="module">/* Kerangka statis: implementasi tiap tool menyediakan perilakunya sendiri. */</script>
+</body>
+</html>

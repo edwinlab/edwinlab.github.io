@@ -1,0 +1,72 @@
+<!doctype html>
+<html lang="id">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Kalkulator Usia: Tahun, Bulan, dan Hari | Edwin Lab</title>
+  <meta name="description" content="Hitung usia dari tanggal lahir ke tanggal pilihan dalam tahun, bulan, hari, dan total hari. Mendukung tahun kabisat dan perhitungan lokal di browser.">
+  <link rel="canonical" href="https://edwinlab.dev/kalkulator-usia/">
+  <meta property="og:type" content="website">
+  <meta property="og:title" content="Kalkulator Usia: Tahun, Bulan, dan Hari | Edwin Lab">
+  <meta property="og:description" content="Hitung usia kalender dalam tahun, bulan, hari, dan total hari, termasuk ulang tahun pada tahun kabisat.">
+  <meta property="og:url" content="https://edwinlab.dev/kalkulator-usia/">
+  <meta property="og:image" content="https://edwinlab.dev/assets/edwinlab-logo.png">
+  <meta name="twitter:card" content="summary">
+  <link rel="icon" href="/assets/edwinlab-logo.png" type="image/png">
+  <link rel="stylesheet" href="/tools/shared/tools.css">
+  <link rel="stylesheet" href="/tools/everyday-links.css">
+  <style>
+    .age-fields{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:1rem}.age-field{min-width:0}.age-field input{width:100%}.age-actions{display:flex;flex-wrap:wrap;gap:.75rem;margin-top:1rem}.age-result{margin-top:1.25rem;padding:1.25rem;border:1px solid var(--line);border-radius:.5rem;background:var(--paper)}.age-result-main{font-size:clamp(1.5rem,4vw,2.3rem);line-height:1.3;font-weight:800;overflow-wrap:anywhere}.age-total{font-size:1.15rem;font-weight:700}.age-summary{display:block;width:100%;min-height:112px;margin-top:1rem;padding:12px;background:white;font:14px/1.6 'DM Mono',monospace;resize:vertical}.age-prose{max-width:800px;margin-top:3rem}@media(max-width:560px){.age-fields{grid-template-columns:minmax(0,1fr)}}
+  </style>
+</head>
+<body class="tools-page">
+  <a class="tools-skip" href="#workspace">Lewati ke kalkulator</a>
+  <header class="tools-header"><div class="tools-container tools-header-inner">
+    <a class="tools-brand" href="/" aria-label="Beranda Edwin Lab"><img src="/assets/edwinlab-logo.png" alt="" width="44" height="44">Edwin Lab</a>
+    <nav class="tools-nav" aria-label="Navigasi utama"><a href="/">Beranda</a><a href="/alat/">Alat Online</a></nav>
+  </div></header>
+  <main class="tools-container">
+    <nav class="tools-breadcrumb" aria-label="Jejak halaman"><ol><li><a href="/">Beranda</a></li><li aria-current="page">Kalkulator usia</li></ol></nav>
+    <h1>Kalkulator Usia</h1>
+    <p class="tools-intro">Pilih tanggal lahir dan tanggal acuan untuk mengetahui usia yang sudah berlalu. Hasil menunjukkan tahun penuh, bulan penuh berikutnya, sisa hari, dan total hari kalender.</p>
+    <noscript><p class="tools-status" data-kind="warning">Aktifkan JavaScript untuk menghitung usia. Cara perhitungan, contoh, dan jawaban umum tetap tersedia di bawah.</p></noscript>
+
+    <section id="workspace" class="tools-workspace" aria-label="Kalkulator usia">
+      <div class="age-fields">
+        <div class="age-field"><label for="birth-date">Tanggal lahir</label><input id="birth-date" type="date" min="0001-01-01" max="9999-12-31" aria-describedby="date-hint"></div>
+        <div class="age-field"><label for="as-of-date">Tanggal acuan</label><input id="as-of-date" type="date" min="0001-01-01" max="9999-12-31" aria-describedby="date-hint"></div>
+      </div>
+      <p id="date-hint" class="tools-note">Pilih tanggal kalender dalam rentang 0001-01-01 sampai 9999-12-31. Usia dihitung sebagai tahun penuh, lalu bulan penuh dari tanggal ulang tahun yang sudah disesuaikan, kemudian sisa hari.</p>
+      <div class="age-actions">
+        <button class="tools-primary" type="button" id="calculate-button">Hitung usia</button>
+        <button type="button" id="today-button">Gunakan hari ini</button>
+        <button type="button" id="example-button">Isi contoh</button>
+        <button type="button" id="clear-button">Bersihkan</button>
+        <button type="button" id="copy-button" disabled>Salin hasil</button>
+      </div>
+      <section id="result-card" class="age-result" aria-labelledby="result-heading" hidden>
+        <h2 id="result-heading">Hasil usia</h2>
+        <p id="age-main" class="age-result-main"></p>
+        <p id="age-total" class="age-total"></p>
+        <label for="copy-output">Ringkasan yang dapat dipilih untuk disalin</label>
+        <textarea id="copy-output" class="age-summary" readonly spellcheck="false"></textarea>
+      </section>
+      <p id="tool-status" class="tools-status" role="status" aria-live="polite" aria-atomic="true">Pilih tanggal lahir dan acuan, lalu hitung usia.</p>
+    </section>
+
+    <article class="tools-prose age-prose" aria-label="Panduan kalkulator usia">
+      <section><h2>Cara memakai kalkulator usia</h2><ol><li>Pilih tanggal lahir.</li><li>Pilih tanggal acuan atau gunakan tombol hari ini.</li><li>Pilih Hitung usia untuk melihat tahun, bulan, hari, dan total hari.</li></ol><p>Contoh: 15 Juni 2000 → 15 Juni 2024 = 24 tahun dan 8766 hari.</p></section>
+      <section><h2>Bagaimana tahun dan bulan dihitung?</h2><p>Kalkulator mengambil jumlah tahun kalender penuh terlebih dahulu. Setelah ulang tahun penuh terakhir, ia menghitung bulan penuh dari tanggal acuan tahun itu, lalu menghitung sisa hari kalender. Panjang bulan mengikuti kalender, bukan diasumsikan 30 hari. Jika tanggal asal berada di akhir bulan, tanggal yang tidak ada pada bulan tujuan dijepit ke hari terakhir bulan tersebut.</p><p>Perhitungan usia 29 Februari menggunakan 28 Februari sebagai ulang tahun pada tahun nonkabisat. Hasil mengikuti kebijakan kalender ini, yang dapat berbeda dari aturan administrasi tertentu.</p></section>
+      <section><h2>Pertanyaan umum</h2>
+        <h3>Bagaimana usia kelahiran 29 Februari dihitung?</h3><p>Dalam kalkulator ini, ulang tahun 29 Februari jatuh pada 28 Februari di tahun nonkabisat. Pada tahun kabisat, tanggalnya tetap 29 Februari.</p>
+        <h3>Mengapa satu bulan tidak selalu 30 hari?</h3><p>Panjang bulan kalender berbeda-beda. Tanggal akhir bulan dijepit ke hari terakhir bulan tujuan bila tanggal yang sama tidak tersedia.</p>
+        <h3>Apakah tanggal lahir dikirim ke server?</h3><p>Tidak. Tanggal diproses di browser pada perangkat ini dan tidak dikirim oleh kalkulator.</p>
+        <h3>Apakah hasil bisa dipakai untuk persyaratan resmi?</h3><p>Ini adalah perhitungan kalender dengan kebijakan yang dijelaskan di halaman. Persyaratan instansi dapat memakai aturan lain.</p>
+      </section>
+    </article>
+  <nav class="tools-related" aria-label="Alat terkait"><h2>Alat terkait</h2><ul><li><a href="/kalkulator-tanggal/"><strong>Kalkulator Tanggal</strong><span>Cari selisih hari atau tanggal setelah menambah hari kalender.</span></a></li></ul></nav>
+  </main>
+  <footer class="tools-footer"><div class="tools-container"><span>Edwin Lab · Alat sehari-hari</span><a href="/">Tentang Edwin</a></div></footer>
+  <script type="module" src="./tool.js"></script>
+</body>
+</html>
