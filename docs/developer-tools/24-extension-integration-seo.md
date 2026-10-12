@@ -1,6 +1,6 @@
 # 24 — Integrasi Developer Tools tambahan & SEO
 
-Status: **parsial pada 12 Oktober 2026: enam tool diintegrasikan secara lokal; empat tool menunggu dependency readiness 14a.** Model: **GPT-6 Luna · high, per batch**. Jalankan untuk subset14–23 yang sudah lulus, tidak perlu menunggu semua10 tools. Tidak mengimplementasikan tool yang belum siap.
+Status: **parsial pada 12 Oktober 2026: sembilan tool tambahan siap diintegrasikan secara lokal. XML Formatter tetap ditahan dari hub/sitemap karena dependency belum memenuhi preservasi whitespace-only leaf.** Model: **GPT-6 Luna · high, per batch**. Jalankan untuk subset14–23 yang sudah lulus, tidak perlu menunggu semua10 tools. Tidak mengimplementasikan tool yang belum siap.
 
 ## Scope/ownership
 
@@ -25,7 +25,7 @@ Baseline repo sekarang12 developer+11 everyday+homepage+2 hub=26 URL sitemap. An
 - [ ] Perbarui stale hard-coded jumlah 14/26 dan route list dalam existing integrationtests berdasarkan batch aktual; jangan mengganti expected dengan hanya hasil aktual yang di-fetch sehingga halaman hilang tidak terdeteksi. Expected set eksplisit mencakup semua26 baseline+ready additions.
 - [ ] Assertion "no script" menghitung executable scripts, mengecualikan application/ld+json. Type/properties JSON-LD di-parse dan cocok visible content; no fake ratings/reviews.
 - [ ] Jalankan fixture new tools+readiness yang terkait dan integration runner existing yang diedit. Jangan melonggarkan assertions agar suite hijau; report gagal dengan reproduksi.
-- [ ] New invariant integration memeriksa10 candidate sesuai ready subset: href/assets/mainhead, input privacy, library hanya dimuat consumer, no framework/build, outputrace/clear jika applicable. Tidak menduplikasi setiap pure fixture tool.
+- [ ] New invariant integration memeriksa sembilan route ready sesuai subset: href/assets/mainhead, input privacy, library hanya dimuat consumer, no framework/build, outputrace/clear jika applicable. Tidak menduplikasi setiap pure fixture tool.
 - [ ] Smoke directload/refresh/example/error/clear/stale/copy/download per tool siap; keyboard/no-JS content; hub dan representative pages pada320/390/768/1440 px. Catat browser/network/console.
 - [x] Input teks/file/password/URL tidak muncul pada fetch/XHR/beacon/telemetry/storage/siteURL. Markdown preview tidak memuat resource/navigate dan XML DOCTYPE tidak memicu request. Hanya fixtures sintetis.
 - [ ] Periksa ukuran resource/layout awal dan interaksi; dependency berat tidak masuk homepage/hub/tool yang tidak membutuhkan. Ukur masalah sebelum optimasi; tidak mengarang Lighthouse/CrUX/ranking.
@@ -50,6 +50,6 @@ Update checklist task 24 dan README berdasarkan bukti. Jangan commit/push/deploy
 
 ## Hasil eksekusi per batch
 
-Batch siap: **15, 16, 17, 20, 21, 22** (`/hash-generator/`, `/password-generator/`, `/color-converter/`, `/number-base-converter/`, `/url-parser/`, `/css-gradient-generator/`). Hub lokal kini memiliki **18 cards / 6 kategori**; sitemap mempertahankan 26 URL existing dan menambah enam, total **32 unique URLs**. Test directory berisi 21 noindex runners. New tool fixtures **43/43**, new integration **10/10**, original integration **29/29** lulus di in-app browser pada HTTP localhost. Responsive smoke pada 320/390/768/1440 px, no-script guide, canonical/metadata, input/network isolation, Blob dispatch/content dan clipboard flow lulus. `git diff --check` bersih.
+Batch siap: **15, 16, 17, 20, 21, 22** (`/hash-generator/`, `/password-generator/`, `/color-converter/`, `/number-base-converter/`, `/url-parser/`, `/css-gradient-generator/`). Hub lokal kini memiliki **21 cards / 7 kategori**; sitemap mempertahankan 26 URL baseline dan menambah sembilan route ready, total **35 unique URLs**. Test directory berisi 26 noindex runners. Enam tool awal memiliki 43/43 fixture, empat task baru 47/47 fixture, vendor smoke 10/10, integrasi sembilan route 13/13, dan runner existing 29/29 setelah ekspektasi dihitung ulang. Browser in-app menggunakan HTTP localhost. Responsive smoke pada 320/390/768/1440 px, no-script guide, canonical/metadata, input/network isolation, Blob dispatch/content dan clipboard flow lulus. `git diff --check` bersih.
 
-Masih pending: tahap 14a A–D beserta license/archive/checksum/browser probes, implementasi 14/18/19/23, integrasi mereka ke hub/sitemap, manual keyboard/console review, dan verifikasi live setelah publish. Tidak ada file vendor ditambahkan. Registry gagal di-resolve dari workspace (`Could not resolve host: registry.npmjs.org`), jadi task 14a dan konsumen yang memerlukan library tidak ditandai selesai.
+Masih pending: kesiapan fase 14a-B untuk XML, completion checklist task 18, review keyboard/console manual, ukuran/performa browser yang dicatat untuk tool baru, dan verifikasi live setelah pemilik mempublikasikan. Sitemap regression test kini mengassert semua 26 URL baseline secara eksplisit. Tidak ada file vendor ditambahkan. Registry gagal di-resolve dari workspace (`Could not resolve host: registry.npmjs.org`), jadi task 14a dan konsumen yang memerlukan library tidak ditandai selesai.

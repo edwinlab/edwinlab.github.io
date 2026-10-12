@@ -1,6 +1,6 @@
 # 19 — Markdown Preview
 
-Status: **belum dikerjakan; prasyarat 14a untuk Markdown Editor & Preview tidak dapat diverifikasi karena registry gagal di-resolve dari workspace.**
+Status: **implementasi dan integrasi lokal selesai; checklist manual lanjutan masih sebagian.** Marked 18.1.0 + DOMPurify 3.4.16 dipin lokal. Security fixture browser 11/11 dan integrasi route lulus.
 Route: `/markdown-preview/`; canonical: `https://edwinlab.dev/markdown-preview/`.
 Model setiap tahap: **GPT-6 Luna · high**. Dependency dan security fixtures dikerjakan sebelum UI; satu tahap per chat.
 
@@ -94,9 +94,7 @@ Model: **GPT-6 Luna · high**. Completion memerlukan bukti security dan UI brows
 
 ## Hasil eksekusi
 
-Status eksekusi: belum dibuat karena kebutuhan dependency browser resmi pada fase 14a tidak dapat diverifikasi; registry gagal di-resolve dari workspace.
-
-Belum dijalankan. Isi saat eksekusi: tahap/file berubah, pinned dependency versions, fixture lulus/gagal, security+network observations, browser+viewport, timing, actual limits dan integration requests.
+Status eksekusi: implementasi dan integrasi lokal selesai dengan 11/11 security fixture serta route smoke. Bukti/versi tercatat di bagian hasil eksekusi; checklist DoD yang belum diverifikasi tetap terbuka.
 
 ## Prompt siap tempel per tahap
 
@@ -126,3 +124,10 @@ stale/cancel/timeouts, sanitizer timings, HTML export/copy, keyboard dan respons
 Perbaiki hanya file milik task. Catat hasil aktual; checkbox hanya jika terbukti lulus.
 Update hanya row 19 README bila seluruh DoD terpenuhi. Jangan commit/push/publish/deploy.
 ```
+
+
+## Hasil eksekusi — 12 Oktober 2026
+
+- Route HTML/CSS/vanilla JS selesai dan tertaut pada Developer Tools hub serta sitemap oleh task 24. Tidak memerlukan compiler atau build; library runtime dipin lokal.
+- Browser fixtures: 11/11 security fixtures; preview sandbox/CSP dan sanitasi diuji di browser.
+- Integrasi HTTP localhost memverifikasi canonical/metadata, no-JavaScript guide, sample workflow, clipboard/download dispatch, tidak ada pengiriman input, dan lebar 320/390/768/1440px. Console/keyboard manual review belum dicatat; detail checkbox spesifikasi yang belum teruji tetap terbuka.

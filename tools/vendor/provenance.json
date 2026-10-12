@@ -134,5 +134,110 @@
         "license": "MIT"
       }
     ]
+  },
+  {
+    "name": "diff",
+    "version": "9.0.0",
+    "source": "https://registry.npmjs.org/diff/-/diff-9.0.0.tgz",
+    "integrity": "sha512-svtcdpS8CgJyqAjEQIXdb3OjhFVVYjzGAPO8WGCmRbrml64SPw/jJD4GoE98aR7r25A0XcgrK3F02yw9R/vhQw==",
+    "archiveSHA256": "b898bf23c95594607576e25ddd4013f1d51ed0e862aaf0732815830c87b3b58f",
+    "license": "BSD-3-Clause",
+    "files": {
+      "jsdiff/diff.js": "5773c7efb34715bb9a9b6a9ebf5b0ff00f85f9efa6d9fd69fc65e181364f7b2e",
+      "jsdiff/LICENSE": "eda81a415869e67809f6a9f3fd6056062cb83a462118e07eec5e92b2e0c40ce9"
+    }
+  },
+  {
+    "name": "xml-formatter",
+    "version": "3.7.0",
+    "source": "https://registry.npmjs.org/xml-formatter/-/xml-formatter-3.7.0.tgz",
+    "integrity": "sha512-+8qTc3zv2UcJ1v9IsSIce37Dl4MQG14Cp7tWrwmy202UaI1wqRukw5QMX1JHsV+DX64yw77EgGsj2s5wGvuMbQ==",
+    "archiveSHA256": "3d1fec11981446fb4066da58f4245120eb9877586a748ebcde4d73b3ed6a59b0",
+    "license": "MIT",
+    "files": {
+      "xml-formatter/xml-formatter.js": "8e7ef6cdf3fc1f2ca4f28c1b2f45f146bc5c4a7733d66cd184b37376e39037d8",
+      "xml-formatter/LICENSE": "4238a9875508fe834330dba5027591a09bc73d3c305d7e8c3e188791bac8ed4e"
+    },
+    "bundledRuntimeDependencies": [
+      {
+        "name": "xml-parser-xo",
+        "version": "4.1.5",
+        "source": "https://registry.npmjs.org/xml-parser-xo/-/xml-parser-xo-4.1.5.tgz",
+        "integrity": "sha512-TxyRxk9sTOUg3glxSIY6f0nfuqRll2OEF8TspLgh5mZkLuBgheCn3zClcDSGJ58TvNmiwyCCuat4UajPud/5Og==",
+        "archiveSHA256": "fd6508fe6336af5a51ecea09bafd5adfcce4319f4d1066e7b6ba0b7937e1e5c7",
+        "license": "MIT",
+        "retainedLicense": "XML-PARSER-XO-LICENSE",
+        "retainedLicenseSHA256": "683055697f20cf810f6b1fea84acc6aa6781a4e945e476e41e18df61139529ef"
+      }
+    ]
+  },
+  {
+    "name": "marked",
+    "version": "18.1.0",
+    "source": "https://registry.npmjs.org/marked/-/marked-18.1.0.tgz",
+    "integrity": "sha512-PamYXWWWg2nboG3oX5Ffzpy3EFZROqZJK9hSlMmUnekp7TxPs5DcT95vwd46m73/exfKCRVMtgXoPMI4FEJL6w==",
+    "archiveSHA256": "39a404686c55fc2d862216e0cbb70f6bedc456adaeb5fe57b642036455f9ffc0",
+    "license": "MIT",
+    "files": {
+      "marked/marked.esm.js": "054d73b676031dc8e60e247ef228044fbeebe10af14bac1a6e53852f80f826e5",
+      "marked/LICENSE": "8e3a3f82f59a60958f56ca08f445647c32a4733dc7ca6c2c46f6eb898471ab9c"
+    }
+  },
+  {
+    "name": "dompurify",
+    "version": "3.4.16",
+    "source": "https://registry.npmjs.org/dompurify/-/dompurify-3.4.16.tgz",
+    "integrity": "sha512-sqo+pNp3qRhCIpbgRi1y8Tgk27Bo2Ry7w0dC1NBeNTdZChWjz9Xb/KOoZbRP/R6pQZ80Qw8YhXw13hWWBbMRnQ==",
+    "archiveSHA256": "d288ced25e6bda3e5fc76d1fc9bca899260cf886e005e84f232e686ada57f1b4",
+    "license": "(MPL-2.0 OR Apache-2.0)",
+    "files": {
+      "dompurify/purify.es.mjs": "c44274a7959cfdd4da871fa78a5d5fbbef55db68d118c5c0833bc4b5cf9633ad",
+      "dompurify/LICENSE-APACHE-2.0": "cfc7749b96f63bd31c3c42b5c471bf756814053e847c10f3eb003417bc523d30",
+      "dompurify/LICENSE-MPL-2.0": "fab3dd6bdab226f1c08630b1dd917e11fcb4ec5e1e020e2c16f83a0a13863e85"
+    }
+  },
+  {
+    "name": "jsonpath-plus",
+    "version": "11.2.0",
+    "source": "https://registry.npmjs.org/jsonpath-plus/-/jsonpath-plus-11.2.0.tgz",
+    "integrity": "sha512-sfM35kUqO1GvBqxrcPSfnai3/fHHFgH6OHP5HbMgQMPSVc5LeBXYvM1HknEpZJPCyNU9Hd3DKiFuDHh2RphTkQ==",
+    "archiveSHA256": "af5fa31460d9da8c4f14d7fd03beb11460724e5952e1a2a749c0308826af1f15",
+    "license": "MIT",
+    "files": {
+      "jsonpath-plus/index-browser-esm.js": "2b17d36166089e21d0db652832e8d06fa20435cb2397b4565c317af52a09e6c5",
+      "jsonpath-plus/LICENSE": "f21ce68006d5bd12fef2f5463039783a50848f115d6e7287f04bb9d0fd0ed546"
+    },
+    "bundledRuntimeDependencies": [
+      {
+        "name": "jsep",
+        "version": "1.4.0",
+        "source": "https://registry.npmjs.org/jsep/-/jsep-1.4.0.tgz",
+        "integrity": "sha512-B7qPcEVE3NVkmSJbaYxvv4cHkVW7DQsZz13pUMrfS8z8Q/BuShN+gcTXrUlPiGqM2/t/EEaI030bpxMqY8gMlw==",
+        "archiveSHA256": "c6ee66928d17c59b17c169a3cb766e004cf28674b8d08dd4cbd1a9fb6bd0c3ea",
+        "license": "MIT",
+        "retainedLicense": "JSEP-LICENSE",
+        "retainedLicenseSHA256": "4a4cffde4afd302689cd6aad9b05463a798d3dbe4cb2488bda45af1977affe33"
+      },
+      {
+        "name": "@jsep-plugin/assignment",
+        "version": "1.3.0",
+        "source": "https://registry.npmjs.org/@jsep-plugin/assignment/-/assignment-1.3.0.tgz",
+        "integrity": "sha512-VVgV+CXrhbMI3aSusQyclHkenWSAm95WaiKrMxRFam3JSUiIaQjoMIw2sEs/OX4XifnqeQUN4DYbJjlA8EfktQ==",
+        "archiveSHA256": "30f6feadc87751e1820ea76d8aff2d8e6d7b314290c86790679ee33c1a8e08cb",
+        "license": "MIT",
+        "retainedLicense": "JSEP-ASSIGNMENT-LICENSE",
+        "retainedLicenseSHA256": "4a4cffde4afd302689cd6aad9b05463a798d3dbe4cb2488bda45af1977affe33"
+      },
+      {
+        "name": "@jsep-plugin/regex",
+        "version": "1.0.4",
+        "source": "https://registry.npmjs.org/@jsep-plugin/regex/-/regex-1.0.4.tgz",
+        "integrity": "sha512-q7qL4Mgjs1vByCaTnDFcBnV9HS7GVPJX5vyVoCgZHNSC9rjwIlmbXG5sUuorR5ndfHAIlJ8pVStxvjXHbNvtUg==",
+        "archiveSHA256": "b8416b209a4c7a01aee4ff721af16e397472cad6f922343acc3585a3dd473d1a",
+        "license": "MIT",
+        "retainedLicense": "JSEP-REGEX-LICENSE",
+        "retainedLicenseSHA256": "4a4cffde4afd302689cd6aad9b05463a798d3dbe4cb2488bda45af1977affe33"
+      }
+    ]
   }
 ]

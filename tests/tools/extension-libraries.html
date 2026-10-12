@@ -1,0 +1,24 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="robots" content="noindex,nofollow">
+  <title>Extension library readiness | Edwin Lab</title>
+  <link rel="icon" href="/favicon/favicon.ico">
+  <link rel="stylesheet" href="/tools/shared/tools.css">
+</head>
+<body class="tools-page">
+  <header class="tools-header"><div class="tools-container tools-header-inner"><a class="tools-brand" href="/"><img src="/assets/edwinlab-logo.png" width="44" height="44" alt="">Edwin Lab</a><nav class="tools-nav" aria-label="Main navigation"><a href="/">Home</a></nav></div></header>
+  <main class="tools-container">
+    <h1>Extension library readiness</h1>
+    <p class="tools-intro">Browser-native checks for pinned local distributions; no network runtime is used.</p>
+    <p class="tools-status" role="status" aria-live="polite" data-test-summary>Loading test modules…</p>
+    <noscript><p>Enable JavaScript to run these tests.</p></noscript>
+    <ol class="tests-list" data-test-results></ol>
+  </main>
+  <script src="/tools/vendor/xml-formatter/xml-formatter.js"></script>
+  <script src="/tools/vendor/jsdiff/diff.js"></script>
+  <script type="module" src="./extension-libraries.test.js"></script>
+</body>
+</html>

@@ -1,6 +1,6 @@
 # 14 — Text Diff (D01)
 
-Status: **belum dikerjakan; prasyarat 14a tidak dapat diverifikasi karena registry tidak bisa di-resolve dari workspace.** Dokumen ini hanya rencana; seluruh checkbox eksekusi tetap terbuka.
+Status: **implementasi dan integrasi lokal selesai; checklist spesifikasi/QA manual lanjutan masih sebagian.** Vendor jsdiff 9.0.0 berhasil dipin dari archive resmi dan browser worker berjalan. Fixture fokus 9/9; route terintegrasi di hub/sitemap.
 Model: **GPT-6 Luna (`gpt-6-luna`), reasoning `high`**. Penilaian berdasarkan scope dan fixture proyek, bukan benchmark.
 Route: `/text-diff/`. Canonical: `https://edwinlab.dev/text-diff/`.
 
@@ -113,3 +113,10 @@ Implementasikan request IDs/cancel/stale protection, safe text render, report co
 Jalankan browser-native fixture, browser QA, dan git diff --check; update checklist/catatan task serta hanya row14 README dengan hasil aktual dan keterbatasan.
 Jangan ubah shared/vendor, tool lama, menu/hub/sitemap/robots/index tes bersama. Jangan commit/push/deploy.
 ```
+
+
+## Hasil eksekusi — 12 Oktober 2026
+
+- Route HTML/CSS/vanilla JS selesai dan tertaut pada Developer Tools hub serta sitemap oleh task 24. Tidak memerlukan compiler atau build; library runtime dipin lokal.
+- Browser fixtures: 9/9 focused fixtures; Text Diff dan worker jsdiff 9.0.0 berjalan.
+- Integrasi HTTP localhost memverifikasi canonical/metadata, no-JavaScript guide, sample workflow, clipboard/download dispatch, tidak ada pengiriman input, dan lebar 320/390/768/1440px. Console/keyboard manual review belum dicatat; detail checkbox spesifikasi yang belum teruji tetap terbuka.

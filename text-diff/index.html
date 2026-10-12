@@ -1,0 +1,35 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Text Diff Online — Compare Text Locally | Edwin Lab</title>
+  <meta name="description" content="Compare two texts line by line in your browser. Review added, removed, unchanged lines and line-ending changes without uploading your text.">
+  <link rel="canonical" href="https://edwinlab.dev/text-diff/">
+  <meta property="og:type" content="website"><meta property="og:title" content="Text Diff Online — Compare Text Locally | Edwin Lab"><meta property="og:description" content="Compare two texts line by line in your browser without uploading them."><meta property="og:url" content="https://edwinlab.dev/text-diff/"><meta property="og:image" content="https://edwinlab.dev/assets/edwinlab-logo.png"><meta name="twitter:card" content="summary">
+  <link rel="icon" href="/favicon/favicon.ico"><link rel="stylesheet" href="/tools/shared/tools.css"><link rel="stylesheet" href="./tool.css">
+  <script type="application/ld+json">{"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"Home","item":"https://edwinlab.dev/"},{"@type":"ListItem","position":2,"name":"Developer Tools","item":"https://edwinlab.dev/tools/"},{"@type":"ListItem","position":3,"name":"Text Diff","item":"https://edwinlab.dev/text-diff/"}]}</script>
+</head>
+<body class="tools-page">
+  <a class="tools-skip" href="#workspace">Skip to text diff</a>
+  <header class="tools-header"><div class="tools-container tools-header-inner"><a class="tools-brand" href="/" aria-label="Edwin Lab home"><img src="/assets/edwinlab-logo.png" alt="" width="44" height="44">Edwin Lab</a><nav class="tools-nav" aria-label="Main navigation"><a href="/">Home</a><a href="/tools/">Developer Tools</a></nav></div></header>
+  <main class="tools-container">
+    <nav class="tools-breadcrumb" aria-label="Breadcrumb"><ol><li><a href="/">Home</a></li><li><a href="/tools/">Developer Tools</a></li><li aria-current="page">Text Diff</li></ol></nav>
+    <h1>Text Diff</h1><p class="tools-intro">Compare two text drafts line by line and see what was added, removed, or left unchanged. Your text stays in this browser.</p>
+    <noscript><p class="tools-status" data-kind="warning">Enable JavaScript to compare text. The guide and examples remain available below.</p></noscript>
+    <section class="tools-workspace" id="workspace" aria-label="Text comparison workspace">
+      <div class="tools-actions"><button class="tools-primary" id="compare" type="button" disabled>Compare text</button><button id="swap" type="button" disabled>Swap</button><button id="example" type="button" disabled>Load example</button><button id="clear" type="button" disabled>Clear</button><button id="cancel" type="button" disabled>Cancel</button></div>
+      <div class="tools-editors"><div class="tools-panel"><label for="left-text">Original text</label><textarea id="left-text" spellcheck="false" aria-describedby="left-note" placeholder="Paste the earlier version…"></textarea><p class="tools-note" id="left-note">Combined input limit: 512 KiB UTF-8 and 5,000 line tokens. Textarea values normalize line endings to LF.</p></div><div class="tools-panel"><label for="right-text">Updated text</label><textarea id="right-text" spellcheck="false" aria-describedby="right-note" placeholder="Paste the newer version…"></textarea><p class="tools-note" id="right-note">Tabs, spaces, blank lines, and final newlines are compared exactly.</p></div></div>
+      <p class="tools-status" id="status" role="status" aria-live="polite" aria-atomic="true" data-kind="idle">Add two texts and select Compare text.</p>
+      <section id="results" aria-label="Text comparison results" hidden><div class="result-head"><h2>Comparison</h2><p id="summary" class="tools-status" data-kind="success"></p><div class="tools-actions"><button id="copy-report" type="button" disabled>Copy report</button><button id="download-report" type="button" disabled>Download .txt</button></div></div><div class="diff-scroll" tabindex="0" aria-label="Scrollable line-by-line diff"><div id="diff-rows" class="diff-rows"></div></div></section>
+    </section>
+    <article class="tools-prose" aria-label="Text diff guide">
+      <section><h2>How to compare text</h2><ol><li>Paste the older text in Original text and the newer text in Updated text.</li><li>Select Compare text. Added, removed, and unchanged lines appear with original and updated line numbers.</li><li>Copy or download a plain-text report if you need to share the review.</li></ol><p>For example, comparing <code>status: pending</code> with <code>status: paid</code> shows one removed line and one added line.</p></section>
+      <section><h2>Comparison rules</h2><p>This tool compares exact line tokens. It does not ignore whitespace, case, or Unicode normalization, and it does not detect moved lines. A replacement appears as a removed line followed by an added line. Final newline differences and line endings are shown explicitly.</p><p>The browser textarea API normalizes pasted line endings to LF, so the comparison reflects the text visible in these fields, not the original file bytes. The report is not a Git patch and cannot be applied automatically.</p></section>
+      <section><h2>Limits and privacy</h2><p>The combined input is limited to 512 KiB of UTF-8 text and 5,000 line tokens. A comparison runs in a local worker with a 4-second deadline and a bounded edit distance. Large or very different inputs may be rejected. No file upload, network processing, storage, or telemetry is used.</p><h3>Is my text uploaded?</h3><p>No. The comparison runs in a worker in this browser. The tool does not send or save either input.</p><h3>Why do line endings differ?</h3><p>Textarea values normalize pasted CRLF and CR to LF. For values created by the tool or test fixtures, line-ending tokens are compared separately.</p><h3>Is the report a patch?</h3><p>No. It is a readable review report, not a patch format.</p></section>
+      <p class="tools-related">Related tools: <a href="/json-diff/">JSON Diff</a> · <a href="/regex-tester/">Regex Tester</a> · <a href="/tools/">All Developer Tools</a>.</p>
+    </article>
+  </main>
+  <footer class="tools-footer"><div class="tools-container"><span>Edwin Lab · Developer tools</span><a href="/">About Edwin</a></div></footer>
+  <script type="module" src="./tool.js"></script>
+</body>
+</html>

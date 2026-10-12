@@ -1,6 +1,6 @@
 # 18 — XML Formatter
 
-Status: **belum dikerjakan; prasyarat 14a untuk XML Formatter tidak dapat diverifikasi karena registry gagal di-resolve dari workspace.**
+Status: **partial / belum siap untuk integrasi publik.** Route dan fixture dibuat; formatter lokal berjalan, tetapi xml-formatter 3.7.0 tidak dapat mempertahankan leaf text yang hanya berisi whitespace. Konten tersebut ditolak sebelum proses agar input tetap utuh. Prasyarat 14a fase B masih gagal untuk subset wajib.
 Route: `/xml-formatter/`; canonical: `https://edwinlab.dev/xml-formatter/`.
 Model setiap tahap: **GPT-6 Luna · high**. Jalankan satu tahap per chat agar konteks kecil; tahap berikutnya memakai hasil tahap sebelumnya.
 
@@ -87,9 +87,7 @@ Model: **GPT-6 Luna · high**. Checkbox tahap sebelumnya tidak cukup tanpa brows
 
 ## Hasil eksekusi
 
-Status eksekusi: belum dibuat karena kebutuhan dependency browser resmi pada fase 14a tidak dapat diverifikasi; registry gagal di-resolve dari workspace.
-
-Belum dijalankan. Isi saat eksekusi: tahap selesai, file berubah, versi/recipe dependency, fixture lulus/gagal, browser+viewport, timing, batas support sebenarnya, dan kebutuhan integrasi.
+Status: implementasi parsial dan belum siap untuk integrasi publik. Detail hasil, fixture, versi dependency, dan preservation blocker tercatat pada bagian hasil eksekusi parsial di akhir dokumen. Checklist DoD tetap terbuka untuk syarat yang belum terpenuhi.
 
 ## Prompt siap tempel per tahap
 
@@ -118,3 +116,12 @@ timing, cancel/stale output, UTF-8 download, keyboard dan responsive states.
 Perbaiki hanya file milik task. Catat hasil aktual dan batas dukungan. Centang hanya bukti yang lulus;
 update hanya row 18 README bila semua DoD terpenuhi. Jangan commit/push/publish/deploy.
 ```
+
+
+## Hasil eksekusi parsial — 12 Oktober 2026
+
+- Dibuat route statis `/xml-formatter/`, worker classic lokal, pemeriksaan sintaks DOMParser, penolakan DOCTYPE sebelum parsing, consent whitespace antar-child, batas ukuran/depth/node, preservation post-check, dan empat belas fixture browser. Runner lulus **14/14** dalam HTTP localhost.
+- Distribusi dipin `xml-formatter` 3.7.0 dengan bundled `xml-parser-xo` 4.1.5; archive integrity, SHA-256, serta lisensi MIT tersimpan pada `tools/vendor/provenance.json`.
+- Blocker terukur: `<root><space> </space></root>` diformat berbeda oleh dependency (nilai leaf hilang atau berubah menjadi dua spasi bergantung opsi). Logic kini mengembalikan `UNSUPPORTED_CONTENT` sebelum formatter, dan post-check tidak pernah mengekspos output yang berubah.
+- Karena DoD mewajibkan whitespace-only leaf dipertahankan, task 18 dan fase 14a-B tetap belum selesai; route tidak dimasukkan ke hub atau sitemap. UI menjelaskan batas ini. Tidak ada fallback formatter buatan sendiri atau XMLSerializer.
+- QA keyboard/clipboard/download manual, console/network, dan mobile/desktop route belum seluruhnya dicatat. Checklist DoD tetap terbuka.

@@ -30,24 +30,24 @@ Prioritas ini berdasarkan kegunaan dan cakupan pengerjaan, bukan hasil pengukura
 
 ## Backlog tambahan — D01–D10, task 14–24
 
-Dibuat **12 Oktober 2026** sesuai permintaan membuat TODO untuk 10 kandidat developer tools. Setelah eksekusi lokal, **6/10 tool siap dan terintegrasi**; 14/18/19/23 belum diimplementasikan karena fase 14a membutuhkan distribusi resmi yang tidak dapat diunduh dari lingkungan ini. Nomor lama 00–13 dipertahankan; D01–D10 adalah kode pilihan, sedangkan 14–23 nomor task. Enam route baru sudah tercatat di hub dan sitemap lokal.
+Dibuat **12 Oktober 2026** sesuai permintaan membuat TODO untuk 10 kandidat developer tools. Setelah eksekusi lokal, **9/10 tool tersedia di hub dan sitemap**. Text Diff, Markdown Preview, dan JSONPath Tester sudah melewati fixture terfokus dan integrasi lokal. XML Formatter tersedia sebagai partial fail-closed: library 3.7.0 mengubah leaf whitespace-only, sehingga route belum dimasukkan ke navigasi publik. Task 14a fase A/C/D lulus smoke; fase B belum siap. Nomor lama 00–13 dipertahankan; D01–D10 adalah kode pilihan, sedangkan 14–23 nomor task.
 
 Baca [EXTENSION-CONTRACT.md](EXTENSION-CONTRACT.md) bersama kontrak existing. Task 14a menyiapkan library hanya untuk consumer yang membutuhkan; task 24 mengintegrasikan batch yang sudah lulus. Semua tool memakai HTML/CSS/vanilla JS, direct folder routes, pemrosesan lokal, dan file siap GitHub Pages tanpa compiler/build.
 
 | Selesai | TODO | Path yang direncanakan | Model / reasoning | Prasyarat |
 |---|---|---|---|---|
-| [ ] | [14a — Readiness library browser](14a-library-readiness.md) | Tidak ada route publik | Luna · high, per fase | Shared/harness existing |
-| [ ] | [14 / D01 — Text Diff](14-text-diff.md) | `/text-diff/` | Luna · high | 14a fase A |
+| [~] | [14a — Readiness library browser](14a-library-readiness.md) | Tidak ada route publik | Luna · high, per fase | A/C/D siap; B partial |
+| [~] | [14 / D01 — Text Diff](14-text-diff.md) | `/text-diff/` | Luna · high | 9/9 fixture; QA lanjutan task masih terbuka |
 | [x] | [15 / D02 — Hash & Checksum Generator](15-hash-generator.md) | `/hash-generator/` | Luna · medium | Native Web Crypto |
 | [x] | [16 / D03 — Password Generator](16-password-generator.md) | `/password-generator/` | Luna · high | Native Web Crypto |
 | [x] | [17 / D04 — Color Converter & Contrast Checker](17-color-converter.md) | `/color-converter/` | Luna · high | Shared existing |
-| [ ] | [18 / D05 — XML Formatter & Syntax Checker](18-xml-formatter.md) | `/xml-formatter/` | Luna · high, per tahap | 14a fase B |
-| [ ] | [19 / D06 — Markdown Editor & Preview](19-markdown-preview.md) | `/markdown-preview/` | Luna · high, per tahap | 14a fase C |
+| [~] | [18 / D05 — XML Formatter & Syntax Checker](18-xml-formatter.md) | `/xml-formatter/` | Luna · high, per tahap | Fail-closed; whitespace-only leaf belum dapat diformat |
+| [~] | [19 / D06 — Markdown Editor & Preview](19-markdown-preview.md) | `/markdown-preview/` | Luna · high, per tahap | 11/11 security fixture; review manual lanjutan terbuka |
 | [x] | [20 / D07 — Number Base Converter](20-number-base-converter.md) | `/number-base-converter/` | Luna · medium | Native BigInt |
 | [x] | [21 / D08 — URL Parser & Query Editor](21-url-parser.md) | `/url-parser/` | Luna · medium | Native URL/URLSearchParams |
 | [x] | [22 / D09 — CSS Gradient Generator](22-css-gradient-generator.md) | `/css-gradient-generator/` | Luna · medium | Shared existing |
-| [ ] | [23 / D10 — JSONPath Tester](23-jsonpath-tester.md) | `/jsonpath-tester/` | Luna · high, per tahap | 14a fase D + shared safe JSON |
-| [ ] | [24 — Integrasi tambahan & SEO](24-extension-integration-seo.md) | Hub/sitemap/related links | Luna · high, per batch | **Parsial:** enam tool terhubung; parser berikutnya menunggu 14a |
+| [~] | [23 / D10 — JSONPath Tester](23-jsonpath-tester.md) | `/jsonpath-tester/` | Luna · high, per tahap | 13/13 fixture; review manual lanjutan terbuka |
+| [~] | [24 — Integrasi tambahan & SEO](24-extension-integration-seo.md) | Hub/sitemap/related links | Luna · high, per batch | **Parsial:** 9 tool terhubung; XML ditahan |
 
 **Model rekomendasi: GPT-6 Luna (`gpt-6-luna`).** Medium untuk transformasi terbatas; high untuk diff, validasi/parser, randomness kata sandi, dan integrasi. Pilihan reasoning per task adalah penilaian scope proyek, bukan benchmark. [OpenAI Docs: Luna](https://developers.openai.com/api/docs/models/gpt-6-luna) mendukung medium/high; [panduan pemilihan model](https://developers.openai.com/api/docs/guides/model-selection) menempatkan Luna untuk pekerjaan yang scope-nya jelas dan biaya perlu dijaga. Harga API bukan estimasi penggunaan langganan Codex. Pilih model/reasoning di pengaturan chat; teks prompt tidak mengubah model sesi.
 
@@ -57,7 +57,7 @@ Urutan hemat yang disarankan:
 2. **Batch berikutnya: 16 → 17**, lalu **14a fase A → 14**. Jalankan 24 lagi untuk tools siap.
 3. **Batch parser: 14a fase B → 18**, **14a fase C → 19**, **14a fase D → 23**. Kerjakan per tahap sesuai task; tidak wajib menunggu kandidat lain. Jalankan 24 setiap batch siap.
 
-Fixture browser untuk enam tool siap lulus **43/43**; runner integrasi enam tool lulus **10/10**, runner developer lama lulus **29/29**, dan `git diff --check` bersih. Angka ini bukti lokal browser, bukan publik/live. Task 24 masih terbuka karena empat kandidat lain belum siap dan 14a A–D tidak memiliki file/vendor yang terverifikasi.
+Fixture browser untuk enam tool awal lulus **43/43**; empat task tambahan memiliki **47/47 focused fixture**; vendor readiness smoke **11/11**. Integrasi sembilan route lulus **13/13**, runner developer lama lulus **29/29**, dan `git diff --check` bersih. Angka ini bukti lokal browser, bukan publik/live. Task XML masih partial: fixture membuktikan leaf whitespace-only ditolak dengan aman karena xml-formatter 3.7.0 menambah/menghapus spasi saat memformat nilai tersebut. Lihat catatan pada 14a dan task 18. Manual keyboard/console review, publish, dan verifikasi live belum dilakukan.
 
 Contoh eksekusi:
 
@@ -107,4 +107,4 @@ Konten bantuan dan metadata ditulis langsung di HTML agar dapat dibaca tanpa men
 
 ## Batas deliverable saat ini
 
-Implementasi lokal 00–13 selesai; pada 11 Oktober **321/321 fixture browser lulus**, termasuk 28 audit integrasi pada baseline saat itu. Setelah batch baru, hub menautkan 18 developer tools, sitemap berisi 32 URL publik unik, dan index tes berisi 21 runner noindex. Enam tool tambahan memiliki **43/43 fixture** lulus; runner integrasi baru **10/10** dan runner lama **29/29** lulus. Beberapa pemeriksaan keyboard/console manual, deployment, verifikasi live routes/redirect, Search Console, dan baseline traffic tetap belum diverifikasi.
+Implementasi lokal 00–13 selesai; pada 11 Oktober **321/321 fixture browser lulus**, termasuk 28 audit integrasi pada baseline saat itu. Hub kini menautkan **21 developer tools**, sitemap berisi **35 URL publik unik**, dan index tes berisi **26 runner noindex**. Batch tambahan pertama memiliki **43/43** fixture; empat task terbaru **47/47** fixture; vendor smoke **11/11**; integrasi sembilan route **13/13**; integrasi baseline **29/29**. XML Formatter dibuat fail-closed tetapi belum terhubung karena whitespace-only leaf belum dipreservasi. Pemeriksaan keyboard/console manual, deployment, verifikasi live routes/redirect, Search Console, dan baseline traffic tetap belum diverifikasi.

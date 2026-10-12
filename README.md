@@ -32,7 +32,7 @@ Open http://127.0.0.1:4173/.
 
 `index-master.html` is an archived 2022 profile marked `noindex`, with links to the current homepage and LinkedIn profile. `css/style.min.css` and `js/app.min.js` are legacy files; the redesigned homepage does not load them.
 
-The homepage and developer tools are ready for the existing GitHub Pages user site, served from the repository root. The existing `CNAME` is `edwinlab.dev`. Routes are real directories with `index.html` files: `/`, `/tools/`, and the eighteen developer tools listed below. Six new routes were integrated locally on 12 October 2026; four other planned additions still need verified browser libraries. GitHub Pages can serve them directly; there is no compiler, package installation, framework, or build step. Native JavaScript modules load over HTTP/HTTPS. Opening pages with `file://` is not supported because root-relative assets and module imports need a web server. Blog content remains at https://edwinlab.dev/blog/ and is linked using absolute URLs.
+The homepage and developer tools are ready for the existing GitHub Pages user site, served from the repository root. The existing `CNAME` is `edwinlab.dev`. Routes are real directories with `index.html` files: `/`, `/tools/`, and the 21 developer tools listed below. Nine new tools are integrated locally. The XML Formatter is implemented as a guarded partial preview and is intentionally omitted from the hub and sitemap until its pinned library can preserve whitespace-only leaf text. GitHub Pages serves the pages directly; there is no compiler, package installation, framework, or build step. Native JavaScript modules load over HTTP/HTTPS. Opening pages with `file://` is not supported because root-relative assets and module imports need a web server. Blog content remains at https://edwinlab.dev/blog/ and is linked using absolute URLs.
 
 ## Content sources
 
@@ -46,7 +46,7 @@ Public code descriptions come from these repositories and their READMEs:
 
 Writing titles and original dates come from the owner's blog. These entries are presented as archived notes, not current technical recommendations.
 
-The new developer-tools batch added six local routes and browser fixtures; four other candidates remain pending browser-library readiness. See [docs/developer-tools/README.md](docs/developer-tools/README.md) for current checklists and local test evidence.
+The new developer-tools batch added nine integrated local routes and browser fixtures; XML Formatter remains unlinked pending a documented formatter limitation. See [docs/developer-tools/README.md](docs/developer-tools/README.md) for current checklists and local test evidence.
 
 ## Checks
 
@@ -57,7 +57,7 @@ git diff --check
 
 Browser review covers 320, 390, 650, 768, 1024 and 1440 px widths, disclosure controls, email-copy feedback, and anchor navigation. Core navigation and disclosure content work without JavaScript. Copy email appears only when the Clipboard API is available in a secure context; a direct mail link remains available.
 
-Developer Tools browser fixtures are listed at `/tests/tools/` and run without a build. Local verification on 11 October 2026: **321/321 fixtures passed** across the foundation and original twelve tools. On 12 October, the six new tools passed **43/43 fixtures**, their integration runner passed **10/10**, and the existing developer integration runner passed **29/29**. The integration runner audits static metadata, links/assets, sitemap, direct refresh, examples, errors, copy/download preparation, stale results, local resources, no-JavaScript content, and responsive layouts. Actual download-file persistence is browser-dependent; fixtures verify Blob content and download dispatch.
+Developer Tools browser fixtures are listed at `/tests/tools/` and run without a build. Local verification on 11 October 2026: **321/321 fixtures passed** across the foundation and original twelve tools. On 12 October, the first six additions passed **43/43 fixtures**; Text Diff, XML Formatter, Markdown Preview, and JSONPath Tester passed **47/47 focused fixtures**; and pinned library smoke checks passed **11/11**. The nine-route integration runner passed **13/13** after final verification; the previous developer integration baseline passed **29/29**. The integration runner audits static metadata, links/assets, sitemap, direct refresh, examples, errors, copy/download preparation, stale results, local resources, no-JavaScript content, and responsive layouts. Actual download-file persistence is browser-dependent; fixtures verify Blob content and download dispatch. XML's whitespace-only leaf preservation remains a documented blocker and the route is not publicly linked.
 
 The hub has no application JavaScript; its navigation and cards are ordinary HTML links. Heavy local dependencies load only in their consuming tools. SQL and regex processing run in terminable workers; user regex never executes on the main thread.
 
@@ -81,5 +81,8 @@ The hub has no application JavaScript; its navigation and cards are ordinary HTM
 | Number Base Converter | `/number-base-converter/` |
 | URL Parser & Query Editor | `/url-parser/` |
 | CSS Gradient Generator | `/css-gradient-generator/` |
+| Text Diff | `/text-diff/` |
+| Markdown Preview | `/markdown-preview/` |
+| JSONPath Tester | `/jsonpath-tester/` |
 
-All tools process input locally without uploads or browser storage. Their documented limits and dialect/data-type constraints still apply. New pages are locally ready; publication, live HTTPS/redirect checks, Search Console submission, and traffic measurement are separate steps. See `docs/developer-tools/13-integration-seo.md` for evidence and remaining public checks.
+Ready tools process input locally without uploads or browser storage. Their documented limits and dialect/data-type constraints still apply. New pages are locally ready; publication, live HTTPS/redirect checks, Search Console submission, and traffic measurement are separate steps. See `docs/developer-tools/13-integration-seo.md` for evidence and remaining public checks.
