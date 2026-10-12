@@ -1,6 +1,22 @@
 # Live crawl and indexing check
 
-Date: **12 October 2026 (Asia/Jakarta)**. This is a partial public check. PageSpeed Insights successfully generated a mobile Lighthouse report for six URLs below, which shows that the PSI service could render them at that time. Its report interface did not expose the origin HTTP response status, redirect chain, or response headers. Do not interpret “report generated” as a verified 200 response.
+Date: **12 October 2026 (Asia/Jakarta)**. This is a partial public check. PageSpeed Insights successfully generated a mobile Lighthouse report for six URLs below, which shows that the PSI service could render them at that time. Its report interface did not expose the origin HTTP response status, redirect chain, or response headers. A browser pass after the user confirmed publication verified the rendered DOM on the routes/assets listed in “Post-publication browser verification” below. Do not interpret browser rendering as a verified HTTP status.
+
+## Post-publication browser verification
+
+The following was checked in a browser on `https://edwinlab.dev/` after the user confirmed that the changes were pushed to `master`:
+
+- `/index-master.html` rendered the visible archive notice and link to the current profile; meta robots was `noindex,follow`. The page had no canonical link. This confirms page HTML only, not `X-Robots-Tag` or HTTP status.
+- Homepage rendered its self-canonical, `ProfilePage`/`Person` JSON-LD, and `https://edwinlab.dev/assets/social/home.png` metadata.
+- `/tools/`, `/alat/`, and `/jsonlint/` rendered expected canonical and OG image metadata. Breadcrumb navigation and JSON-LD appeared on the tool hub and JSONLint. The everyday hub rendered its four category shortcuts.
+- All 11 everyday tool routes from the sitemap rendered the hierarchy `Beranda → Alat Online → [tool]`; each had `BreadcrumbList` JSON-LD.
+- JSONLint, timestamp converter, and JSON ↔ CSV converter rendered the relevant RFC 8259, RFC 3339, and RFC 4180 links.
+- The discount calculator rendered the updated rounding/example copy. An interactive live calculation of Rp200000 with 20% then 10% produced Rp144000,00, total savings Rp56000,00, and 28,00% effective savings.
+- `/link-whatsapp/`, `/kompres-gambar/`, and `/pembuat-qr-code/` rendered. QR showed one related-tools section linking to WhatsApp.
+- All six social PNG URLs loaded as 1200×630 images in the browser: home, developer tools, everyday tools, JSONLint, WhatsApp link, and image compressor. The corresponding pages in that six-page batch referenced their matching social cards.
+- The public everyday integration runner completed **20/21 tests**. The single failure was its hub assertion counting a `type="application/ld+json"` metadata block as executable JavaScript. The local test now excludes JSON-LD when checking for executable scripts; that test correction still needs publication and a repeat run.
+
+This pass verifies rendered HTML/asset availability and one tool interaction. Platform-specific social preview debuggers, HTTP response status/headers, full redirect behavior, all-route response crawling, and Search Console remain unverified.
 
 ## Sitemap URL sample
 

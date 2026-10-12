@@ -1,6 +1,6 @@
 # SEO 03 — Crawl live dan Search Console
 
-Status: **sebagian; sampel PSI dan laporan batas dibuat** di [LIVE-CHECK.md](LIVE-CHECK.md). Tool browser tidak mengungkap HTTP status/headers untuk crawl, dan Search Console milik pemilik tidak tersedia. Temuan: [F02](AUDIT.md#f02--blog-memakai-identitas-dan-url-sosial-lama), [F03](AUDIT.md#f03--bukti-indeks-dan-performa-search-belum-tersedia).
+Status: **sebagian; PSI dan pemeriksaan browser DOM pascapublikasi dicatat** di [LIVE-CHECK.md](LIVE-CHECK.md). Tool browser tidak mengungkap HTTP status/headers untuk crawl, dan Search Console milik pemilik tidak tersedia. Temuan: [F02](AUDIT.md#f02--blog-memakai-identitas-dan-url-sosial-lama), [F03](AUDIT.md#f03--bukti-indeks-dan-performa-search-belum-tersedia).
 
 ## Scope
 
@@ -19,7 +19,7 @@ Bagian Search Console dilakukan di properti milik Edwin ketika akses/instruksi u
 - [ ] Akses properti Search Console pemilik tidak tersedia; dependency ini dicatat secara spesifik.
 - [ ] Sitemap report dan URL Inspection belum dapat dibaca; tidak ada klaim indexing.
 - [x] Baseline Search Console 28 hari dinyatakan belum tersedia; tidak ada data privat direkam.
-- [ ] Dokumentasi lama tentang belum live diperbarui hanya untuk fakta publikasi yang telah terbukti; QA lama tidak dicentang tanpa pengujian.
+- [x] Dokumentasi status lama diperbarui dengan konfirmasi pemilik dan bukti DOM pascapublikasi; tidak mengklaim status HTTP/header atau indexing.
 - [x] Checklist/tracker membedakan laporan PSI/public sample, status response tak terukur, dan Search Console pending.
 
 ## Prompt

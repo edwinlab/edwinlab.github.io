@@ -15,8 +15,8 @@ Untuk perubahan batch01–09, perluas runner integrasi yang sudah ada hanya pada
 - [x] Baseline lab per URL, tanggal, device, throttling dan versi dicatat; data field dilaporkan No Data.
 - [x] LCP/CLS dibandingkan dengan target panduan; TBT dipisahkan dan tidak disebut INP.
 - [x] Tidak ada bottleneck pengalaman yang terbukti; tidak dilakukan optimasi kosmetik/rewrite.
-- [ ] Re-run 320/390/768/1440 viewport setelah TODO 05 belum dapat dilakukan di browser lokal; source dan existing runner memiliki breakpoint/focus/no-JS checks.
-- [x] Existing runner kini menjaga breadcrumb/person dan OG cards; syntax runner lolos. Source audit statis memeriksa 26 canonical route, unique title/description, lang/H1, seluruh 38 JSON-LD blocks, dan OG asset path. Browser execution menunggu local preview server.
+- [x] Re-run viewport live pascapublikasi pada hub `/alat/` dan tiga halaman TODO 07 di lebar 320/390/768/1440 px; tidak ditemukan horizontal overflow. Ini sampel layout, bukan audit visual semua 26 halaman.
+- [x] Existing runner menjaga breadcrumb/person dan OG cards. Runner everyday live lulus 20/21; satu failure adalah assertion yang menghitung JSON-LD sebagai script executable dan sudah diperbaiki lokal, menunggu publikasi/re-run. Source audit statis memeriksa 26 canonical route, unique title/description, lang/H1, 38 JSON-LD blocks, dan OG asset path.
 - [x] Tidak mengulang tes tool yang tidak terdampak; task sebelumnya menjalankan checks copy, breadcrumbs, metadata dan JSON-LD terkait.
 - [x] Bukti, batas dan keputusan dicatat; `git diff --check` lulus. Pengukuran ulang setelah perubahan live masih diperlukan.
 

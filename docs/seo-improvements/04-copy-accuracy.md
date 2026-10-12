@@ -1,6 +1,6 @@
 # SEO 04 — Koreksi penjelasan tool
 
-Status: **selesai lokal**. Prioritas P1. Dependency: tidak ada. Temuan: [F04](AUDIT.md#f04--dua-penjelasan-alat-tidak-sepenuhnya-cocok-dengan-implementasi).
+Status: **selesai; copy dan contoh diskon diverifikasi live**. Prioritas P1. Dependency: tidak ada. Temuan: [F04](AUDIT.md#f04--dua-penjelasan-alat-tidak-sepenuhnya-cocok-dengan-implementasi). Bukti: [LIVE-CHECK.md](LIVE-CHECK.md#post-publication-browser-verification).
 
 ## Scope
 
@@ -17,7 +17,8 @@ Diskon baris 42: contoh harus menyebut harga Rp200000 → Rp144000 untuk 20% lal
 - [x] Contoh diskon menyertakan harga; istilah sen (Rp0,01) dan pembulatan setengah ke atas dijelaskan, termasuk rincian salin.
 - [x] Cross-check memakai fungsi logic existing: keluarga `Array.from(...).length = 7`, bendera `= 2`; Rp200000 → Rp144000/28%; Rp0,05 dengan dua tahap 50% → Rp0,03 → Rp0,02, hasil final hemat 60%. Tidak mengubah hitungan.
 - [x] Metadata/H1/canonical/form tidak diubah; `git diff --check` lulus. Tidak dibuat suite baru untuk copy sederhana.
-- [x] Checklist/tracker diperbarui; QA live tetap tertunda hingga perubahan dipublikasikan.
+- [x] Setelah publikasi, copy WhatsApp/diskon tampak pada halaman live; kalkulasi Rp200000, 20% lalu 10% menghasilkan Rp144000,00 dan 28,00%. Bukti dan batas response-level tercatat di LIVE-CHECK.md.
+- [x] Checklist/tracker diperbarui; pemeriksaan hanya memastikan satu contoh interaksi live.
 
 ## Prompt
 

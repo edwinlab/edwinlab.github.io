@@ -1,6 +1,6 @@
 # SEO 06 — Konten developer tools
 
-Status: **selesai lokal untuk batch awal (3 halaman)**. Prioritas P2. Query belum tersedia; pilihan merupakan hipotesis berdasarkan kebutuhan yang sudah dicatat di audit. Temuan: [F06](AUDIT.md#f06--konten-lanjutan-perlu-menjawab-masalah-yang-nyata), [F08](AUDIT.md#f08--preview-sosial-seragam-dan-kecil).
+Status: **batch awal (3 halaman) terverifikasi live**. Prioritas P2. Query belum tersedia; pilihan merupakan hipotesis berdasarkan kebutuhan yang sudah dicatat di audit. Temuan: [F06](AUDIT.md#f06--konten-lanjutan-perlu-menjawab-masalah-yang-nyata), [F08](AUDIT.md#f08--preview-sosial-seragam-dan-kecil). Bukti browser: [LIVE-CHECK.md](LIVE-CHECK.md#post-publication-browser-verification).
 
 ## Scope
 
@@ -22,6 +22,7 @@ Artikel terpisah tidak wajib. Jika satu query memerlukan tutorial yang lebih len
 - [x] Title/description/canonical tidak berubah; konten HTML awal dan related links tetap ada.
 - [x] Tidak ada perubahan algoritme/batas atau halaman baru. `git diff --check` lulus.
 - [x] Checklist/tracker mencatat batch; perluasan berikutnya menunggu data/query nyata.
+- [x] Browser live membuka ketiga halaman dan memverifikasi breadcrumb serta link RFC yang relevan; status respons HTTP belum diukur.
 
 ## Prompt
 

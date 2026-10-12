@@ -33,7 +33,7 @@ test('hub memuat 11 card HTML statis pada empat kategori dan tanpa script', asyn
   equal(doc.title, 'Alat Online Gratis untuk Kebutuhan Sehari-hari | Edwin Lab');
   equal(doc.documentElement.lang, 'id'); equal(doc.querySelectorAll('h1').length, 1);
   equal(doc.querySelectorAll('.alat-directory').length, 4); equal(doc.querySelectorAll('.alat-card').length, 11);
-  equal(doc.querySelectorAll('script').length, 0); equal(doc.querySelectorAll('meta[name="robots"]').length, 0);
+  equal(doc.querySelectorAll('script:not([type="application/ld+json"])').length, 0); equal(doc.querySelectorAll('meta[name="robots"]').length, 0);
   equal(doc.querySelector('link[rel="canonical"]').getAttribute('href'), 'https://edwinlab.dev/alat/');
   assert(doc.querySelector('nav a[href="/tools/"]')); assert(doc.querySelector('a[href="/"]'));
   for (const id of ['teks-title', 'kalkulator-title', 'tautan-title', 'gambar-title']) {

@@ -1,12 +1,12 @@
 # SEO 01 — Tangani halaman legacy
 
-Status: **sebagian selesai lokal**. Prioritas P1. Dependency: tidak ada. Temuan: [F01](AUDIT.md#f01--halaman-profil-legacy-masih-live).
+Status: **HTML legacy live terverifikasi**. Prioritas P1. Dependency: tidak ada. Temuan: [F01](AUDIT.md#f01--halaman-profil-legacy-masih-live). Bukti browser: [LIVE-CHECK.md](LIVE-CHECK.md#post-publication-browser-verification).
 
 ## Scope
 
 Miliki `index-master.html` dan catatan status legacy pada `README.md`. Pada audit live 12 Oktober, halaman masih memakai identitas Jakarta/freelance, URL OG github.io, serta belum memiliki noindex. Homepage `/` sudah berisi profil saat ini; perbaikan source task ini tercatat di checklist berikut.
 
-Keputusan task: simpan sebagai arsip 2022 karena repo ini menggunakan static GitHub Pages dan tidak memiliki konfigurasi redirect. Arsip diberi label yang terlihat, `noindex,follow`, social metadata pada domain utama, serta tautan ke homepage dan LinkedIn saat ini. Verifikasi live menunggu publikasi.
+Keputusan task: simpan sebagai arsip 2022 karena repo ini menggunakan static GitHub Pages dan tidak memiliki konfigurasi redirect. Arsip diberi label yang terlihat, `noindex,follow`, social metadata pada domain utama, serta tautan ke homepage dan LinkedIn saat ini. Setelah publikasi, browser menampilkan label/link arsip dan meta robots `noindex,follow`; status HTTP, response headers, dan redirect belum diverifikasi.
 
 Tidak perlu menghapus file atau aset legacy untuk menyelesaikan ini. Tidak mengubah homepage/CNAME atau memasukkan arsip ke sitemap. Jangan memakai `Disallow` sebagai pengganti noindex; crawler harus dapat membaca directive.
 
@@ -17,7 +17,7 @@ Tidak perlu menghapus file atau aset legacy untuk menyelesaikan ini. Tidak mengu
 - [x] `noindex,follow` disediakan dalam HTML awal. `robots.txt` tetap mengizinkan crawl; URL tidak ditambahkan ke sitemap.
 - [x] Homepage dan tool publik tetap indexable di source; sitemap dan canonical tidak diubah.
 - [x] HTML source diperiksa; `git diff --check` lulus. Tidak perlu tes aplikasi baru untuk perubahan copy/meta.
-- [ ] Sesudah publikasi yang diminta terpisah, catat final URL/status/directive live. Jika belum dipublikasikan, bagian live tetap unchecked.
+- [x] Sesudah publikasi, browser membuka `/index-master.html` dan memverifikasi label/link serta meta `noindex,follow`; tidak ada canonical. HTTP status, response headers, dan redirect chain tetap belum terverifikasi.
 - [x] Tracker serta status task diperbarui dengan bukti lokal/live yang terpisah.
 
 ## Prompt

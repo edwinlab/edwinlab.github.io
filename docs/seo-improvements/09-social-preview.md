@@ -1,6 +1,6 @@
 # SEO 09 — Preview saat dibagikan
 
-Status: **sebagian selesai lokal; platform preview pending publikasi**. Batch: homepage, `/tools/`, `/alat/`, `/jsonlint/`, `/link-whatsapp/`, `/kompres-gambar/`. Temuan: [F08](AUDIT.md#f08--preview-sosial-seragam-dan-kecil).
+Status: **metadata dan asset live terverifikasi; platform preview pending**. Batch: homepage, `/tools/`, `/alat/`, `/jsonlint/`, `/link-whatsapp/`, `/kompres-gambar/`. Temuan: [F08](AUDIT.md#f08--preview-sosial-seragam-dan-kecil). Bukti browser: [LIVE-CHECK.md](LIVE-CHECK.md#post-publication-browser-verification).
 
 ## Scope
 
@@ -16,7 +16,8 @@ Lengkapi OG/Twitter metadata secara konsisten, termasuk URL absolut, gambar yang
 - [x] Warna/logo Edwin Lab dipakai; judul/fungsi tiap halaman terbaca pada ukuran thumbnail dan tidak memuat klaim palsu.
 - [x] OG/Twitter title, description, URL absolut, image, image alt dan dimensi konsisten dengan halaman; Twitter large image.
 - [x] Enam aset berukuran 1200×630, total sekitar 344 KB; favicon/logo asli tetap dipertahankan dan tidak ada data pengguna.
-- [ ] Path lokal valid; fetch publik dan preview platform pending karena belum dipublikasikan.
+- [x] Seluruh enam asset berhasil dibuka publik di browser sebagai PNG 1200×630; halaman batch merujuk ke image yang sesuai.
+- [ ] Facebook/LinkedIn/X preview debugger tetap pending; asset fetch sukses tidak membuktikan preview platform.
 - [x] Tidak mengklaim social metadata menaikkan ranking.
 - [x] Pemeriksaan metadata/path, visual thumbnail, syntax runner, dan `git diff --check` lulus; runner tools kini memeriksa enam metadata/assets. Eksekusi browser live menunggu publikasi.
 

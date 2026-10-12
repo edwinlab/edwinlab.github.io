@@ -1,6 +1,6 @@
 # TODO — Peningkatan SEO Edwin Lab
 
-Tanggal audit: **12 Oktober 2026, Asia/Jakarta**. Website sudah live di **https://edwinlab.dev/**. Perbaikan lokal, laporan parsial, dan dependency tiap TODO tercatat di tracker. Source 01/04–09 dan draft 11/12 berubah lokal; hasil lokal belum diterbitkan ke website.
+Tanggal audit: **12 Oktober 2026, Asia/Jakarta**. Website live di **https://edwinlab.dev/** dan pemilik mengonfirmasi perubahan telah dipush ke `master`. Verifikasi browser pascapublikasi untuk route dan asset sampel tercatat di [LIVE-CHECK.md](LIVE-CHECK.md); hal ini bukan bukti HTTP headers, indexing, atau respons Search Console.
 
 Baca [AUDIT.md](AUDIT.md) untuk bukti dan batas pemeriksaan. Audit source mencakup **26 halaman publik: homepage, dua hub, 12 developer tools, dan 11 alat harian**. Pemeriksaan browser live mencakup homepage, kedua hub, empat tool contoh, halaman legacy, blog, serta satu artikel. Halaman tool lainnya diperiksa dari source; jangan menyebut semua route live sudah diaudit.
 
@@ -10,7 +10,8 @@ Baca [AUDIT.md](AUDIT.md) untuk bukti dan batas pemeriksaan. Audit source mencak
 - [x] Review konten, language, internal links, dan structured data kedua koleksi tools.
 - [x] Pemeriksaan sampel live dan identifikasi masalah blog/halaman legacy.
 - [x] Rencana task dengan scope, dependency, checklist penerimaan, dan prompt eksekusi.
-- [ ] Selesaikan seluruh perbaikan dan verifikasi SEO; beberapa perubahan telah dikerjakan lokal sesuai tracker.
+- [x] Perbaikan source TODO 01 dan 04–09 telah dipublikasikan; route sampel, seluruh 11 breadcrumb alat harian, dan enam social image telah diperiksa di browser live.
+- [ ] Verifikasi visual lintas viewport 320/390/768/1440 px dan platform social preview.
 - [ ] Verifikasi HTTP/header/redirect semua URL publik.
 - [ ] Bukti Search Console, indeks, traffic, dan Core Web Vitals.
 
@@ -20,16 +21,16 @@ TODO 01 dan 04–09 telah dikerjakan lokal dalam scope batch yang dijelaskan tia
 
 | Status | TODO | Prioritas | Pemilik / dependency |
 |---|---|---|---|
-| Sebagian (lokal selesai; live pending) | [01 — Tangani halaman legacy](01-legacy-indexing.md) | P1 | Repo ini; independen |
+| Sebagian (meta `noindex,follow` terverifikasi live; response headers/status pending) | [01 — Tangani halaman legacy](01-legacy-indexing.md) | P1 | Repo ini; independen |
 | Sebagian; source blog belum ditemukan | [02 — Identitas dan canonical blog](02-blog-seo.md) | P1 | Source blog terpisah perlu ditemukan |
 | Sebagian; 6 URL PSI; HTTP headers/GSC pending | [03 — Crawl live dan Search Console](03-live-indexing.md) | P1 | Pemeriksaan publik; akses pemilik untuk Search Console |
-| Selesai lokal; live pending | [04 — Koreksi penjelasan tool](04-copy-accuracy.md) | P1 | Repo ini; independen |
-| Sebagian; visual viewport pending | [05 — Hub, breadcrumb, dan related links](05-navigation.md) | P2 | Repo ini; sebelum 08 |
-| Selesai lokal; batch 3 halaman; query belum ada | [06 — Konten developer tools](06-developer-content.md) | P2 | Gunakan data 03 bila tersedia; batch kecil |
-| Sebagian; batch 3 halaman lokal; visual pending | [07 — Konten alat harian](07-everyday-content.md) | P2 | Setelah 04; gunakan data 03 bila tersedia |
-| Sebagian; 13 halaman JSON-LD lokal tervalidasi; live pending | [08 — Structured data yang sesuai konten](08-structured-data.md) | P2 | Setelah 05; tidak mensyaratkan rich result |
-| Sebagian; 6 aset + metadata lokal; live preview pending | [09 — Preview saat dibagikan](09-social-preview.md) | P2 | Repo ini; peningkatan distribusi |
-| Sebagian; baseline PSI 6 halaman; CrUX dan recheck publikasi pending | [10 — Kinerja mobile dan regresi SEO](10-performance-validation.md) | P2 | Ukur sebelum mengubah; cek batch sebelumnya |
+| Selesai; contoh live teruji | [04 — Koreksi penjelasan tool](04-copy-accuracy.md) | P1 | Repo ini; independen |
+| Sebagian; semua 11 breadcrumb/schema live; 20/21 runner lulus, satu assertion JSON-LD diperbaiki lokal dan perlu re-run | [05 — Hub, breadcrumb, dan related links](05-navigation.md) | P2 | Repo ini; sebelum 08 |
+| Selesai; batch 3 halaman terverifikasi live; query belum ada | [06 — Konten developer tools](06-developer-content.md) | P2 | Gunakan data 03 bila tersedia; batch kecil |
+| Selesai untuk batch 3 halaman; live copy dan 4 lebar sampel diperiksa | [07 — Konten alat harian](07-everyday-content.md) | P2 | Setelah 04; gunakan data 03 bila tersedia |
+| Sebagian; markup utama diverifikasi di browser; Rich Results/Search Console pending | [08 — Structured data yang sesuai konten](08-structured-data.md) | P2 | Setelah 05; tidak mensyaratkan rich result |
+| Sebagian; 6 aset + metadata terverifikasi live; platform preview pending | [09 — Preview saat dibagikan](09-social-preview.md) | P2 | Repo ini; peningkatan distribusi |
+| Sebagian; baseline PSI 6 halaman dan viewport sampel; re-run runner publik serta CrUX pending | [10 — Kinerja mobile dan regresi SEO](10-performance-validation.md) | P2 | Ukur sebelum mengubah; cek batch sebelumnya |
 | Sebagian; event spec selesai; provider/property menunggu pemilik | [11 — Analytics dan penggunaan tools](11-measurement.md) | P1 | Pilihan layanan/ID yang nyata dari pemilik |
 | Sebagian; 3 brief dan draft LinkedIn; evaluasi pending | [12 — Distribusi dan evaluasi query](12-growth-review.md) | P2 | Setelah 03; 06/07/09/11 bila tersedia |
 
@@ -37,7 +38,7 @@ P1 berarti tindakan awal karena ada informasi publik yang keliru atau bukti dasa
 
 ## Urutan eksekusi
 
-1. Perbaikan source TODO 01 dan 04–09 serta baseline TODO 10 selesai lokal/parsial. Berikutnya jalankan browser runner visual, validasi Rich Results/platform preview, dan PSI ulang setelah publikasi.
+1. Perbaikan source TODO 01 dan 04–09 telah dipublikasikan; pemeriksaan browser sampel tercatat. Berikutnya jalankan QA viewport, validasi Rich Results/platform preview, dan PSI ulang setelah publikasi.
 2. Minta akses repository/CMS blog untuk TODO 02 dan properti Search Console untuk TODO 03. Hanya owner dapat memberikan akses tersebut.
 3. Pilih provider/property analytics untuk mengaktifkan event spec TODO 11; jangan memasang ID asumsi. Draft TODO 12 siap direview dan dipublikasikan secara manual.
 4. Mulai evaluasi query dan traffic setelah perubahan benar-benar live dan baseline cukup; hindari klaim dampak dari tes lab.

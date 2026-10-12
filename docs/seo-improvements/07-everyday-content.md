@@ -1,6 +1,6 @@
 # SEO 07 — Konten alat harian
 
-Status: **sebagian selesai lokal untuk batch awal (3 halaman)**. TODO 04 selesai lokal; query Search Console belum tersedia. Temuan: [F06](AUDIT.md#f06--konten-lanjutan-perlu-menjawab-masalah-yang-nyata).
+Status: **batch awal (3 halaman) terverifikasi live**. TODO 04 selesai; query Search Console belum tersedia. Temuan: [F06](AUDIT.md#f06--konten-lanjutan-perlu-menjawab-masalah-yang-nyata). Bukti browser: [LIVE-CHECK.md](LIVE-CHECK.md#post-publication-browser-verification).
 
 ## Scope
 
@@ -17,7 +17,8 @@ Link WhatsApp, diskon, dan kompres gambar sudah punya panduan; perluasan berikut
 - [x] Petunjuk utama disederhanakan; rincian batas, format baris dan perilaku merek ditempatkan di panduan/contoh lanjutan.
 - [x] Klaim hasil tetap sesuai logic; tidak menambah fitur/batas baru.
 - [x] Metadata, H1, canonical, form/CTA tidak berubah; copy Bahasa Indonesia tersedia dalam HTML statis.
-- [ ] Pemeriksaan source/copy selesai dan `git diff --check` lulus; visual layout mobile menunggu preview karena server localhost tidak dapat dibuka di sandbox.
+- [x] Pemeriksaan source/copy selesai dan `git diff --check` lulus; browser live membuka ketiga halaman dan memverifikasi intro/copy serta breadcrumb.
+- [x] Browser live memeriksa tiga halaman batch pada lebar 320/390/768/1440 px; tidak ditemukan horizontal overflow.
 - [x] Checklist/tracker mencatat batch dan keterbatasan; tidak mengubah algoritme.
 
 ## Prompt
