@@ -6,7 +6,7 @@ Sasaran: pengunjung Indonesia dengan UI Bahasa Indonesia. Tools ditujukan untuk 
 
 ## Tracker dan model eksekusi
 
-**Untuk run ini, semua tools menggunakan GPT-6 Luna (`gpt-6-luna`) dengan reasoning `high`, sesuai pilihan pengguna.** Ini adalah pilihan sesi ini, bukan klaim benchmark atau jaminan biaya. Pengaturan model dilakukan di chat; menulis nama model di prompt tidak mengganti model sesi secara otomatis. Rekomendasi mengikuti [profil resmi GPT-6 Luna](https://developers.openai.com/api/docs/models/gpt-6-luna) dan prinsip [efisiensi biaya OpenAI](https://developers.openai.com/api/docs/guides/cost-optimization).
+**Untuk batch awal 00–13, semua tools menggunakan GPT-6 Luna (`gpt-6-luna`) dengan reasoning `high`, sesuai pilihan pengguna.** Ini adalah pilihan sesi sebelumnya, bukan klaim benchmark atau jaminan biaya. Pengaturan model dilakukan di chat; menulis nama model di prompt tidak mengganti model sesi secara otomatis. Rekomendasi mengikuti [profil resmi GPT-6 Luna](https://developers.openai.com/api/docs/models/gpt-6-luna) dan prinsip [efisiensi biaya OpenAI](https://developers.openai.com/api/docs/guides/cost-optimization).
 
 | Status | TODO / dokumen | Path publik | Model · reasoning | Prasyarat |
 |---|---|---|---|---|
@@ -28,7 +28,46 @@ Sasaran: pengunjung Indonesia dengan UI Bahasa Indonesia. Tools ditujukan untuk 
 
 Semua kotak di atas menunjukkan **implementasi**, bukan penyelesaian penulisan rencana. Executor boleh memperbarui checklist task sendiri dan baris tracker sendiri setelah ada bukti. Untuk 00a catat fase yang lulus; untuk 13 catat batch terintegrasi. Jangan menandai keduanya selesai keseluruhan ketika baru sebagian.
 
-## Urutan yang disarankan
+## Backlog tambahan — task 14–24
+
+**Status: rencana saja; seluruh checkbox batch ini belum dikerjakan.** Dibuat 12 Oktober 2026 untuk eksekusi satu task per chat menggunakan model hemat. Rekomendasi batch baru memakai **GPT-6 Luna (gpt-6-luna) medium/high** sesuai kompleksitas; pilihan high pada batch awal 00–13 tetap menjadi catatan sesi terdahulu. Model dipilih pengguna di UI, bukan otomatis oleh prompt.
+
+Inventaris saat perencanaan: 11 tool ada di /alat/, task 12 Gambar ke PDF masih pending; sitemap repository memuat 35 URL publik termasuk developer tools. Batch ini menambah kebutuhan teks, hitungan, fokus, pengacakan, dan gambar tanpa mengulang tool yang sudah ada. Prioritas merupakan penilaian kegunaan/scope, **bukan hasil riset volume keyword**.
+
+Baca [EXTENSION-CONTRACT.md](EXTENSION-CONTRACT.md) bersama kontrak existing. Setiap task menyertakan scope V1, ownership, algoritme/batas, fixture dengan expected results, copy/SEO Indonesia, QA dan prompt siap tempel.
+
+| Selesai | TODO | Route rencana | Model · reasoning | Prasyarat relevan |
+|---|---|---|---|---|
+| [ ] | [14 — Terbilang angka & rupiah](14-terbilang.md) | /terbilang/ | Luna · medium | Shared UI/BigInt |
+| [ ] | [15 — Split bill / bagi tagihan](15-split-bill.md) | /split-bill/ | Luna · high | Shared angka integer |
+| [ ] | [16 — Kalkulator rata-rata](16-kalkulator-rata-rata.md) | /kalkulator-rata-rata/ | Luna · medium | Shared decimal/rasional |
+| [ ] | [17 — Kalkulator nilai akhir](17-kalkulator-nilai-akhir.md) | /kalkulator-nilai-akhir/ | Luna · high | Shared decimal/rasional |
+| [ ] | [18 — Timer Pomodoro](18-pomodoro.md) | /pomodoro/ | Luna · high | Native clock/timer |
+| [ ] | [19 — Stopwatch dengan lap](19-stopwatch.md) | /stopwatch/ | Luna · high | Native monotonic clock |
+| [ ] | [20 — Pengacak daftar](20-pengacak-daftar.md) | /pengacak-daftar/ | Luna · high | Web Crypto |
+| [ ] | [21 — Pembersih teks](21-pembersih-teks.md) | /pembersih-teks/ | Luna · medium | Shared UI/UTF-8 limits |
+| [ ] | [22 — Konversi format gambar](22-konversi-format-gambar.md) | /konversi-format-gambar/ | Luna · high, per tahap | 00a fase I, API aktual |
+| [ ] | [23 — Crop foto](23-crop-foto.md) | /crop-foto/ | Luna · high, per tahap | 00a fase I, API crop native |
+| [ ] | [24 — Integrasi tambahan & SEO](24-extension-integration-seo.md) | Hub/sitemap/related/tests | Luna · high, per batch | Tool yang lulus |
+
+Rekomendasi Luna didukung [OpenAI Docs](https://developers.openai.com/api/docs/models/gpt-6-luna); pilihan medium/high di atas adalah penilaian proyek. [Panduan pemilihan model](https://developers.openai.com/api/docs/guides/model-selection) menjadi dasar menjaga task terfokus. Harga API tidak dipakai sebagai estimasi penggunaan langganan Codex.
+
+Urutan hemat: **14 → 16 → 21**, lalu task 24 untuk batch siap; **15 → 17**; **18 → 19 → 20**; terakhir **22 → 23** setelah fixture media kritis terbukti. Integrasi boleh diulang untuk batch kecil. Tidak perlu menyelesaikan PDF task 12 untuk mengerjakan tools teks/angka/timer ini.
+
+Contoh prompt setelah memilih model:
+
+~~~text
+Kerjakan hanya docs/everyday-tools/14-terbilang.md.
+Baca README.md, CONTRACT.md, EXTENSION-CONTRACT.md serta shared yang relevan.
+Ikuti scope V1, ownership, fixture, SEO dan QA pada task.
+Setelah bukti lulus, update checklist task dan hanya row 14 dalam README.
+Catat sebagian bila ada QA/prasyarat pending. Jangan mengerjakan tool lain,
+mengubah hub/sitemap/shared, atau commit/push/deploy.
+~~~
+
+Tools tambahan masih merupakan rencana: belum ada route, card, sitemap entry, atau fixture baru. Task 24 hanya menautkan implementasi yang siap. Task 12/PDF, checklist manual batch awal, dan verifikasi live tetap mempunyai status masing-masing.
+
+## Urutan batch awal 00–13
 
 1. **00**: kerjakan helper UI, angka, kalender, lalu template/tes sebagai tahap kecil dalam task yang sama. Selesaikan foundation sekali agar model murah tidak mengulang aturan dasar.
 2. **Batch A: 01, 02, 03, 04, 08**, satu task per sesi; lanjutkan **13 untuk batch A**. Scope ringan dengan kegunaan teks, belanja, dan usaha kecil.
